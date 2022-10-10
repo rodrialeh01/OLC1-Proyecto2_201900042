@@ -1,0 +1,27 @@
+
+
+.consola {
+    background: #1E1E1E;
+    color: #fff;
+    font-family: 'Share Tech Mono', monospace;
+    height: 100vh; 
+    /* overflow-y: scroll; */
+}
+
+.texta
+{
+    background: #1E1E1E;
+    font-size: 15px;
+    color: #fff;
+    font-family: 'Share Tech Mono', monospace;
+    width: 50%;
+    height: 100vh;
+    position: absolute;
+    white-space: pre;
+    resize: none;
+}
+
+#inputff
+{
+    display: none;
+}
