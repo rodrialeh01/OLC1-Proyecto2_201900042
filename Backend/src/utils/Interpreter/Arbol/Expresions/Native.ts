@@ -22,9 +22,9 @@ export default class Nativo extends Instruccion {
             return this.obtenercaracteres(this.valor.toString());
         }else if(this.tipoDato.getTipo()===DataType.BOOLEANO){
             if(this.valor.toString().toUpperCase()==="TRUE"){
-                return true;
+                return "true";
             }else if(this.valor.toString().toUpperCase()==="FALSE"){
-                return false;
+                return "false";
             }
         }
     }

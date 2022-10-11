@@ -19,7 +19,7 @@ function EditordeTexto(){
         console.log(editorRef.current.getValue())
         Service.parse(editorRef.current.getValue())
         .then(({consola})=>{
-            setResponse('MFMScript Console\nCopyright (C) MFMScript-OLC1-P2. Created by Rodrigo Hernández 2022\n'+consola)
+            setResponse('MFMScript Console\nCopyright (C) MFMScript-OLC1-P2. Created by Rodrigo Hernández 2022\n\n'+consola)
         })
     }
     return(

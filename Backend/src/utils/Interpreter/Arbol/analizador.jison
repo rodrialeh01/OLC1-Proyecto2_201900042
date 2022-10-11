@@ -3,6 +3,7 @@
     const nativo = require('./Expresions/Native');
     const Tipo = require('./Symbol/Type');
     const impresion = require('./Instructions/imprimir');
+    const impresionconsalto = require('./Instructions/ImprimirConSalto')
 %}
 %lex 
 
@@ -97,8 +98,8 @@
 [ \r\t]+ { }
 \n {}                                                                       //saltos de linea
 [\"](((\\\')|(\\\")|(\\n)|(\\t)|(\\))|[^\\\"\n])*[\"]	                    { yytext=yytext.substr(1,yyleng-2); return 'CADENA'; }
-[0-9]+                                                                      return 'ENTERO';
-[0-9]+\.[0-9]+                                                              return 'DECIMAL';
+[0-9]+"."[0-9]+\b                                                           return 'DECIMAL';
+[0-9]+\b                                                                    return 'ENTERO';
 \'(([^\"\'\\\\]{0,1}|\\\'|\\\"|\\n|\\r|\\t|\\\\))\'                         { yytext=yytext.substr(1,yyleng-2); return 'CARACTER'; }
 [a-zA-Z][a-zA-Z0-9_]+                                                       return 'IDENTIFICADOR';
 
@@ -141,7 +142,8 @@ AMBITO_GLOBAL : DECLARACION
               | ASIGNACION
               | FUNCION 
               | METODO
-              | RUN                                               
+              | RUN
+              | IMPRIMIR                                                    {$$=$1;}                                               
 ;
 
 DECLARACION : RINT LISTA_IDENTIFICADORES PTCOMA                             {;}
@@ -268,11 +270,11 @@ ACCESO_VECTORES : IDENTIFICADOR CORABRE EXPRESION CORCIERRA                     
 
 EXPRESION : ENTERO                                                          {$$ = new nativo.default(new Tipo.default(Tipo.DataType.ENTERO),$1, @1.first_line, @1.first_column);}
           | CADENA                                                          {$$ = new nativo.default(new Tipo.default(Tipo.DataType.CADENA),$1, @1.first_line, @1.first_column);}
-          | CARACTER                                                        {;}
-          | DECIMAL                                                         {;}
+          | CARACTER                                                        {$$ = new nativo.default(new Tipo.default(Tipo.DataType.CARACTER),$1, @1.first_line, @1.first_column);}
+          | DECIMAL                                                         {$$ = new nativo.default(new Tipo.default(Tipo.DataType.DECIMAL),$1, @1.first_line, @1.first_column);}
           | IDENTIFICADOR                                                   {;}
-          | RTRUE                                                           {;}
-          | RFALSE                                                          {;}
+          | RTRUE                                                           {$$ = new nativo.default(new Tipo.default(Tipo.DataType.BOOLEANO),$1, @1.first_line, @1.first_column);}
+          | RFALSE                                                          {$$ = new nativo.default(new Tipo.default(Tipo.DataType.BOOLEANO),$1, @1.first_line, @1.first_column);}
           | EXPRESION MAS EXPRESION                                         {;}
           | EXPRESION MENOS EXPRESION                                       {;}
           | EXPRESION MULTIPLICACION EXPRESION                              {;}
@@ -358,7 +360,7 @@ CICLO_DO_UNTIL : RDO ENCAPSULAMIENTO RUNTIL PARABRE EXPRESION PARCIERRA PTCOMA  
 ;
 
 IMPRIMIR : RPRINT PARABRE EXPRESION PARCIERRA PTCOMA                        {$$=new impresion.default($3,@1.first_line,@1.first_column);}
-         | RPRINTLN PARABRE EXPRESION PARCIERRA PTCOMA                      {$$=new impresion.default($3,@1.first_line,@1.first_column);}
+         | RPRINTLN PARABRE EXPRESION PARCIERRA PTCOMA                      {$$=new impresionconsalto.default($3,@1.first_line,@1.first_column);}
 ;
 
 INSERCION_ELIMINACION_VECTORES : IDENTIFICADOR PUNTO RPUSH PARABRE EXPRESION PARCIERRA PTCOMA   {;}

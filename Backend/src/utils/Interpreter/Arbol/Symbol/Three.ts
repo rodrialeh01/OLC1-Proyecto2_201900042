@@ -21,7 +21,7 @@ export default class Three {
         this.consola = value;
     }
     public actualizaConsola(uptodate: String) {
-        this.consola = `${this.consola}${uptodate}\n`;
+        this.consola = `${this.consola}${uptodate}`;
     }
     public getinstrucciones(): Array<Instruccion> {
         return this.instrucciones;

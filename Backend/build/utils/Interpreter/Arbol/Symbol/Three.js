@@ -18,7 +18,7 @@ class Three {
         this.consola = value;
     }
     actualizaConsola(uptodate) {
-        this.consola = `${this.consola}${uptodate}\n`;
+        this.consola = `${this.consola}${uptodate}`;
     }
     getinstrucciones() {
         return this.instrucciones;

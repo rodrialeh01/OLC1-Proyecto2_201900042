@@ -22,10 +22,10 @@ class Nativo extends Instruccion_1.Instruccion {
         }
         else if (this.tipoDato.getTipo() === Type_1.DataType.BOOLEANO) {
             if (this.valor.toString().toUpperCase() === "TRUE") {
-                return true;
+                return "true";
             }
             else if (this.valor.toString().toUpperCase() === "FALSE") {
-                return false;
+                return "false";
             }
         }
     }
