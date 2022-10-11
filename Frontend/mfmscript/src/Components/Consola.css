@@ -1,5 +1,5 @@
 
-
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
 .consola {
     background: #1E1E1E;
     color: #fff;
@@ -13,7 +13,7 @@
     background: #1E1E1E;
     font-size: 15px;
     color: #fff;
-    font-family: 'Share Tech Mono', monospace;
+    font-family: 'Courier Prime', monospace;
     width: 50%;
     height: 100vh;
     position: absolute;

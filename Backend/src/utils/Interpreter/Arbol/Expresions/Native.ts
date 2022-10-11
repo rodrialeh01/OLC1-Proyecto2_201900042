@@ -15,7 +15,43 @@ export default class Nativo extends Instruccion {
         if(this.tipoDato.getTipo()===DataType.ENTERO){
             return this.valor;
         }else if(this.tipoDato.getTipo()===DataType.CADENA){
-            return this.valor.toString();
+            return this.valor.toString().replaceAll("\\n","\n").replaceAll("\\t","\t").replaceAll("\\r","\r").replaceAll("\\\\","\\").replaceAll("\\\"","\"").replaceAll("\\'","\'");
+        }else if(this.tipoDato.getTipo()===DataType.DECIMAL){
+            return this.valor;
+        }else if(this.tipoDato.getTipo()===DataType.CARACTER){
+            return this.obtenercaracteres(this.valor.toString());
+        }else if(this.tipoDato.getTipo()===DataType.BOOLEANO){
+            if(this.valor.toString().toUpperCase()==="TRUE"){
+                return true;
+            }else if(this.valor.toString().toUpperCase()==="FALSE"){
+                return false;
+            }
+        }
+    }
+    obtenercaracteres(car: string): string{
+        switch(car){
+            case "\\n":{
+                return "\n"
+            }
+            case "\\\\":{
+                return "\\"
+            }
+            case "\\t":{
+                return "\t"
+            }
+            case "\\r":{
+                return "\r"
+            }
+            case "\\'":{
+                return "\'"
+            }
+            case "\\\"":{
+                return "\""
+            }
+            default:
+            {
+                return car
+            }
         }
     }
 }

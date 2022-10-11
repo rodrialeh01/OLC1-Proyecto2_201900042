@@ -2,12 +2,14 @@ import React from "react";
 import Editor from "@monaco-editor/react"
 import { useState } from "react";
 import { useRef } from "react";
+import Service from "../Services/Service";
 import './Consola.css';
 import './NavBarStyle.css'
 
 function EditordeTexto(){
     const[contentLanguaje, setContentLanguaje] = useState('')
     const editorRef = useRef(null)
+    const [response, setResponse] = useState('MFMScript Console\nCopyright (C) MFMScript-OLC1-P2. Created by Rodrigo Hernández 2022')
 
     const handleEditorDidMount = (editor, monaco)=>{
         editorRef.current = editor
@@ -15,7 +17,10 @@ function EditordeTexto(){
 
     const runDev= ()=>{
         console.log(editorRef.current.getValue())
-        return editorRef.current.getValue()
+        Service.parse(editorRef.current.getValue())
+        .then(({consola})=>{
+            setResponse('MFMScript Console\nCopyright (C) MFMScript-OLC1-P2. Created by Rodrigo Hernández 2022\n'+consola)
+        })
     }
     return(
         <>
@@ -72,6 +77,7 @@ function EditordeTexto(){
             size='30px'
             height='100vh'
             theme='vs-dark'
+            fontSizew='20px'
             defaultLanguage='java'
             value='//Welcome :D, Start your code here...'
             onChange={(value) => setContentLanguaje(value)}
@@ -79,7 +85,7 @@ function EditordeTexto(){
         />
         </div>
         <div className='consola' id="consola">
-            <textarea readOnly  className="texta"></textarea>
+            <textarea readOnly  className="texta" value={response}></textarea>
         <br /> 
         </div>
         </>

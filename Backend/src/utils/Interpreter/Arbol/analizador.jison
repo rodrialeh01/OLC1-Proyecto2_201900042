@@ -10,6 +10,10 @@
 %options case-insensitive 
 //---------------------------------------------ANALIZADOR LEXICO--------------------------------------------------
 %%
+//COMENTARIOS
+[/][/].*                                                                  //comentario unilinea
+[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]                                       //comentario multilinea
+
 //PALABRAS RESERVADAS
 "Int"                                                                       return 'RINT';
 "Double"                                                                    return 'RDOUBLE';
@@ -92,12 +96,10 @@
 //EXPRESIONES REGULARES
 [ \r\t]+ { }
 \n {}                                                                       //saltos de linea
-\\[^\n]*                                                                    //comentario unilinea
-[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]                                         //comentario multilinea
 [\"](((\\\')|(\\\")|(\\n)|(\\t)|(\\))|[^\\\"\n])*[\"]	                    { yytext=yytext.substr(1,yyleng-2); return 'CADENA'; }
-[+-][0-9]+                                                                  return 'ENTERO';
-[+-][0-9]+\.[0-9]+                                                          return 'DECIMAL';
-\'(([^\"\'\\\\]{0,1}|\\\'|\\\"|\\n|\\r|\\t|\\\\))\'                         return 'CARACTER';
+[0-9]+                                                                      return 'ENTERO';
+[0-9]+\.[0-9]+                                                              return 'DECIMAL';
+\'(([^\"\'\\\\]{0,1}|\\\'|\\\"|\\n|\\r|\\t|\\\\))\'                         { yytext=yytext.substr(1,yyleng-2); return 'CARACTER'; }
 [a-zA-Z][a-zA-Z0-9_]+                                                       return 'IDENTIFICADOR';
 
 
@@ -128,7 +130,8 @@ INIT: INSTRUCCIONES EOF                                                     {ret
 
 INSTRUCCIONES : INSTRUCCIONES AMBITO_GLOBAL                                 {$1.push($2); $$=$1;}
               | AMBITO_GLOBAL                                               {$$=[$1];}
-              | error                                                       {;}
+              | INVALID                                                     {;}
+              | error PTCOMA                                                {;}
 ;
 
 AMBITO_GLOBAL : DECLARACION
@@ -138,7 +141,7 @@ AMBITO_GLOBAL : DECLARACION
               | ASIGNACION
               | FUNCION 
               | METODO
-              | RUN                                                 
+              | RUN                                               
 ;
 
 DECLARACION : RINT LISTA_IDENTIFICADORES PTCOMA                             {;}
@@ -148,8 +151,8 @@ DECLARACION : RINT LISTA_IDENTIFICADORES PTCOMA                             {;}
             | RBOOLEAN LISTA_IDENTIFICADORES PTCOMA                         {;}
 ;
 
-LISTA_IDENTIFICADORES : LISTA_IDENTIFICADORES COMA IDENTIFICADOR            {$1.push($3); $$=$1}
-                      | IDENTIFICADOR                                       {$$=[$1]}
+LISTA_IDENTIFICADORES : LISTA_IDENTIFICADORES COMA IDENTIFICADOR            {;}
+                      | IDENTIFICADOR                                       {;}
 ;
 
 ASIGNACION : LISTA_IDENTIFICADORES IGUAL EXPRESION PTCOMA                                                   {;}
@@ -223,7 +226,6 @@ ENTORNO_LOCAL : DECLARACION
               | CICLO_FOR
               | CICLO_DO_WHILE
               | CICLO_DO_UNTIL
-              | IMPRIMIR
               | INSERCION_ELIMINACION_VECTORES
               | RRETURN EXPRESION PTCOMA                                    {;}
               | RRETURN PTCOMA                                              {;}
@@ -264,8 +266,8 @@ ACCESO_VECTORES : IDENTIFICADOR CORABRE EXPRESION CORCIERRA                     
                 | IDENTIFICADOR CORABRE EXPRESION CORCIERRA CORABRE EXPRESION CORCIERRA {;}
 ;
 
-EXPRESION : ENTERO                                                          {;}
-          | CADENA                                                          {;}
+EXPRESION : ENTERO                                                          {$$ = new nativo.default(new Tipo.default(Tipo.DataType.ENTERO),$1, @1.first_line, @1.first_column);}
+          | CADENA                                                          {$$ = new nativo.default(new Tipo.default(Tipo.DataType.CADENA),$1, @1.first_line, @1.first_column);}
           | CARACTER                                                        {;}
           | DECIMAL                                                         {;}
           | IDENTIFICADOR                                                   {;}
@@ -355,8 +357,8 @@ CICLO_DO_WHILE : RDO ENCAPSULAMIENTO RWHILE PARABRE EXPRESION PARCIERRA PTCOMA  
 CICLO_DO_UNTIL : RDO ENCAPSULAMIENTO RUNTIL PARABRE EXPRESION PARCIERRA PTCOMA  {;}
 ;
 
-IMPRIMIR : RPRINT PARABRE EXPRESION PARCIERRA PTCOMA                        {;}
-         | RPRINTLN PARABRE EXPRESION PARCIERRA PTCOMA                      {;}
+IMPRIMIR : RPRINT PARABRE EXPRESION PARCIERRA PTCOMA                        {$$=new impresion.default($3,@1.first_line,@1.first_column);}
+         | RPRINTLN PARABRE EXPRESION PARCIERRA PTCOMA                      {$$=new impresion.default($3,@1.first_line,@1.first_column);}
 ;
 
 INSERCION_ELIMINACION_VECTORES : IDENTIFICADOR PUNTO RPUSH PARABRE EXPRESION PARCIERRA PTCOMA   {;}
