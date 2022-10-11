@@ -1,4 +1,5 @@
 @import url("//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+@import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
 
 .navbar-icon-top .navbar-nav .nav-link > .fa {
   position: relative;
@@ -10,7 +11,7 @@
   font-size: 0.75rem;
   position: absolute;
   right: 0;
-  font-family: sans-serif;
+  font-family:'Babas Neue';
 }
 
 .navbar-icon-top .navbar-nav .nav-link > .fa {
@@ -44,7 +45,10 @@
     top: -7px;
   }
 }
-
+@font-face {
+  font-family: Babas Neue;
+  src: url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+}
 @media (min-width: 768px) {
   .navbar-icon-top.navbar-expand-md .navbar-nav .nav-link {
     text-align: center;
@@ -112,4 +116,13 @@
   .navbar-icon-top.navbar-expand-xl .navbar-nav .nav-link > .fa > .badge {
     top: -7px;
   }
+}
+
+.titulo{
+  font-family: 'Secular One', sans-serif;
+  font-size: 29px;
+}
+.botones{
+  background-color: #212529;
+  border: #212529;
 }
