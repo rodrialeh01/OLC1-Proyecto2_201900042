@@ -40,7 +40,6 @@ class Declaracion extends Instruccion_1.Instruccion {
             console.log(this.ids[index]);
             console.log(this.tipo);
             if (this.tipo.getTipo() === Type_1.DataType.ENTERO) {
-                console.log("entero");
                 tabla.setValor(this.ids[index], new Symbol_1.default(this.tipo, this.ids[index], "0"));
             }
             else if (this.tipo.getTipo() === Type_1.DataType.CADENA) {

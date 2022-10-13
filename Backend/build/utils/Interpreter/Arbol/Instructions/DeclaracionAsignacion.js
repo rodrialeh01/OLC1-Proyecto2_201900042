@@ -37,10 +37,30 @@ class Declaracion_Asignacion extends Instruccion_1.Instruccion {
         this.valor = valor;
     }
     interpretar(arbol, tabla) {
-        for (let index = 0; index < this.ids.length; index++) {
-            console.log(this.ids[index]);
-            console.log(this.tipo);
-            tabla.setValor(this.ids[index], new Symbol_1.default(this.tipo, this.ids[index], this.valor.interpretar(arbol, tabla)));
+        if (this.tipo.getTipo() == Type_1.DataType.ENTERO && this.valor.tipoDato.getTipo() == Type_1.DataType.ENTERO) {
+            for (let index = 0; index < this.ids.length; index++) {
+                tabla.setValor(this.ids[index], new Symbol_1.default(this.tipo, this.ids[index], this.valor.interpretar(arbol, tabla)));
+            }
+        }
+        else if (this.tipo.getTipo() == Type_1.DataType.DECIMAL && this.valor.tipoDato.getTipo() == Type_1.DataType.DECIMAL) {
+            for (let index = 0; index < this.ids.length; index++) {
+                tabla.setValor(this.ids[index], new Symbol_1.default(this.tipo, this.ids[index], this.valor.interpretar(arbol, tabla)));
+            }
+        }
+        else if (this.tipo.getTipo() == Type_1.DataType.CARACTER && this.valor.tipoDato.getTipo() == Type_1.DataType.CARACTER) {
+            for (let index = 0; index < this.ids.length; index++) {
+                tabla.setValor(this.ids[index], new Symbol_1.default(this.tipo, this.ids[index], this.valor.interpretar(arbol, tabla)));
+            }
+        }
+        else if (this.tipo.getTipo() == Type_1.DataType.CADENA && this.valor.tipoDato.getTipo() == Type_1.DataType.CADENA) {
+            for (let index = 0; index < this.ids.length; index++) {
+                tabla.setValor(this.ids[index], new Symbol_1.default(this.tipo, this.ids[index], this.valor.interpretar(arbol, tabla)));
+            }
+        }
+        else if (this.tipo.getTipo() == Type_1.DataType.BOOLEANO && this.valor.tipoDato.getTipo() == Type_1.DataType.BOOLEANO) {
+            for (let index = 0; index < this.ids.length; index++) {
+                tabla.setValor(this.ids[index], new Symbol_1.default(this.tipo, this.ids[index], this.valor.interpretar(arbol, tabla)));
+            }
         }
         return null;
     }

@@ -19,7 +19,6 @@ export default class Declaracion extends Instruccion {
             console.log(this.ids[index]);
             console.log(this.tipo)
             if (this.tipo.getTipo() === DataType.ENTERO) {
-                console.log("entero");
                 tabla.setValor(this.ids[index], new Simbolo(this.tipo, this.ids[index],"0"));
             }else if (this.tipo.getTipo() === DataType.CADENA) {
                 tabla.setValor(this.ids[index], new Simbolo(this.tipo, this.ids[index],""));

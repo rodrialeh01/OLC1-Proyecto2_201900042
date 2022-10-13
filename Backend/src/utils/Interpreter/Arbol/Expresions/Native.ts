@@ -14,21 +14,22 @@ export default class Nativo extends Instruccion {
 
     interpretar(arbol: Three, tabla: SymbolTable) {
         if(this.tipoDato.getTipo()===DataType.ENTERO){
-            return this.valor;
+            return Number(this.valor);
         }else if(this.tipoDato.getTipo()===DataType.CADENA){
             return this.valor.toString().replaceAll("\\n","\n").replaceAll("\\t","\t").replaceAll("\\r","\r").replaceAll("\\\\","\\").replaceAll("\\\"","\"").replaceAll("\\'","\'");
         }else if(this.tipoDato.getTipo()===DataType.DECIMAL){
-            return this.valor;
+            return Number(this.valor);
         }else if(this.tipoDato.getTipo()===DataType.CARACTER){
             return this.obtenercaracteres(this.valor.toString());
         }else if(this.tipoDato.getTipo()===DataType.BOOLEANO){
             if(this.valor.toString().toUpperCase()==="TRUE"){
-                return "true";
+                return true;
             }else if(this.valor.toString().toUpperCase()==="FALSE"){
-                return "false";
+                return false;
             }
         }else if(this.tipoDato.getTipo()===DataType.IDENTIFICADOR){
             let value = tabla.getValor(this.valor)
+            this.tipoDato = get(value, 'tipo', new Type(DataType.INDEFINIDO));
             return get(value, 'valor');
         }
     }

@@ -9,6 +9,7 @@
     const DeclaracionAsignacion = require('./Instructions/DeclaracionAsignacion');
     const Declaracion = require('./Instructions/Declaracion');
     const Asignacion = require('./Instructions/Asignacion');
+    const Aritmetica = require('./Expresions/Aritmetica');
 %}
 %lex 
 
@@ -132,13 +133,14 @@ INIT: INSTRUCCIONES EOF                                                     {ret
 
 INSTRUCCIONES : INSTRUCCIONES AMBITO_GLOBAL                                 {$1.push($2); $$=$1;}
               | AMBITO_GLOBAL                                               {$$=[$1];}
+              | INVALID                                                     {controller.listaErrores.push(new errores.default('ERROR LEXICO', "No se esperaba el caracter " + $1, @1.first_line, @1.first_column));}
+              | error PTCOMA                                                {controller.listaErrores.push(new errores.default('ERROR SINTACTICO', "Se esperaba token", @1.first_line, @1.first_column));}
 ;
 
 AMBITO_GLOBAL : IMPRIMIR                                                    {$$=$1;}
               | DECLARACION_ASIGNACION                                      {$$=$1;}
               | DECLARACION                                                 {$$=$1;}
-              | ASIGNACION                                                  {$$=$1;}
-              | error PTCOMA                                                {;}                                               
+              | ASIGNACION                                                  {$$=$1;}                                             
 ;
 
 IMPRIMIR : RPRINT PARABRE EXPRESION PARCIERRA PTCOMA                        {$$=new impresion.default($3,@1.first_line,@1.first_column);}
@@ -175,10 +177,10 @@ EXPRESION : ENTERO                                                          {$$ 
           | IDENTIFICADOR                                                   {$$ = new nativo.default(new Tipo.default(Tipo.DataType.IDENTIFICADOR), $1, @1.first_line, @1.first_column);}
           | RTRUE                                                           {$$ = new nativo.default(new Tipo.default(Tipo.DataType.BOOLEANO),$1, @1.first_line, @1.first_column);}
           | RFALSE                                                          {$$ = new nativo.default(new Tipo.default(Tipo.DataType.BOOLEANO),$1, @1.first_line, @1.first_column);}
-          | EXPRESION MAS EXPRESION                                         {;}
-          | EXPRESION MENOS EXPRESION                                       {;}
-          | EXPRESION MULTIPLICACION EXPRESION                              {;}
-          | EXPRESION DIVISION EXPRESION                                    {;}
+          | EXPRESION MAS EXPRESION                                         {$$ = new Aritmetica.default(Aritmetica.tipoOp.SUMA,$1,$3,@1.first_line, @1.first_column);}
+          | EXPRESION MENOS EXPRESION                                       {$$ = new Aritmetica.default(Aritmetica.tipoOp.RESTA,$1,$3,@1.first_line, @1.first_column);}
+          | EXPRESION MULTIPLICACION EXPRESION                              {$$ = new Aritmetica.default(Aritmetica.tipoOp.MULTIPLICACION,$1,$3,@1.first_line, @1.first_column);}
+          | EXPRESION DIVISION EXPRESION                                    {$$ = new Aritmetica.default(Aritmetica.tipoOp.DIVISION,$1,$3,@1.first_line, @1.first_column);}
           | EXPRESION MODULO EXPRESION                                      {;}
           | EXPRESION POTENCIA EXPRESION                                    {;}
           | MENOS EXPRESION %prec NEGATIVO                                  {;}
