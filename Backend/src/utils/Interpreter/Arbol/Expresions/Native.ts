@@ -2,6 +2,7 @@ import { Instruccion } from "../Abstract/Instruccion";
 import Three from '../Symbol/Three';
 import SymbolTable from '../Symbol/SymbolTable';
 import Type, { DataType } from '../Symbol/Type';
+import get from "lodash/get"
 
 export default class Nativo extends Instruccion {
     valor: any;
@@ -26,6 +27,9 @@ export default class Nativo extends Instruccion {
             }else if(this.valor.toString().toUpperCase()==="FALSE"){
                 return "false";
             }
+        }else if(this.tipoDato.getTipo()===DataType.IDENTIFICADOR){
+            let value = tabla.getValor(this.valor)
+            return get(value, 'valor');
         }
     }
     obtenercaracteres(car: string): string{
