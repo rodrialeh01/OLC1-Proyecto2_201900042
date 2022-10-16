@@ -40,19 +40,19 @@ class Declaracion extends Instruccion_1.Instruccion {
             console.log(this.ids[index]);
             console.log(this.tipo);
             if (this.tipo.getTipo() === Type_1.DataType.ENTERO) {
-                tabla.setValor(this.ids[index], new Symbol_1.default(this.tipo, this.ids[index], "0"));
+                tabla.setValor(this.ids[index], new Symbol_1.default(this.tipo, this.ids[index], 0));
             }
             else if (this.tipo.getTipo() === Type_1.DataType.CADENA) {
                 tabla.setValor(this.ids[index], new Symbol_1.default(this.tipo, this.ids[index], ""));
             }
             else if (this.tipo.getTipo() === Type_1.DataType.DECIMAL) {
-                tabla.setValor(this.ids[index], new Symbol_1.default(this.tipo, this.ids[index], "0.0"));
+                tabla.setValor(this.ids[index], new Symbol_1.default(this.tipo, this.ids[index], 0.0));
             }
             else if (this.tipo.getTipo() === Type_1.DataType.CARACTER) {
-                tabla.setValor(this.ids[index], new Symbol_1.default(this.tipo, this.ids[index], ""));
+                tabla.setValor(this.ids[index], new Symbol_1.default(this.tipo, this.ids[index], '0'));
             }
             else if (this.tipo.getTipo() === Type_1.DataType.BOOLEANO) {
-                tabla.setValor(this.ids[index], new Symbol_1.default(this.tipo, this.ids[index], "true"));
+                tabla.setValor(this.ids[index], new Symbol_1.default(this.tipo, this.ids[index], true));
             }
         }
         return null;

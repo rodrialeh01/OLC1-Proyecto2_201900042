@@ -4,7 +4,7 @@ import SymbolTable from '../Symbol/SymbolTable';
 import Type, { DataType } from '../Symbol/Type';
 import get from "lodash/get"
 
-export default class Nativo extends Instruccion {
+export default class Aritmetica extends Instruccion {
     operadorIzq: Instruccion;
     operadorDer: Instruccion;
     tipo: tipoOp;
@@ -18,11 +18,15 @@ export default class Nativo extends Instruccion {
 
     interpretar(arbol: Three, tabla: SymbolTable) {
         if(this.tipo === tipoOp.SUMA){
+            console.log("-----------------------------");
             let valorIzq = this.operadorIzq.interpretar(arbol, tabla);
+            console.log(this.operadorIzq.tipoDato.getTipo())
             let valorDer = this.operadorDer.interpretar(arbol,tabla);
+            console.log(this.operadorDer.tipoDato.getTipo())
             //I-ENTERO -- D-ANY
             if (this.operadorIzq.tipoDato.getTipo() === DataType.ENTERO && this.operadorDer.tipoDato.getTipo()===DataType.ENTERO) {
                 this.tipoDato.setTipo(DataType.ENTERO);
+                console.log("TIPO DE DATO: " + this.tipoDato.getTipo())
                 return (Number(valorIzq) + Number(valorDer));
             }else if(this.operadorIzq.tipoDato.getTipo() === DataType.ENTERO && this.operadorDer.tipoDato.getTipo()===DataType.DECIMAL){
                 this.tipoDato.setTipo(DataType.DECIMAL);
@@ -276,6 +280,71 @@ export default class Nativo extends Instruccion {
                 this.tipoDato.setTipo(DataType.INDEFINIDO);
                 return (null);
             }
+        }else if(this.tipo === tipoOp.POTENCIA){
+            let valorIzq = this.operadorIzq.interpretar(arbol, tabla);
+            let valorDer = this.operadorDer.interpretar(arbol,tabla);
+
+            //I-ENTERO -- D-ANY
+            if (this.operadorIzq.tipoDato.getTipo() === DataType.ENTERO && this.operadorDer.tipoDato.getTipo()===DataType.ENTERO) {
+                this.tipoDato.setTipo(DataType.ENTERO);
+                return (Math.pow(Number(valorIzq),Number(valorDer)));
+            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.ENTERO && this.operadorDer.tipoDato.getTipo()===DataType.DECIMAL){
+                this.tipoDato.setTipo(DataType.DECIMAL);
+                return (Math.pow(Number(valorIzq),Number(valorDer)));
+            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.ENTERO && this.operadorDer.tipoDato.getTipo()===DataType.BOOLEANO){
+                this.tipoDato.setTipo(DataType.ENTERO);
+                return (Math.pow(Number(valorIzq),Number(valorDer)));
+            }
+            //I-DECIMAL -- D-ANY
+            else if (this.operadorIzq.tipoDato.getTipo() === DataType.DECIMAL && this.operadorDer.tipoDato.getTipo()===DataType.ENTERO) {
+                this.tipoDato.setTipo(DataType.DECIMAL);
+                return (Math.pow(Number(valorIzq),Number(valorDer)));
+            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.DECIMAL && this.operadorDer.tipoDato.getTipo()===DataType.DECIMAL){
+                this.tipoDato.setTipo(DataType.DECIMAL);
+                return (Math.pow(Number(valorIzq),Number(valorDer)));
+            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.DECIMAL && this.operadorDer.tipoDato.getTipo()===DataType.BOOLEANO){
+                this.tipoDato.setTipo(DataType.DECIMAL);
+                return (Math.pow(Number(valorIzq),Number(valorDer)));
+            }
+            //I-BOOLEANO -- D-ANY
+            else if (this.operadorIzq.tipoDato.getTipo() === DataType.BOOLEANO && this.operadorDer.tipoDato.getTipo()===DataType.ENTERO) {
+                this.tipoDato.setTipo(DataType.ENTERO);
+                return (Math.pow(Number(valorIzq),Number(valorDer)));
+            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.BOOLEANO && this.operadorDer.tipoDato.getTipo()===DataType.DECIMAL){
+                this.tipoDato.setTipo(DataType.DECIMAL);
+                return (Math.pow(Number(valorIzq),Number(valorDer)));
+            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.BOOLEANO && this.operadorDer.tipoDato.getTipo()===DataType.BOOLEANO){
+                this.tipoDato.setTipo(DataType.ENTERO);
+                return (Math.pow(Number(valorIzq),Number(valorDer)));
+            }else{
+                //ERROR SEMANTICO
+                this.tipoDato.setTipo(DataType.INDEFINIDO);
+                return (null);
+            }
+        }else if(this.tipo === tipoOp.MODULO){
+            let valorIzq = this.operadorIzq.interpretar(arbol, tabla);
+            let valorDer = this.operadorDer.interpretar(arbol,tabla);
+
+            //I-ENTERO -- D-ANY
+            if (this.operadorIzq.tipoDato.getTipo() === DataType.ENTERO && this.operadorDer.tipoDato.getTipo()===DataType.ENTERO) {
+                this.tipoDato.setTipo(DataType.DECIMAL);
+                return (Number(valorIzq)%Number(valorDer));
+            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.ENTERO && this.operadorDer.tipoDato.getTipo()===DataType.DECIMAL){
+                this.tipoDato.setTipo(DataType.DECIMAL);
+                return (Number(valorIzq)%Number(valorDer));
+            }
+            //I-DECIMAL -- D-ANY
+            else if (this.operadorIzq.tipoDato.getTipo() === DataType.DECIMAL && this.operadorDer.tipoDato.getTipo()===DataType.ENTERO) {
+                this.tipoDato.setTipo(DataType.DECIMAL);
+                return (Number(valorIzq)%Number(valorDer));
+            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.DECIMAL && this.operadorDer.tipoDato.getTipo()===DataType.DECIMAL){
+                this.tipoDato.setTipo(DataType.DECIMAL);
+                return (Number(valorIzq)%Number(valorDer));
+            }else{
+                //ERROR SEMANTICO
+                this.tipoDato.setTipo(DataType.INDEFINIDO);
+                return (null);
+            }
         }
 
     }
@@ -286,7 +355,6 @@ export enum tipoOp{
     RESTA,
     MULTIPLICACION,
     DIVISION,
-    MODULAR,
-    NEGATIVO,
-    CONCATENACION
+    POTENCIA,
+    MODULO
 }

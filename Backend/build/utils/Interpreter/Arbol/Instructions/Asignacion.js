@@ -32,11 +32,28 @@ class Asignacion extends Instruccion_1.Instruccion {
         this.valor = valor;
     }
     interpretar(arbol, tabla) {
-        var _a;
+        let valorset = this.valor.interpretar(arbol, tabla);
         for (let index = 0; index < this.ids.length; index++) {
-            console.log(this.valor);
-            console.log(tabla.getValor(this.ids[index]).getValor());
-            (_a = tabla.getValor(this.ids[index])) === null || _a === void 0 ? void 0 : _a.setValor(this.valor.valor);
+            if (tabla.getValor(this.ids[index]) != null) {
+                if (tabla.getValor(this.ids[index]).tipo.getTipo() === Type_1.DataType.ENTERO && this.valor.tipoDato.getTipo() === Type_1.DataType.ENTERO) {
+                    tabla.getValor(this.ids[index]).setValor(valorset);
+                }
+                else if (tabla.getValor(this.ids[index]).tipo.getTipo() === Type_1.DataType.DECIMAL && this.valor.tipoDato.getTipo() === Type_1.DataType.DECIMAL) {
+                    tabla.getValor(this.ids[index]).setValor(valorset);
+                }
+                else if (tabla.getValor(this.ids[index]).tipo.getTipo() === Type_1.DataType.CADENA && this.valor.tipoDato.getTipo() === Type_1.DataType.CADENA) {
+                    tabla.getValor(this.ids[index]).setValor(valorset);
+                }
+                else if (tabla.getValor(this.ids[index]).tipo.getTipo() === Type_1.DataType.BOOLEANO && this.valor.tipoDato.getTipo() === Type_1.DataType.BOOLEANO) {
+                    tabla.getValor(this.ids[index]).setValor(valorset);
+                }
+                else if (tabla.getValor(this.ids[index]).tipo.getTipo() === Type_1.DataType.CARACTER && this.valor.tipoDato.getTipo() === Type_1.DataType.CARACTER) {
+                    tabla.getValor(this.ids[index]).setValor(valorset);
+                }
+            }
+            else {
+                //ERROR SEMANTICO
+            }
         }
         return null;
     }

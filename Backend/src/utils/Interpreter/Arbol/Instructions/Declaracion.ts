@@ -19,15 +19,15 @@ export default class Declaracion extends Instruccion {
             console.log(this.ids[index]);
             console.log(this.tipo)
             if (this.tipo.getTipo() === DataType.ENTERO) {
-                tabla.setValor(this.ids[index], new Simbolo(this.tipo, this.ids[index],"0"));
+                tabla.setValor(this.ids[index], new Simbolo(this.tipo, this.ids[index],0));
             }else if (this.tipo.getTipo() === DataType.CADENA) {
                 tabla.setValor(this.ids[index], new Simbolo(this.tipo, this.ids[index],""));
             }else if (this.tipo.getTipo() === DataType.DECIMAL) {
-                tabla.setValor(this.ids[index], new Simbolo(this.tipo, this.ids[index],"0.0"));
+                tabla.setValor(this.ids[index], new Simbolo(this.tipo, this.ids[index],0.0));
             }else if (this.tipo.getTipo() === DataType.CARACTER) {
-                tabla.setValor(this.ids[index], new Simbolo(this.tipo, this.ids[index],""));
+                tabla.setValor(this.ids[index], new Simbolo(this.tipo, this.ids[index],'0'));
             }else if (this.tipo.getTipo() === DataType.BOOLEANO) {
-                tabla.setValor(this.ids[index], new Simbolo(this.tipo, this.ids[index],"true"));
+                tabla.setValor(this.ids[index], new Simbolo(this.tipo, this.ids[index],true));
             }
         }
         

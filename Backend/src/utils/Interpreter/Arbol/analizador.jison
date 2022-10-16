@@ -10,6 +10,10 @@
     const Declaracion = require('./Instructions/Declaracion');
     const Asignacion = require('./Instructions/Asignacion');
     const Aritmetica = require('./Expresions/Aritmetica');
+    const Unario = require('./Expresions/Unario');
+    const Not = require('./Expresions/Not');
+    const Relacional = require('./Expresions/Relacional');
+    const Logico = require('./Expresions/Logico');
 %}
 %lex 
 
@@ -170,7 +174,7 @@ LISTA_IDENTIFICADORES : LISTA_IDENTIFICADORES COMA IDENTIFICADOR            {$1.
                       | IDENTIFICADOR                                       {$$=[$1];}
 ;
 
-EXPRESION : ENTERO                                                          {$$ = new nativo.default(new Tipo.default(Tipo.DataType.ENTERO),$1, @1.first_line, @1.first_column);console.log("a");}
+EXPRESION : ENTERO                                                          {$$ = new nativo.default(new Tipo.default(Tipo.DataType.ENTERO),$1, @1.first_line, @1.first_column);}
           | CADENA                                                          {$$ = new nativo.default(new Tipo.default(Tipo.DataType.CADENA),$1, @1.first_line, @1.first_column);}
           | CARACTER                                                        {$$ = new nativo.default(new Tipo.default(Tipo.DataType.CARACTER),$1, @1.first_line, @1.first_column);}
           | DECIMAL                                                         {$$ = new nativo.default(new Tipo.default(Tipo.DataType.DECIMAL),$1, @1.first_line, @1.first_column);}
@@ -181,19 +185,19 @@ EXPRESION : ENTERO                                                          {$$ 
           | EXPRESION MENOS EXPRESION                                       {$$ = new Aritmetica.default(Aritmetica.tipoOp.RESTA,$1,$3,@1.first_line, @1.first_column);}
           | EXPRESION MULTIPLICACION EXPRESION                              {$$ = new Aritmetica.default(Aritmetica.tipoOp.MULTIPLICACION,$1,$3,@1.first_line, @1.first_column);}
           | EXPRESION DIVISION EXPRESION                                    {$$ = new Aritmetica.default(Aritmetica.tipoOp.DIVISION,$1,$3,@1.first_line, @1.first_column);}
-          | EXPRESION MODULO EXPRESION                                      {;}
-          | EXPRESION POTENCIA EXPRESION                                    {;}
-          | MENOS EXPRESION %prec NEGATIVO                                  {;}
-          | PARABRE EXPRESION PARCIERRA                                     {;}
-          | EXPRESION OR EXPRESION                                          {;}
-          | EXPRESION AND EXPRESION                                         {;}
-          | NOT EXPRESION                                                   {;}
-          | EXPRESION IGUALIGUAL EXPRESION                                  {;}
-          | EXPRESION DIFERENTE EXPRESION                                   {;}
-          | EXPRESION MENOR EXPRESION                                       {;}
-          | EXPRESION MAYOR EXPRESION                                       {;}
-          | EXPRESION MENOROIGUAL EXPRESION                                 {;}
-          | EXPRESION MAYOROIGUAL EXPRESION                                 {;}
+          | EXPRESION MODULO EXPRESION                                      {$$ = new Aritmetica.default(Aritmetica.tipoOp.MODULO,$1,$3,@1.first_line, @1.first_column);}
+          | EXPRESION POTENCIA EXPRESION                                    {$$ = new Aritmetica.default(Aritmetica.tipoOp.POTENCIA,$1,$3,@1.first_line, @1.first_column);}
+          | MENOS EXPRESION %prec NEGATIVO                                  {$$ = new Unario.default($2,@1.first_line, @1.first_column);}
+          | PARABRE EXPRESION PARCIERRA                                     {$$ = $2;}
+          | EXPRESION OR EXPRESION                                          {$$ = new Logico.default(Logico.tipoLog.OR, $1, $3, @1.first_line, @1.first_column);}
+          | EXPRESION AND EXPRESION                                         {$$ = new Logico.default(Logico.tipoLog.AND, $1, $3, @1.first_line, @1.first_column);}
+          | NOT EXPRESION                                                   {$$ = new Not.default($2,@1.first_line, @1.first_column);}
+          | EXPRESION IGUALIGUAL EXPRESION                                  {$$ = new Relacional.default(Relacional.tipoRel.IGUAL, $1, $3, @1.first_line, @1.first_column);}
+          | EXPRESION DIFERENTE EXPRESION                                   {$$ = new Relacional.default(Relacional.tipoRel.DIFERENTE, $1, $3, @1.first_line, @1.first_column);}
+          | EXPRESION MENOR EXPRESION                                       {$$ = new Relacional.default(Relacional.tipoRel.MENOR, $1, $3, @1.first_line, @1.first_column);}
+          | EXPRESION MAYOR EXPRESION                                       {$$ = new Relacional.default(Relacional.tipoRel.MAYOR, $1, $3, @1.first_line, @1.first_column);}
+          | EXPRESION MENOROIGUAL EXPRESION                                 {$$ = new Relacional.default(Relacional.tipoRel.MENOR_IGUAL, $1, $3, @1.first_line, @1.first_column);}
+          | EXPRESION MAYOROIGUAL EXPRESION                                 {$$ = new Relacional.default(Relacional.tipoRel.MAYOR_IGUAL, $1, $3, @1.first_line, @1.first_column);}
           | IDENTIFICADOR INCREMENTO                                        {;}
           | IDENTIFICADOR DECREMENTO                                        {;}
           | LLAMADA                                                         {;}

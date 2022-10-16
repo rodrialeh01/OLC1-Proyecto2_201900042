@@ -18,6 +18,8 @@ export default class Declaracion_Asignacion extends Instruccion {
     }
 
     public interpretar(arbol: Arbol, tabla: tablaSimbolo) {
+        let valorasig = this.valor.interpretar(arbol,tabla)
+        console.log(this.valor)
         if(this.tipo.getTipo() == DataType.ENTERO && this.valor.tipoDato.getTipo() == DataType.ENTERO){
             for (let index = 0; index < this.ids.length; index++) {
                 tabla.setValor(this.ids[index], new Simbolo(this.tipo, this.ids[index], this.valor.interpretar(arbol, tabla)));
@@ -38,6 +40,8 @@ export default class Declaracion_Asignacion extends Instruccion {
             for (let index = 0; index < this.ids.length; index++) {
                 tabla.setValor(this.ids[index], new Simbolo(this.tipo, this.ids[index], this.valor.interpretar(arbol, tabla)));
             }
+        }else{
+            //ERROR SEMANTICO
         }
         return null;
     }
