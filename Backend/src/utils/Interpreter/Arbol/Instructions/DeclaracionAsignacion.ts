@@ -4,6 +4,8 @@ import Arbol from "../Symbol/Three";
 import Simbolo from "../Symbol/Symbol";
 import tablaSimbolo from "../Symbol/SymbolTable";
 import Tipo, { DataType } from '../Symbol/Type';
+const controller = require('../../../../controller/parser/parser')
+const errores = require('../Exceptions/Error')
 
 export default class Declaracion_Asignacion extends Instruccion {
     private ids: Array<String>;
@@ -42,6 +44,7 @@ export default class Declaracion_Asignacion extends Instruccion {
             }
         }else{
             //ERROR SEMANTICO
+            controller.listaErrores.push(new Error(new errores.default('ERROR SEMANTICO', "No coinciden los tipos de datos", this.linea, this.columna)))
         }
         return null;
     }

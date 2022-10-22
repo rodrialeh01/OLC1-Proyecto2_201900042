@@ -29,6 +29,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Instruccion_1 = require("../Abstract/Instruccion");
 const Symbol_1 = __importDefault(require("../Symbol/Symbol"));
 const Type_1 = __importStar(require("../Symbol/Type"));
+const controller = require('../../../../controller/parser/parser');
+const errores = require('../Exceptions/Error');
 class Declaracion_Asignacion extends Instruccion_1.Instruccion {
     constructor(ids, tipo, valor, linea, columna) {
         super(new Type_1.default(Type_1.DataType.INDEFINIDO), linea, columna);
@@ -66,6 +68,7 @@ class Declaracion_Asignacion extends Instruccion_1.Instruccion {
         }
         else {
             //ERROR SEMANTICO
+            controller.listaErrores.push(new Error(new errores.default('ERROR SEMANTICO', "No coinciden los tipos de datos", this.linea, this.columna)));
         }
         return null;
     }

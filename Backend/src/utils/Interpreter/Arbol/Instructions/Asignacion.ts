@@ -4,6 +4,8 @@ import Arbol from "../Symbol/Three";
 import Simbolo from "../Symbol/Symbol";
 import tablaSimbolo from "../Symbol/SymbolTable";
 import Tipo, { DataType } from '../Symbol/Type';
+const controller = require('../../../../controller/parser/parser')
+const errores = require('../Exceptions/Error')
 
 export default class Asignacion extends Instruccion {
     private ids: Array<String>;
@@ -20,18 +22,21 @@ export default class Asignacion extends Instruccion {
         for (let index = 0; index < this.ids.length; index++) {
             if(tabla.getValor(this.ids[index]) != null){
                 if(tabla.getValor(this.ids[index]).tipo.getTipo()===DataType.ENTERO && this.valor.tipoDato.getTipo()===DataType.ENTERO){
-                    tabla.getValor(this.ids[index]).setValor(valorset);
+                    tabla.setValor(this.ids[index],new Simbolo(this.valor.tipoDato,this.ids[index], this.valor.interpretar(arbol,tabla)), false);
                 }else if(tabla.getValor(this.ids[index]).tipo.getTipo()===DataType.DECIMAL && this.valor.tipoDato.getTipo()===DataType.DECIMAL){
-                    tabla.getValor(this.ids[index]).setValor(valorset);
+                    tabla.setValor(this.ids[index],new Simbolo(this.valor.tipoDato,this.ids[index], this.valor.interpretar(arbol,tabla)), false);
                 }else if(tabla.getValor(this.ids[index]).tipo.getTipo()===DataType.CADENA && this.valor.tipoDato.getTipo()===DataType.CADENA){
-                    tabla.getValor(this.ids[index]).setValor(valorset);
+                    tabla.setValor(this.ids[index],new Simbolo(this.valor.tipoDato,this.ids[index], this.valor.interpretar(arbol,tabla)), false);
                 }else if(tabla.getValor(this.ids[index]).tipo.getTipo()===DataType.BOOLEANO && this.valor.tipoDato.getTipo()===DataType.BOOLEANO){
-                    tabla.getValor(this.ids[index]).setValor(valorset);
+                    tabla.setValor(this.ids[index],new Simbolo(this.valor.tipoDato,this.ids[index], this.valor.interpretar(arbol,tabla)), false);
                 }else if(tabla.getValor(this.ids[index]).tipo.getTipo()===DataType.CARACTER && this.valor.tipoDato.getTipo()===DataType.CARACTER){
-                    tabla.getValor(this.ids[index]).setValor(valorset);
+                    tabla.setValor(this.ids[index],new Simbolo(this.valor.tipoDato,this.ids[index], this.valor.interpretar(arbol,tabla)), false);
+                }else{
+                    controller.listaErrores.push(new Error(new errores.default('ERROR SEMANTICO', "No coinciden los tipos de datos", this.linea, this.columna)))
                 }
             }else{
                 //ERROR SEMANTICO
+                controller.listaErrores.push(new Error(new errores.default('ERROR SEMANTICO', "No se encontro el identificador", this.linea, this.columna)))
             }
         }
         return null;

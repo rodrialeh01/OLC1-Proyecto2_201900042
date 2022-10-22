@@ -14,6 +14,9 @@
     const Not = require('./Expresions/Not');
     const Relacional = require('./Expresions/Relacional');
     const Logico = require('./Expresions/Logico');
+    const insif = require('./Instructions/Sentencia_If');
+    const simbolo = require('./Symbol/Symbol');
+    const elif = require('./Instructions/Elif');
 %}
 %lex 
 
@@ -144,7 +147,8 @@ INSTRUCCIONES : INSTRUCCIONES AMBITO_GLOBAL                                 {$1.
 AMBITO_GLOBAL : IMPRIMIR                                                    {$$=$1;}
               | DECLARACION_ASIGNACION                                      {$$=$1;}
               | DECLARACION                                                 {$$=$1;}
-              | ASIGNACION                                                  {$$=$1;}                                             
+              | ASIGNACION                                                  {$$=$1;} 
+              | SENTENCIA_IF                                                {$$=$1;}                                         
 ;
 
 IMPRIMIR : RPRINT PARABRE EXPRESION PARCIERRA PTCOMA                        {$$=new impresion.default($3,@1.first_line,@1.first_column);}
@@ -169,9 +173,22 @@ DECLARACION_ASIGNACION : RINT LISTA_IDENTIFICADORES IGUAL EXPRESION PTCOMA      
                        | RCHAR LISTA_IDENTIFICADORES IGUAL EXPRESION PTCOMA     {$$=new DeclaracionAsignacion.default($2, new Tipo.default(Tipo.DataType.CARACTER), $4, @1.first_line, @1.first_column);}
                        | RBOOLEAN LISTA_IDENTIFICADORES IGUAL EXPRESION PTCOMA  {$$=new DeclaracionAsignacion.default($2, new Tipo.default(Tipo.DataType.BOOLEANO), $4, @1.first_line, @1.first_column);}
 ;
+ENCAPSULAMIENTO : LLAVEA INSTRUCCIONES LLAVEC                               {$$=$2;}
+                | LLAVEA LLAVEC                                             {$$=[];}
+;
 
 LISTA_IDENTIFICADORES : LISTA_IDENTIFICADORES COMA IDENTIFICADOR            {$1.push($3); $$=$1;console.log($$)}
                       | IDENTIFICADOR                                       {$$=[$1];}
+;
+
+SENTENCIA_IF : RIF PARABRE EXPRESION PARCIERRA ENCAPSULAMIENTO                                  {$$=new insif.default($3,$5,null,null,@1.first_line,@1.first_column);}
+             | RIF PARABRE EXPRESION PARCIERRA ENCAPSULAMIENTO RELSE ENCAPSULAMIENTO            {$$=new insif.default($3,$5,null,$7,@1.first_line,@1.first_column);}
+             | RIF PARABRE EXPRESION PARCIERRA ENCAPSULAMIENTO LISTA_ELIF                       {$$=new insif.default($3,$5,$6,null,@1.first_line,@1.first_column);}
+             | RIF PARABRE EXPRESION PARCIERRA ENCAPSULAMIENTO LISTA_ELIF RELSE ENCAPSULAMIENTO {$$=new insif.default($3,$5,$6,$8,@1.first_line,@1.first_column);}
+;
+
+LISTA_ELIF : LISTA_ELIF RELIF PARABRE EXPRESION PARCIERRA ENCAPSULAMIENTO   {$1.push(new elif.default($4,$6,@1.first_line,@1.first_column)); $$=$1}
+           | RELIF PARABRE EXPRESION PARCIERRA ENCAPSULAMIENTO              {$$=[new elif.default($3,$5,@1.first_line,@1.first_column)];}
 ;
 
 EXPRESION : ENTERO                                                          {$$ = new nativo.default(new Tipo.default(Tipo.DataType.ENTERO),$1, @1.first_line, @1.first_column);}

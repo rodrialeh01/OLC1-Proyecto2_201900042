@@ -29,6 +29,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Instruccion_1 = require("../Abstract/Instruccion");
 const Symbol_1 = __importDefault(require("../Symbol/Symbol"));
 const Type_1 = __importStar(require("../Symbol/Type"));
+const controller = require('../../../../controller/parser/parser');
+const errores = require('../Exceptions/Error');
 class Declaracion extends Instruccion_1.Instruccion {
     constructor(ids, tipo, linea, columna) {
         super(new Type_1.default(Type_1.DataType.INDEFINIDO), linea, columna);
@@ -37,22 +39,25 @@ class Declaracion extends Instruccion_1.Instruccion {
     }
     interpretar(arbol, tabla) {
         for (let index = 0; index < this.ids.length; index++) {
-            console.log(this.ids[index]);
-            console.log(this.tipo);
-            if (this.tipo.getTipo() === Type_1.DataType.ENTERO) {
-                tabla.setValor(this.ids[index], new Symbol_1.default(this.tipo, this.ids[index], 0));
+            if (tabla.getValor(this.ids[index]) == null) {
+                if (this.tipo.getTipo() === Type_1.DataType.ENTERO) {
+                    tabla.setValor(this.ids[index], new Symbol_1.default(this.tipo, this.ids[index], 0));
+                }
+                else if (this.tipo.getTipo() === Type_1.DataType.CADENA) {
+                    tabla.setValor(this.ids[index], new Symbol_1.default(this.tipo, this.ids[index], ""));
+                }
+                else if (this.tipo.getTipo() === Type_1.DataType.DECIMAL) {
+                    tabla.setValor(this.ids[index], new Symbol_1.default(this.tipo, this.ids[index], 0.0));
+                }
+                else if (this.tipo.getTipo() === Type_1.DataType.CARACTER) {
+                    tabla.setValor(this.ids[index], new Symbol_1.default(this.tipo, this.ids[index], '0'));
+                }
+                else if (this.tipo.getTipo() === Type_1.DataType.BOOLEANO) {
+                    tabla.setValor(this.ids[index], new Symbol_1.default(this.tipo, this.ids[index], true));
+                }
             }
-            else if (this.tipo.getTipo() === Type_1.DataType.CADENA) {
-                tabla.setValor(this.ids[index], new Symbol_1.default(this.tipo, this.ids[index], ""));
-            }
-            else if (this.tipo.getTipo() === Type_1.DataType.DECIMAL) {
-                tabla.setValor(this.ids[index], new Symbol_1.default(this.tipo, this.ids[index], 0.0));
-            }
-            else if (this.tipo.getTipo() === Type_1.DataType.CARACTER) {
-                tabla.setValor(this.ids[index], new Symbol_1.default(this.tipo, this.ids[index], '0'));
-            }
-            else if (this.tipo.getTipo() === Type_1.DataType.BOOLEANO) {
-                tabla.setValor(this.ids[index], new Symbol_1.default(this.tipo, this.ids[index], true));
+            else {
+                controller.listaErrores.push(new Error(new errores.default('ERROR SEMANTICO', "Ya existe un identificador con este nombre", this.linea, this.columna)));
             }
         }
         return null;
