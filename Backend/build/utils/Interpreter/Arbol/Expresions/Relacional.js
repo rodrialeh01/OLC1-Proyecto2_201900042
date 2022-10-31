@@ -39,46 +39,45 @@ class Aritmetica extends Instruccion_1.Instruccion {
             let valorDer = this.operadorDer.interpretar(arbol, tabla);
             //I-ENTERO -- D-ANY
             if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.ENTERO && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.ENTERO) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) > Number(valorDer));
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.ENTERO && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.DECIMAL) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) > Number(valorDer));
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.ENTERO && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.CARACTER) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) > Number(valorDer.charCodeAt(0)));
             }
             //I-DECIMAL -- D-ANY
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.DECIMAL && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.ENTERO) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) > Number(valorDer));
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.DECIMAL && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.DECIMAL) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) > Number(valorDer));
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.DECIMAL && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.CARACTER) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) > valorDer.charCodeAt(0));
             }
             //I-CARACTER -- D-ANY
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.CARACTER && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.ENTERO) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq.charCodeAt(0)) > Number(valorDer));
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.CARACTER && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.DECIMAL) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq.charCodeAt(0)) > Number(valorDer));
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.CARACTER && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.CARACTER) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq.charCodeAt(0)) > Number(valorDer.charCodeAt(0)));
             }
             else {
                 //ERROR SEMANTICO
-                this.tipoDato.setTipo(Type_1.DataType.INDEFINIDO);
                 return (null);
             }
         }
@@ -87,46 +86,45 @@ class Aritmetica extends Instruccion_1.Instruccion {
             let valorDer = this.operadorDer.interpretar(arbol, tabla);
             //I-ENTERO -- D-ANY
             if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.ENTERO && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.ENTERO) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) < Number(valorDer));
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.ENTERO && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.DECIMAL) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) < Number(valorDer));
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.ENTERO && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.CARACTER) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) < Number(valorDer.charCodeAt(0)));
             }
             //I-DECIMAL -- D-ANY
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.DECIMAL && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.ENTERO) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) < Number(valorDer));
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.DECIMAL && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.DECIMAL) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) < Number(valorDer));
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.DECIMAL && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.CARACTER) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) < valorDer.charCodeAt(0));
             }
             //I-CARACTER -- D-ANY
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.CARACTER && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.ENTERO) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq.charCodeAt(0)) < Number(valorDer));
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.CARACTER && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.DECIMAL) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq.charCodeAt(0)) < Number(valorDer));
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.CARACTER && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.CARACTER) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq.charCodeAt(0)) < Number(valorDer.charCodeAt(0)));
             }
             else {
                 //ERROR SEMANTICO
-                this.tipoDato.setTipo(Type_1.DataType.INDEFINIDO);
                 return (null);
             }
         }
@@ -135,46 +133,45 @@ class Aritmetica extends Instruccion_1.Instruccion {
             let valorDer = this.operadorDer.interpretar(arbol, tabla);
             //I-ENTERO -- D-ANY
             if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.ENTERO && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.ENTERO) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) >= Number(valorDer));
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.ENTERO && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.DECIMAL) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) >= Number(valorDer));
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.ENTERO && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.CARACTER) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) >= Number(valorDer.charCodeAt(0)));
             }
             //I-DECIMAL -- D-ANY
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.DECIMAL && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.ENTERO) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) >= Number(valorDer));
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.DECIMAL && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.DECIMAL) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) >= Number(valorDer));
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.DECIMAL && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.CARACTER) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) >= valorDer.charCodeAt(0));
             }
             //I-CARACTER -- D-ANY
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.CARACTER && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.ENTERO) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq.charCodeAt(0)) >= Number(valorDer));
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.CARACTER && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.DECIMAL) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq.charCodeAt(0)) >= Number(valorDer));
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.CARACTER && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.CARACTER) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq.charCodeAt(0)) >= Number(valorDer.charCodeAt(0)));
             }
             else {
                 //ERROR SEMANTICO
-                this.tipoDato.setTipo(Type_1.DataType.INDEFINIDO);
                 return (null);
             }
         }
@@ -183,46 +180,45 @@ class Aritmetica extends Instruccion_1.Instruccion {
             let valorDer = this.operadorDer.interpretar(arbol, tabla);
             //I-ENTERO -- D-ANY
             if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.ENTERO && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.ENTERO) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) <= Number(valorDer));
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.ENTERO && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.DECIMAL) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) <= Number(valorDer));
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.ENTERO && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.CARACTER) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) <= Number(valorDer.charCodeAt(0)));
             }
             //I-DECIMAL -- D-ANY
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.DECIMAL && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.ENTERO) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) <= Number(valorDer));
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.DECIMAL && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.DECIMAL) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) <= Number(valorDer));
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.DECIMAL && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.CARACTER) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) <= valorDer.charCodeAt(0));
             }
             //I-CARACTER -- D-ANY
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.CARACTER && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.ENTERO) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq.charCodeAt(0)) <= Number(valorDer));
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.CARACTER && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.DECIMAL) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq.charCodeAt(0)) <= Number(valorDer));
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.CARACTER && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.CARACTER) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq.charCodeAt(0)) <= Number(valorDer.charCodeAt(0)));
             }
             else {
                 //ERROR SEMANTICO
-                this.tipoDato.setTipo(Type_1.DataType.INDEFINIDO);
                 return (null);
             }
         }
@@ -231,43 +227,43 @@ class Aritmetica extends Instruccion_1.Instruccion {
             let valorDer = this.operadorDer.interpretar(arbol, tabla);
             //I-ENTERO -- D-ANY
             if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.ENTERO && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.ENTERO) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) == Number(valorDer));
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.ENTERO && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.DECIMAL) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) == Number(valorDer));
             }
             //I-DECIMAL -- D-ANY
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.DECIMAL && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.ENTERO) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) == Number(valorDer));
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.DECIMAL && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.DECIMAL) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) == Number(valorDer));
             }
             //I-BOOLEAN -- D-BOOLEAN
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.BOOLEANO && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.BOOLEANO) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Boolean(valorIzq) == Boolean(valorDer));
             }
             //I-CARACTER -- D-ANY
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.CARACTER && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.CARACTER) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (valorIzq == valorDer);
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.CARACTER && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.CADENA) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (String(valorIzq) == String(valorDer));
             }
             //I-CADENA -- D-ANY
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.CADENA && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.CARACTER) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (String(valorIzq) == String(valorDer));
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.CADENA && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.CADENA) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (String(valorIzq) == String(valorDer));
             }
             else {
@@ -281,48 +277,47 @@ class Aritmetica extends Instruccion_1.Instruccion {
             let valorDer = this.operadorDer.interpretar(arbol, tabla);
             //I-ENTERO -- D-ANY
             if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.ENTERO && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.ENTERO) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) != Number(valorDer));
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.ENTERO && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.DECIMAL) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) != Number(valorDer));
             }
             //I-DECIMAL -- D-ANY
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.DECIMAL && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.ENTERO) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) != Number(valorDer));
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.DECIMAL && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.DECIMAL) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Number(valorIzq) != Number(valorDer));
             }
             //I-BOOLEAN -- D-BOOLEAN
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.BOOLEANO && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.BOOLEANO) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (Boolean(valorIzq) != Boolean(valorDer));
             }
             //I-CARACTER -- D-ANY
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.CARACTER && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.CARACTER) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (valorIzq != valorDer);
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.CARACTER && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.CADENA) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (String(valorIzq) != String(valorDer));
             }
             //I-CADENA -- D-ANY
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.CADENA && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.CARACTER) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (String(valorIzq) != String(valorDer));
             }
             else if (this.operadorIzq.tipoDato.getTipo() === Type_1.DataType.CADENA && this.operadorDer.tipoDato.getTipo() === Type_1.DataType.CADENA) {
-                this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
+                this.tipoDato = new Type_1.default(Type_1.DataType.BOOLEANO);
                 return (String(valorIzq) != String(valorDer));
             }
             else {
                 //ERROR SEMANTICO
-                this.tipoDato.setTipo(Type_1.DataType.INDEFINIDO);
                 return (null);
             }
         }

@@ -40,7 +40,6 @@ class Declaracion_Asignacion extends Instruccion_1.Instruccion {
     }
     interpretar(arbol, tabla) {
         let valorasig = this.valor.interpretar(arbol, tabla);
-        console.log(this.valor);
         if (this.tipo.getTipo() == Type_1.DataType.ENTERO && this.valor.tipoDato.getTipo() == Type_1.DataType.ENTERO) {
             for (let index = 0; index < this.ids.length; index++) {
                 tabla.setValor(this.ids[index], new Symbol_1.default(this.tipo, this.ids[index], this.valor.interpretar(arbol, tabla)));

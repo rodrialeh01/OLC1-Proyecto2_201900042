@@ -17,6 +17,7 @@
     const insif = require('./Instructions/Sentencia_If');
     const simbolo = require('./Symbol/Symbol');
     const elif = require('./Instructions/Elif');
+    const inswhile = require('./Instructions/Ciclo_While');
 %}
 %lex 
 
@@ -148,7 +149,8 @@ AMBITO_GLOBAL : IMPRIMIR                                                    {$$=
               | DECLARACION_ASIGNACION                                      {$$=$1;}
               | DECLARACION                                                 {$$=$1;}
               | ASIGNACION                                                  {$$=$1;} 
-              | SENTENCIA_IF                                                {$$=$1;}                                         
+              | SENTENCIA_IF                                                {$$=$1;}
+              | CICLO_WHILE                                                 {$$=$1;}                                         
 ;
 
 IMPRIMIR : RPRINT PARABRE EXPRESION PARCIERRA PTCOMA                        {$$=new impresion.default($3,@1.first_line,@1.first_column);}
@@ -189,6 +191,9 @@ SENTENCIA_IF : RIF PARABRE EXPRESION PARCIERRA ENCAPSULAMIENTO                  
 
 LISTA_ELIF : LISTA_ELIF RELIF PARABRE EXPRESION PARCIERRA ENCAPSULAMIENTO   {$1.push(new elif.default($4,$6,@1.first_line,@1.first_column)); $$=$1}
            | RELIF PARABRE EXPRESION PARCIERRA ENCAPSULAMIENTO              {$$=[new elif.default($3,$5,@1.first_line,@1.first_column)];}
+;
+
+CICLO_WHILE : RWHILE PARABRE EXPRESION PARCIERRA ENCAPSULAMIENTO            {$$ = new inswhile.default($3,$5,@1.first_line,@1.first_column);}
 ;
 
 EXPRESION : ENTERO                                                          {$$ = new nativo.default(new Tipo.default(Tipo.DataType.ENTERO),$1, @1.first_line, @1.first_column);}

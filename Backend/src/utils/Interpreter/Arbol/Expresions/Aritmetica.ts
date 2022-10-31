@@ -19,14 +19,21 @@ export default class Aritmetica extends Instruccion {
     interpretar(arbol: Three, tabla: SymbolTable) {
         if(this.tipo === tipoOp.SUMA){
             console.log("-----------------------------");
+            console.log(tabla);
+            console.log(this.operadorIzq);
             let valorIzq = this.operadorIzq.interpretar(arbol, tabla);
+            console.log("VALOR IZQ: " + valorIzq)
             console.log(this.operadorIzq.tipoDato.getTipo())
+            console.log(this.operadorDer);
             let valorDer = this.operadorDer.interpretar(arbol,tabla);
+            console.log("VALOR DER: " + valorDer)
             console.log(this.operadorDer.tipoDato.getTipo())
             //I-ENTERO -- D-ANY
             if (this.operadorIzq.tipoDato.getTipo() === DataType.ENTERO && this.operadorDer.tipoDato.getTipo()===DataType.ENTERO) {
                 this.tipoDato.setTipo(DataType.ENTERO);
-                console.log("TIPO DE DATO: " + this.tipoDato.getTipo())
+                console.log(this.operadorIzq);
+                console.log("OP1: " + valorIzq);
+                console.log("OP2: " + valorDer);
                 return (Number(valorIzq) + Number(valorDer));
             }else if(this.operadorIzq.tipoDato.getTipo() === DataType.ENTERO && this.operadorDer.tipoDato.getTipo()===DataType.DECIMAL){
                 this.tipoDato.setTipo(DataType.DECIMAL);

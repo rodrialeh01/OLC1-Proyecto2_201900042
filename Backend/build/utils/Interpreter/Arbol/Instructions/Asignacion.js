@@ -38,23 +38,24 @@ class Asignacion extends Instruccion_1.Instruccion {
         this.valor = valor;
     }
     interpretar(arbol, tabla) {
-        let valorset = this.valor.interpretar(arbol, tabla);
+        const valorset = this.valor.interpretar(arbol, tabla);
         for (let index = 0; index < this.ids.length; index++) {
             if (tabla.getValor(this.ids[index]) != null) {
                 if (tabla.getValor(this.ids[index]).tipo.getTipo() === Type_1.DataType.ENTERO && this.valor.tipoDato.getTipo() === Type_1.DataType.ENTERO) {
-                    tabla.setValor(this.ids[index], new Symbol_1.default(this.valor.tipoDato, this.ids[index], this.valor.interpretar(arbol, tabla)), false);
+                    tabla.setValor(this.ids[index], new Symbol_1.default(this.valor.tipoDato, this.ids[index], valorset), false);
+                    console.log(tabla.getValor(this.ids[index]));
                 }
                 else if (tabla.getValor(this.ids[index]).tipo.getTipo() === Type_1.DataType.DECIMAL && this.valor.tipoDato.getTipo() === Type_1.DataType.DECIMAL) {
-                    tabla.setValor(this.ids[index], new Symbol_1.default(this.valor.tipoDato, this.ids[index], this.valor.interpretar(arbol, tabla)), false);
+                    tabla.setValor(this.ids[index], new Symbol_1.default(this.valor.tipoDato, this.ids[index], valorset), false);
                 }
                 else if (tabla.getValor(this.ids[index]).tipo.getTipo() === Type_1.DataType.CADENA && this.valor.tipoDato.getTipo() === Type_1.DataType.CADENA) {
-                    tabla.setValor(this.ids[index], new Symbol_1.default(this.valor.tipoDato, this.ids[index], this.valor.interpretar(arbol, tabla)), false);
+                    tabla.setValor(this.ids[index], new Symbol_1.default(this.valor.tipoDato, this.ids[index], valorset), false);
                 }
                 else if (tabla.getValor(this.ids[index]).tipo.getTipo() === Type_1.DataType.BOOLEANO && this.valor.tipoDato.getTipo() === Type_1.DataType.BOOLEANO) {
-                    tabla.setValor(this.ids[index], new Symbol_1.default(this.valor.tipoDato, this.ids[index], this.valor.interpretar(arbol, tabla)), false);
+                    tabla.setValor(this.ids[index], new Symbol_1.default(this.valor.tipoDato, this.ids[index], valorset), false);
                 }
                 else if (tabla.getValor(this.ids[index]).tipo.getTipo() === Type_1.DataType.CARACTER && this.valor.tipoDato.getTipo() === Type_1.DataType.CARACTER) {
-                    tabla.setValor(this.ids[index], new Symbol_1.default(this.valor.tipoDato, this.ids[index], this.valor.interpretar(arbol, tabla)), false);
+                    tabla.setValor(this.ids[index], new Symbol_1.default(this.valor.tipoDato, this.ids[index], valorset), false);
                 }
                 else {
                     controller.listaErrores.push(new Error(new errores.default('ERROR SEMANTICO', "No coinciden los tipos de datos", this.linea, this.columna)));

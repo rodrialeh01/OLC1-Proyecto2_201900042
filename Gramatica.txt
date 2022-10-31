@@ -26,6 +26,8 @@ DECLARACION : RINT LISTA_IDENTIFICADORES PTCOMA                             {;}
 ASIGNACION : LISTA_IDENTIFICADORES IGUAL EXPRESION PTCOMA                                                   {;}
            | IDENTIFICADOR CORABRE EXPRESION CORCIERRA IGUAL EXPRESION PTCOMA                               {;}
            | IDENTIFICADOR CORABRE EXPRESION CORCIERRA CORABRE EXPRESION CORCIERRA IGUAL EXPRESION PTCOMA   {;}
+           | IDENTIFICADOR INCREMENTO                                                                       {;}
+           | IDENTIFICADOR DECREMENTO                                                                       {;}
 ;
 
 DECLARACION_ASIGNACION : RINT LISTA_IDENTIFICADORES IGUAL EXPRESION PTCOMA      {console.log($2);}

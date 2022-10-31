@@ -18,19 +18,20 @@ export default class Asignacion extends Instruccion {
     }
 
     public interpretar(arbol: Arbol, tabla: tablaSimbolo) {
-        let valorset = this.valor.interpretar(arbol,tabla);
+        const valorset = this.valor.interpretar(arbol,tabla);
         for (let index = 0; index < this.ids.length; index++) {
             if(tabla.getValor(this.ids[index]) != null){
                 if(tabla.getValor(this.ids[index]).tipo.getTipo()===DataType.ENTERO && this.valor.tipoDato.getTipo()===DataType.ENTERO){
-                    tabla.setValor(this.ids[index],new Simbolo(this.valor.tipoDato,this.ids[index], this.valor.interpretar(arbol,tabla)), false);
+                    tabla.setValor(this.ids[index],new Simbolo(this.valor.tipoDato,this.ids[index], valorset), false);
+                    console.log(tabla.getValor(this.ids[index]));
                 }else if(tabla.getValor(this.ids[index]).tipo.getTipo()===DataType.DECIMAL && this.valor.tipoDato.getTipo()===DataType.DECIMAL){
-                    tabla.setValor(this.ids[index],new Simbolo(this.valor.tipoDato,this.ids[index], this.valor.interpretar(arbol,tabla)), false);
+                    tabla.setValor(this.ids[index],new Simbolo(this.valor.tipoDato,this.ids[index], valorset), false);
                 }else if(tabla.getValor(this.ids[index]).tipo.getTipo()===DataType.CADENA && this.valor.tipoDato.getTipo()===DataType.CADENA){
-                    tabla.setValor(this.ids[index],new Simbolo(this.valor.tipoDato,this.ids[index], this.valor.interpretar(arbol,tabla)), false);
+                    tabla.setValor(this.ids[index],new Simbolo(this.valor.tipoDato,this.ids[index], valorset), false);
                 }else if(tabla.getValor(this.ids[index]).tipo.getTipo()===DataType.BOOLEANO && this.valor.tipoDato.getTipo()===DataType.BOOLEANO){
-                    tabla.setValor(this.ids[index],new Simbolo(this.valor.tipoDato,this.ids[index], this.valor.interpretar(arbol,tabla)), false);
+                    tabla.setValor(this.ids[index],new Simbolo(this.valor.tipoDato,this.ids[index], valorset), false);
                 }else if(tabla.getValor(this.ids[index]).tipo.getTipo()===DataType.CARACTER && this.valor.tipoDato.getTipo()===DataType.CARACTER){
-                    tabla.setValor(this.ids[index],new Simbolo(this.valor.tipoDato,this.ids[index], this.valor.interpretar(arbol,tabla)), false);
+                    tabla.setValor(this.ids[index],new Simbolo(this.valor.tipoDato,this.ids[index], valorset), false);
                 }else{
                     controller.listaErrores.push(new Error(new errores.default('ERROR SEMANTICO', "No coinciden los tipos de datos", this.linea, this.columna)))
                 }
