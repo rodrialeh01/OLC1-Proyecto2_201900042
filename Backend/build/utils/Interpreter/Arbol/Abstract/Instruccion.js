@@ -2,8 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Instruccion = void 0;
 class Instruccion {
-    constructor(tipo, linea, columna) {
-        this.tipoDato = tipo;
+    constructor(linea, columna) {
         this.linea = linea;
         this.columna = columna;
     }

@@ -1,7 +1,8 @@
 import { Instruccion } from "../Abstract/Instruccion";
+import Break from "./Break";
 import Three from '../Symbol/Three';
 import SymbolTable from '../Symbol/SymbolTable';
-import Type, { DataType } from '../Symbol/Type';
+import { DataType } from "../Data/Data";
 import cloneDeep from "lodash/cloneDeep"
 const controller = require('../../../../controller/parser/parser')
 const errores = require('../Exceptions/Error')
@@ -11,7 +12,7 @@ export default class While extends Instruccion{
     listainstrucciones: Instruccion[];
 
     constructor(condicion: Instruccion,listainstrucciones: Instruccion[], fila: number, columna: number){
-        super(new Type(DataType.INDEFINIDO), fila, columna);
+        super( fila, columna);
         this.condicion = condicion;
         this.listainstrucciones = listainstrucciones;
     }
@@ -22,10 +23,15 @@ export default class While extends Instruccion{
             while(cloneDeep(this.condicion).interpretar(arbol,tablaLocal)){
                 const instrucciones = cloneDeep(this.listainstrucciones);
                 for(let i of instrucciones){
-                    i.interpretar(arbol,tablaLocal);
+                    if(i instanceof Instruccion){
+                        console.log("Instruccion: ",(i.constructor.name));
+                        if(i.constructor.name == "Break"){
+                            return i.interpretar(arbol,tablaLocal);
+                        }
+                        i.interpretar(arbol,tablaLocal);
+                    }
                 }
             }
         }
-        return null;
     }
 }

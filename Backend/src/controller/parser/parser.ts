@@ -1,5 +1,6 @@
 import { Response, Request } from "express";
 import Errores from '../../utils/Interpreter/Arbol/Exceptions/Error';
+import { tipoErr } from "../../utils/Interpreter/Arbol/Data/Data";
 import Three from '../../utils/Interpreter/Arbol/Symbol/Three';
 import SymbolTable from "../../utils/Interpreter/Arbol/Symbol/SymbolTable";
 import { Instruccion } from '../../utils/Interpreter/Arbol/Abstract/Instruccion';
@@ -23,7 +24,7 @@ export const parse = (req: Request, res: Response): void => {
                 ast.actualizaConsola((<Errores>i).returnError());
             }
 
-            var resultador = i instanceof Instruccion ? i.interpretar(ast,tabla) : new Errores("ERROR SEMANTICO", "no se puede ejecutar la instruccion", 0 , 0);
+            var resultador = i instanceof Instruccion ? i.interpretar(ast,tabla) : new Errores(tipoErr.SEMANTICO, "no se puede ejecutar la instruccion", 0 , 0);
             if(resultador instanceof Errores){
                 listaErrores.push(resultador);
                 ast.actualizaConsola((<Errores>resultador).returnError());

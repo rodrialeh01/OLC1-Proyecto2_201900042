@@ -1,29 +1,31 @@
 import { Instruccion } from "../Abstract/Instruccion";
 import Three from '../Symbol/Three';
 import SymbolTable from '../Symbol/SymbolTable';
-import Type, { DataType } from '../Symbol/Type';
+import { DataType, tipoErr } from "../Data/Data";
+import Error from "../Exceptions/Error";
 import get from "lodash/get"
 
 export default class Unario extends Instruccion {
-    operadorDer: Instruccion;
 
-    constructor( operadorDer: Instruccion, fila: number, columna: number){
-        super(new Type(DataType.INDEFINIDO), fila, columna);
-        this.operadorDer = operadorDer;
+    constructor(private operadorDer: Instruccion, fila: number, columna: number){
+        super( fila, columna);
     }
 
     interpretar(arbol: Three, tabla: SymbolTable) {
         let valorDer = this.operadorDer.interpretar(arbol,tabla);
-        if (this.operadorDer.tipoDato.getTipo()===DataType.ENTERO) {
-            this.tipoDato.setTipo(DataType.ENTERO);
-            return (Number(valorDer)*-1);
-        }else if(this.operadorDer.tipoDato.getTipo()===DataType.DECIMAL){
-            this.tipoDato.setTipo(DataType.DECIMAL);
-            return (Number(valorDer)*-1);
+        if (valorDer.type ===DataType.ENTERO) {
+            return {
+                "type": DataType.ENTERO,
+                "value": (-1*Number(valorDer.value))
+            }
+        }else if(valorDer.type===DataType.DECIMAL){
+            return {
+                "type": DataType.DECIMAL,
+                "value": (-1*Number(valorDer.value))
+            }
         }else{
             //ERROR SEMANTICO
-            this.tipoDato.setTipo(DataType.INDEFINIDO);
-            return (null);
+            throw new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
         }
     }
 }

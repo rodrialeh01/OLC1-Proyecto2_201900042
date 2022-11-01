@@ -1,62 +1,55 @@
 import { Instruccion } from "../Abstract/Instruccion";
 import Three from '../Symbol/Three';
 import SymbolTable from '../Symbol/SymbolTable';
-import Type, { DataType } from '../Symbol/Type';
+import { DataType } from "../Data/Data";
+import { obtenercaracteres } from "../Data/Data";
 import get from "lodash/get"
 
 export default class Nativo extends Instruccion {
-    valor: any;
 
-    constructor(tipo: Type, valor: any, fila: number, columna: number){
-        super(tipo, fila, columna);
-        this.valor = valor;
+    constructor(private tipo: DataType,private valor: any, fila: number, columna: number){
+        super(fila, columna);
     }
 
     interpretar(arbol: Three, tabla: SymbolTable) {
-        if(this.tipoDato.getTipo()===DataType.ENTERO){
-            return Number(this.valor);
-        }else if(this.tipoDato.getTipo()===DataType.CADENA){
-            return this.valor.toString().replaceAll("\\n","\n").replaceAll("\\t","\t").replaceAll("\\r","\r").replaceAll("\\\\","\\").replaceAll("\\\"","\"").replaceAll("\\'","\'");
-        }else if(this.tipoDato.getTipo()===DataType.DECIMAL){
-            return Number(this.valor);
-        }else if(this.tipoDato.getTipo()===DataType.CARACTER){
-            return this.obtenercaracteres(this.valor.toString());
-        }else if(this.tipoDato.getTipo()===DataType.BOOLEANO){
+        if(this.tipo === DataType.ENTERO){
+            return {
+                "type": DataType.ENTERO,
+                "value": Number(this.valor)
+            };
+        }else if(this.tipo === DataType.CADENA){
+            return {
+                "type":DataType.CADENA,
+                "value":this.valor.toString().replaceAll("\\n","\n").replaceAll("\\t","\t").replaceAll("\\r","\r").replaceAll("\\\\","\\").replaceAll("\\\"","\"").replaceAll("\\'","\'")
+            };
+        }else if(this.tipo === DataType.DECIMAL){
+            return {
+                "type": DataType.DECIMAL,
+                "value": Number(this.valor)
+            };
+        }else if(this.tipo === DataType.CARACTER){
+            return {
+                "type":DataType.CARACTER, 
+                "value":obtenercaracteres(this.valor.toString())
+            };
+        }else if(this.tipo === DataType.BOOLEANO){
             if(this.valor.toString().toUpperCase()==="TRUE"){
-                return true;
+                return {
+                    "type":DataType.BOOLEANO,
+                    "value": true
+                };
             }else if(this.valor.toString().toUpperCase()==="FALSE"){
-                return false;
+                return {
+                    "type":DataType.BOOLEANO,
+                    "value": false
+                };
             }
-        }else if(this.tipoDato.getTipo()===DataType.IDENTIFICADOR){
-            let value = tabla.getValor(this.valor)
-            this.tipoDato = get(value, 'tipo', new Type(DataType.INDEFINIDO));
-            return get(value, 'valor');
+        }else{
+            return {
+                "type":DataType.INDEFINIDO,
+                "value": null
+            };
         }
     }
-    obtenercaracteres(car: string): string{
-        switch(car){
-            case "\\n":{
-                return "\n"
-            }
-            case "\\\\":{
-                return "\\"
-            }
-            case "\\t":{
-                return "\t"
-            }
-            case "\\r":{
-                return "\r"
-            }
-            case "\\'":{
-                return "\'"
-            }
-            case "\\\"":{
-                return "\""
-            }
-            default:
-            {
-                return car
-            }
-        }
-    }
+    
 }

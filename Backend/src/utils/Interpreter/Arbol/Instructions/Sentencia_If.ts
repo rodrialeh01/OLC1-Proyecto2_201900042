@@ -1,7 +1,7 @@
 import { Instruccion } from "../Abstract/Instruccion";
 import Three from '../Symbol/Three';
 import SymbolTable from '../Symbol/SymbolTable';
-import Type, { DataType } from '../Symbol/Type';
+import { DataType } from "../Data/Data";
 import get from "lodash/get"
 const controller = require('../../../../controller/parser/parser')
 const errores = require('../Exceptions/Error')
@@ -13,7 +13,7 @@ export default class If extends Instruccion{
     listainstruccioneselse: Instruccion[] | undefined;
 
     constructor(condicion: Instruccion,listainstrucciones: Instruccion[],listaelif:Instruccion[]| undefined,listainstruccioneselse:Instruccion[]| undefined, fila: number, columna: number){
-        super(new Type(DataType.INDEFINIDO), fila, columna);
+        super(fila, columna);
         this.condicion = condicion;
         this.listainstrucciones = listainstrucciones;
         this.listaelif = listaelif ;

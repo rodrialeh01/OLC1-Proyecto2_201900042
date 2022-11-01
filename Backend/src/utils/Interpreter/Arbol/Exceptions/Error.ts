@@ -1,5 +1,7 @@
+import { tipoErr } from "../Data/Data";
+
 export default class Error {
-    private tipoError: String;
+    private tipoError: tipoErr;
     private desc: String;
     private fila: number;
     private columna: number;
@@ -7,7 +9,7 @@ export default class Error {
     public getDesc(): String{
         return this.desc;
     }
-    public getTipoError(): String {
+    public getTipoError(): tipoErr {
         return this.tipoError;
     }
     public getColumna(): number {
@@ -16,18 +18,36 @@ export default class Error {
     public getFila(): number {
         return this.fila;
     }
-    constructor(tipo: String, desc: String, fila: number, columna: number){
+    constructor(tipo: tipoErr, desc: String, fila: number, columna: number){
         this.tipoError = tipo;
         this.desc = desc;
         this.fila = fila;
         this.columna = columna;
     }
     public returnError(): String {
-        return (
-            'Se obtuvo: ' + this.tipoError + 
-            ' desc: {' + this.desc + 
-            '} en la fila: ' + this.fila + 
-            ' en la columna: ' + this.columna + '\n'
-        );
+        if(this.getTipoError() === tipoErr.LEXICO){
+            return (
+                'Se obtuvo: ERROR LEXICO' + 
+                ' desc: {' + this.desc + 
+                '} en la fila: ' + this.fila + 
+                ' en la columna: ' + this.columna + '\n'
+            );
+        }else if(this.getTipoError() === tipoErr.SINTACTICO){
+            return (
+                'Se obtuvo: ERROR SINTACTICO' + 
+                ' desc: {' + this.desc + 
+                '} en la fila: ' + this.fila + 
+                ' en la columna: ' + this.columna + '\n'
+            );
+        }else if(this.getTipoError() === tipoErr.SEMANTICO){
+            return (
+                'Se obtuvo: ERROR SEMANTICO' + 
+                ' desc: {' + this.desc + 
+                '} en la fila: ' + this.fila + 
+                ' en la columna: ' + this.columna + '\n'
+            );
+        }else{
+            return '';
+        }
     }
 }

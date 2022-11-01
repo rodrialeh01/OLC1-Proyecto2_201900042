@@ -6,7 +6,7 @@ class SymbolTable {
         this.tablaActual = new Map();
     }
     getValor(id) {
-        let Valor = this.tablaActual.get(id);
+        let Valor = this.tablaActual.get(id.toLowerCase());
         if (!Valor) {
             let actual = this.getAnterior();
             while (actual && !Valor) {

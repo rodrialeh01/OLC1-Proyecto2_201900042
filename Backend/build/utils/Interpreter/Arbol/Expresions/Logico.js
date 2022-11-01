@@ -1,54 +1,36 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.tipoLog = void 0;
 const Instruccion_1 = require("../Abstract/Instruccion");
-const Type_1 = __importStar(require("../Symbol/Type"));
-class Aritmetica extends Instruccion_1.Instruccion {
+const Data_1 = require("../Data/Data");
+const Error_1 = __importDefault(require("../Exceptions/Error"));
+class Logico extends Instruccion_1.Instruccion {
     constructor(tipo, operadorIzq, operadorDer, fila, columna) {
-        super(new Type_1.default(Type_1.DataType.INDEFINIDO), fila, columna);
+        super(fila, columna);
+        this.tipo = tipo;
         this.operadorIzq = operadorIzq;
         this.operadorDer = operadorDer;
-        this.tipo = tipo;
     }
     interpretar(arbol, tabla) {
         let valorIzq = this.operadorIzq.interpretar(arbol, tabla);
         let valorDer = this.operadorDer.interpretar(arbol, tabla);
-        if (this.tipo === tipoLog.OR) {
-            this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
-            return (valorIzq || valorDer);
+        if (this.tipo === Data_1.tipoLog.OR) {
+            return {
+                "type": Data_1.DataType.BOOLEANO,
+                "value": (valorIzq.value || valorDer.value)
+            };
         }
-        else if (this.tipo === tipoLog.AND) {
-            this.tipoDato.setTipo(Type_1.DataType.BOOLEANO);
-            return (valorIzq && valorDer);
+        else if (this.tipo === Data_1.tipoLog.AND) {
+            return {
+                "type": Data_1.DataType.BOOLEANO,
+                "value": (valorIzq.value && valorDer.value)
+            };
+        }
+        else {
+            throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
         }
     }
 }
-exports.default = Aritmetica;
-var tipoLog;
-(function (tipoLog) {
-    tipoLog[tipoLog["AND"] = 0] = "AND";
-    tipoLog[tipoLog["OR"] = 1] = "OR";
-})(tipoLog = exports.tipoLog || (exports.tipoLog = {}));
+exports.default = Logico;

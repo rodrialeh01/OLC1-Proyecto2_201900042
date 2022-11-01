@@ -3,7 +3,7 @@
     const controller = require('../../../controller/parser/parser')
     const errores = require('./Exceptions/Error')
     const nativo = require('./Expresions/Native');
-    const Tipo = require('./Symbol/Type');
+    const Tipo = require('./Data/Data');
     const impresion = require('./Instructions/imprimir');
     const impresionconsalto = require('./Instructions/ImprimirConSalto');
     const DeclaracionAsignacion = require('./Instructions/DeclaracionAsignacion');
@@ -18,6 +18,10 @@
     const simbolo = require('./Symbol/Symbol');
     const elif = require('./Instructions/Elif');
     const inswhile = require('./Instructions/Ciclo_While');
+    const insbreak = require('./Instructions/Break');
+    const inswitch = require('./Instructions/Sentencia_Switch');
+    const inscase = require('./Instructions/Caso');
+    const opternario = require('./Expresions/Operador_Ternario');
 %}
 %lex 
 
@@ -150,18 +154,20 @@ AMBITO_GLOBAL : IMPRIMIR                                                    {$$=
               | DECLARACION                                                 {$$=$1;}
               | ASIGNACION                                                  {$$=$1;} 
               | SENTENCIA_IF                                                {$$=$1;}
-              | CICLO_WHILE                                                 {$$=$1;}                                         
+              | CICLO_WHILE                                                 {$$=$1;}
+              | INS_BREAK                                                   {$$=$1;}
+              | SENTENCIA_SWITCH                                            {$$=$1;}                                         
 ;
 
 IMPRIMIR : RPRINT PARABRE EXPRESION PARCIERRA PTCOMA                        {$$=new impresion.default($3,@1.first_line,@1.first_column);}
          | RPRINTLN PARABRE EXPRESION PARCIERRA PTCOMA                      {$$=new impresionconsalto.default($3,@1.first_line,@1.first_column);}
 ;
 
-DECLARACION : RINT LISTA_IDENTIFICADORES PTCOMA                             {$$= new Declaracion.default($2, new Tipo.default(Tipo.DataType.ENTERO), @1.first_line,@1.first_column);}
-            | RDOUBLE LISTA_IDENTIFICADORES PTCOMA                          {$$= new Declaracion.default($2, new Tipo.default(Tipo.DataType.DECIMAL), @1.first_line,@1.first_column);}
-            | RCHAR LISTA_IDENTIFICADORES PTCOMA                            {$$= new Declaracion.default($2, new Tipo.default(Tipo.DataType.CADENA), @1.first_line,@1.first_column);}
-            | RSTRING LISTA_IDENTIFICADORES PTCOMA                          {$$= new Declaracion.default($2, new Tipo.default(Tipo.DataType.CARACTER), @1.first_line,@1.first_column);}
-            | RBOOLEAN LISTA_IDENTIFICADORES PTCOMA                         {$$= new Declaracion.default($2, new Tipo.default(Tipo.DataType.BOOLEANO), @1.first_line,@1.first_column);}
+DECLARACION : RINT LISTA_IDENTIFICADORES PTCOMA                             {$$= new Declaracion.default($2,Tipo.DataType.ENTERO, @1.first_line,@1.first_column);}
+            | RDOUBLE LISTA_IDENTIFICADORES PTCOMA                          {$$= new Declaracion.default($2,Tipo.DataType.DECIMAL, @1.first_line,@1.first_column);}
+            | RCHAR LISTA_IDENTIFICADORES PTCOMA                            {$$= new Declaracion.default($2,Tipo.DataType.CADENA, @1.first_line,@1.first_column);}
+            | RSTRING LISTA_IDENTIFICADORES PTCOMA                          {$$= new Declaracion.default($2,Tipo.DataType.CARACTER, @1.first_line,@1.first_column);}
+            | RBOOLEAN LISTA_IDENTIFICADORES PTCOMA                         {$$= new Declaracion.default($2,Tipo.DataType.BOOLEANO, @1.first_line,@1.first_column);}
 ;
 
 ASIGNACION : LISTA_IDENTIFICADORES IGUAL EXPRESION PTCOMA                                                   {$$= new Asignacion.default($1, $3, @1.first_line, @1.first_column);}
@@ -169,11 +175,11 @@ ASIGNACION : LISTA_IDENTIFICADORES IGUAL EXPRESION PTCOMA                       
            | IDENTIFICADOR CORABRE EXPRESION CORCIERRA CORABRE EXPRESION CORCIERRA IGUAL EXPRESION PTCOMA   {;}
 ;
 
-DECLARACION_ASIGNACION : RINT LISTA_IDENTIFICADORES IGUAL EXPRESION PTCOMA      {$$=new DeclaracionAsignacion.default($2, new Tipo.default(Tipo.DataType.ENTERO), $4, @1.first_line, @1.first_column);}
-                       | RDOUBLE LISTA_IDENTIFICADORES IGUAL EXPRESION PTCOMA   {$$=new DeclaracionAsignacion.default($2, new Tipo.default(Tipo.DataType.DECIMAL), $4, @1.first_line, @1.first_column);}
-                       | RSTRING LISTA_IDENTIFICADORES IGUAL EXPRESION PTCOMA   {$$=new DeclaracionAsignacion.default($2, new Tipo.default(Tipo.DataType.CADENA), $4, @1.first_line, @1.first_column);}
-                       | RCHAR LISTA_IDENTIFICADORES IGUAL EXPRESION PTCOMA     {$$=new DeclaracionAsignacion.default($2, new Tipo.default(Tipo.DataType.CARACTER), $4, @1.first_line, @1.first_column);}
-                       | RBOOLEAN LISTA_IDENTIFICADORES IGUAL EXPRESION PTCOMA  {$$=new DeclaracionAsignacion.default($2, new Tipo.default(Tipo.DataType.BOOLEANO), $4, @1.first_line, @1.first_column);}
+DECLARACION_ASIGNACION : RINT LISTA_IDENTIFICADORES IGUAL EXPRESION PTCOMA      {$$=new DeclaracionAsignacion.default($2,Tipo.DataType.ENTERO, $4, @1.first_line, @1.first_column);}
+                       | RDOUBLE LISTA_IDENTIFICADORES IGUAL EXPRESION PTCOMA   {$$=new DeclaracionAsignacion.default($2,Tipo.DataType.DECIMAL, $4, @1.first_line, @1.first_column);}
+                       | RSTRING LISTA_IDENTIFICADORES IGUAL EXPRESION PTCOMA   {$$=new DeclaracionAsignacion.default($2,Tipo.DataType.CADENA, $4, @1.first_line, @1.first_column);}
+                       | RCHAR LISTA_IDENTIFICADORES IGUAL EXPRESION PTCOMA     {$$=new DeclaracionAsignacion.default($2,Tipo.DataType.CARACTER, $4, @1.first_line, @1.first_column);}
+                       | RBOOLEAN LISTA_IDENTIFICADORES IGUAL EXPRESION PTCOMA  {$$=new DeclaracionAsignacion.default($2,Tipo.DataType.BOOLEANO, $4, @1.first_line, @1.first_column);}
 ;
 ENCAPSULAMIENTO : LLAVEA INSTRUCCIONES LLAVEC                               {$$=$2;}
                 | LLAVEA LLAVEC                                             {$$=[];}
@@ -196,35 +202,50 @@ LISTA_ELIF : LISTA_ELIF RELIF PARABRE EXPRESION PARCIERRA ENCAPSULAMIENTO   {$1.
 CICLO_WHILE : RWHILE PARABRE EXPRESION PARCIERRA ENCAPSULAMIENTO            {$$ = new inswhile.default($3,$5,@1.first_line,@1.first_column);}
 ;
 
-EXPRESION : ENTERO                                                          {$$ = new nativo.default(new Tipo.default(Tipo.DataType.ENTERO),$1, @1.first_line, @1.first_column);}
-          | CADENA                                                          {$$ = new nativo.default(new Tipo.default(Tipo.DataType.CADENA),$1, @1.first_line, @1.first_column);}
-          | CARACTER                                                        {$$ = new nativo.default(new Tipo.default(Tipo.DataType.CARACTER),$1, @1.first_line, @1.first_column);}
-          | DECIMAL                                                         {$$ = new nativo.default(new Tipo.default(Tipo.DataType.DECIMAL),$1, @1.first_line, @1.first_column);}
-          | IDENTIFICADOR                                                   {$$ = new nativo.default(new Tipo.default(Tipo.DataType.IDENTIFICADOR), $1, @1.first_line, @1.first_column);}
-          | RTRUE                                                           {$$ = new nativo.default(new Tipo.default(Tipo.DataType.BOOLEANO),$1, @1.first_line, @1.first_column);}
-          | RFALSE                                                          {$$ = new nativo.default(new Tipo.default(Tipo.DataType.BOOLEANO),$1, @1.first_line, @1.first_column);}
-          | EXPRESION MAS EXPRESION                                         {$$ = new Aritmetica.default(Aritmetica.tipoOp.SUMA,$1,$3,@1.first_line, @1.first_column);}
-          | EXPRESION MENOS EXPRESION                                       {$$ = new Aritmetica.default(Aritmetica.tipoOp.RESTA,$1,$3,@1.first_line, @1.first_column);}
-          | EXPRESION MULTIPLICACION EXPRESION                              {$$ = new Aritmetica.default(Aritmetica.tipoOp.MULTIPLICACION,$1,$3,@1.first_line, @1.first_column);}
-          | EXPRESION DIVISION EXPRESION                                    {$$ = new Aritmetica.default(Aritmetica.tipoOp.DIVISION,$1,$3,@1.first_line, @1.first_column);}
-          | EXPRESION MODULO EXPRESION                                      {$$ = new Aritmetica.default(Aritmetica.tipoOp.MODULO,$1,$3,@1.first_line, @1.first_column);}
-          | EXPRESION POTENCIA EXPRESION                                    {$$ = new Aritmetica.default(Aritmetica.tipoOp.POTENCIA,$1,$3,@1.first_line, @1.first_column);}
+INS_BREAK : RBREAK PTCOMA                                                   {$$=new insbreak.default(@1.first_line,@1.first_column);}
+;
+
+SENTENCIA_SWITCH : RSWITCH PARABRE EXPRESION PARCIERRA LLAVEA LISTA_CASES LLAVEC                                    {$$=new inswitch.default($3,$6,null,@1.first_line,@1.first_column);}
+                 | RSWITCH PARABRE EXPRESION PARCIERRA LLAVEA LISTA_CASES RDEFAULT DOSPUNTOS AMBITO_LOCAL LLAVEC    {$$= new inswitch.default($3,$6,$9,@1.first_line,@1.first_column);}
+                 | RSWITCH PARABRE EXPRESION PARCIERRA LLAVEA RDEFAULT DOSPUNTOS AMBITO_LOCAL LLAVEC                {$$= new inswitch.default($3,null,$8,@1.first_line,@1.first_column);}
+;
+
+LISTA_CASES : LISTA_CASES RCASE EXPRESION DOSPUNTOS AMBITO_LOCAL            {$1.push(new Caso.default($3,$5,@1.first_line,@1.first_column));}
+            | RCASE EXPRESION DOSPUNTOS AMBITO_LOCAL                        {$$=[new Caso.default($3,$5,@1.first_line,@1.first_column)];}
+;
+
+EXPRESION : ENTERO                                                          {$$ = new nativo.default(Tipo.DataType.ENTERO,$1, @1.first_line, @1.first_column);}
+          | CADENA                                                          {$$ = new nativo.default(Tipo.DataType.CADENA,$1, @1.first_line, @1.first_column);}
+          | CARACTER                                                        {$$ = new nativo.default(Tipo.DataType.CARACTER,$1, @1.first_line, @1.first_column);}
+          | DECIMAL                                                         {$$ = new nativo.default(Tipo.DataType.DECIMAL,$1, @1.first_line, @1.first_column);}
+          | IDENTIFICADOR                                                   {$$ = new nativo.default(Tipo.DataType.IDENTIFICADOR, $1, @1.first_line, @1.first_column);}
+          | RTRUE                                                           {$$ = new nativo.default(Tipo.DataType.BOOLEANO,$1, @1.first_line, @1.first_column);}
+          | RFALSE                                                          {$$ = new nativo.default(Tipo.DataType.BOOLEANO,$1, @1.first_line, @1.first_column);}
+          | EXPRESION MAS EXPRESION                                         {$$ = new Aritmetica.default(Tipo.tipoOp.SUMA,$1,$3,@1.first_line, @1.first_column);}
+          | EXPRESION MENOS EXPRESION                                       {$$ = new Aritmetica.default(Tipo.tipoOp.RESTA,$1,$3,@1.first_line, @1.first_column);}
+          | EXPRESION MULTIPLICACION EXPRESION                              {$$ = new Aritmetica.default(Tipo.tipoOp.MULTIPLICACION,$1,$3,@1.first_line, @1.first_column);}
+          | EXPRESION DIVISION EXPRESION                                    {$$ = new Aritmetica.default(Tipo.tipoOp.DIVISION,$1,$3,@1.first_line, @1.first_column);}
+          | EXPRESION MODULO EXPRESION                                      {$$ = new Aritmetica.default(Tipo.tipoOp.MODULO,$1,$3,@1.first_line, @1.first_column);}
+          | EXPRESION POTENCIA EXPRESION                                    {$$ = new Aritmetica.default(Tipo.tipoOp.POTENCIA,$1,$3,@1.first_line, @1.first_column);}
           | MENOS EXPRESION %prec NEGATIVO                                  {$$ = new Unario.default($2,@1.first_line, @1.first_column);}
           | PARABRE EXPRESION PARCIERRA                                     {$$ = $2;}
-          | EXPRESION OR EXPRESION                                          {$$ = new Logico.default(Logico.tipoLog.OR, $1, $3, @1.first_line, @1.first_column);}
-          | EXPRESION AND EXPRESION                                         {$$ = new Logico.default(Logico.tipoLog.AND, $1, $3, @1.first_line, @1.first_column);}
+          | EXPRESION OR EXPRESION                                          {$$ = new Logico.default(Tipo.tipoLog.OR, $1, $3, @1.first_line, @1.first_column);}
+          | EXPRESION AND EXPRESION                                         {$$ = new Logico.default(Tipo.tipoLog.AND, $1, $3, @1.first_line, @1.first_column);}
           | NOT EXPRESION                                                   {$$ = new Not.default($2,@1.first_line, @1.first_column);}
-          | EXPRESION IGUALIGUAL EXPRESION                                  {$$ = new Relacional.default(Relacional.tipoRel.IGUAL, $1, $3, @1.first_line, @1.first_column);}
-          | EXPRESION DIFERENTE EXPRESION                                   {$$ = new Relacional.default(Relacional.tipoRel.DIFERENTE, $1, $3, @1.first_line, @1.first_column);}
-          | EXPRESION MENOR EXPRESION                                       {$$ = new Relacional.default(Relacional.tipoRel.MENOR, $1, $3, @1.first_line, @1.first_column);}
-          | EXPRESION MAYOR EXPRESION                                       {$$ = new Relacional.default(Relacional.tipoRel.MAYOR, $1, $3, @1.first_line, @1.first_column);}
-          | EXPRESION MENOROIGUAL EXPRESION                                 {$$ = new Relacional.default(Relacional.tipoRel.MENOR_IGUAL, $1, $3, @1.first_line, @1.first_column);}
-          | EXPRESION MAYOROIGUAL EXPRESION                                 {$$ = new Relacional.default(Relacional.tipoRel.MAYOR_IGUAL, $1, $3, @1.first_line, @1.first_column);}
+          | EXPRESION IGUALIGUAL EXPRESION                                  {$$ = new Relacional.default(Tipo.tipoRel.IGUAL, $1, $3, @1.first_line, @1.first_column);}
+          | EXPRESION DIFERENTE EXPRESION                                   {$$ = new Relacional.default(Tipo.tipoRel.DIFERENTE, $1, $3, @1.first_line, @1.first_column);}
+          | EXPRESION MENOR EXPRESION                                       {$$ = new Relacional.default(Tipo.tipoRel.MENOR, $1, $3, @1.first_line, @1.first_column);}
+          | EXPRESION MAYOR EXPRESION                                       {$$ = new Relacional.default(Tipo.tipoRel.MAYOR, $1, $3, @1.first_line, @1.first_column);}
+          | EXPRESION MENOROIGUAL EXPRESION                                 {$$ = new Relacional.default(Tipo.tipoRel.MENOR_IGUAL, $1, $3, @1.first_line, @1.first_column);}
+          | EXPRESION MAYOROIGUAL EXPRESION                                 {$$ = new Relacional.default(Tipo.tipoRel.MAYOR_IGUAL, $1, $3, @1.first_line, @1.first_column);}
           | IDENTIFICADOR INCREMENTO                                        {;}
           | IDENTIFICADOR DECREMENTO                                        {;}
           | LLAMADA                                                         {;}
-          | OPERADOR_TERNARIO                                               {;}
+          | OPERADOR_TERNARIO                                               {$$=$1;}
           | CASTEOS                                                         {;}
           | ACCESO_VECTORES                                                 {;}
           | FUNCIONES_NATIVAS                                               {;}
+;
+
+OPERADOR_TERNARIO : EXPRESION INTERROGACION EXPRESION DOSPUNTOS EXPRESION   {$$ = new opternario.default($1,$3,$5,@1.first_line,@1.first_column);}
 ;

@@ -9,7 +9,7 @@ export default class SymbolTable{
         this.tablaActual = new Map<String, Simbolo>();
     }
     public getValor(id: String): any{
-        let Valor= this.tablaActual.get(id);
+        let Valor= this.tablaActual.get(id.toLowerCase());
         if(!Valor){
             let actual: SymbolTable = this.getAnterior();
             while(actual && ! Valor){

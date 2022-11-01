@@ -1,274 +1,362 @@
 import { Instruccion } from "../Abstract/Instruccion";
 import Three from '../Symbol/Three';
 import SymbolTable from '../Symbol/SymbolTable';
-import Type, { DataType } from '../Symbol/Type';
+import { DataType, tipoRel, tipoErr } from "../Data/Data";
+import Error from "../Exceptions/Error";
 import get from "lodash/get"
 
-export default class Aritmetica extends Instruccion {
-    operadorIzq: Instruccion;
-    operadorDer: Instruccion;
-    tipo: tipoRel;
+export default class Relacional extends Instruccion {
 
-    constructor(tipo: tipoRel, operadorIzq: Instruccion, operadorDer: Instruccion, fila: number, columna: number){
-        super(new Type(DataType.INDEFINIDO), fila, columna);
-        this.operadorIzq = operadorIzq;
-        this.operadorDer = operadorDer;
-        this.tipo = tipo;
+    constructor(private tipo: tipoRel, private operadorIzq: Instruccion, private operadorDer: Instruccion, fila: number, columna: number){
+        super( fila, columna);
     }
 
     interpretar(arbol: Three, tabla: SymbolTable) {
         if(this.tipo === tipoRel.MAYOR){
             let valorIzq = this.operadorIzq.interpretar(arbol, tabla);
             let valorDer = this.operadorDer.interpretar(arbol,tabla);
-            //I-ENTERO -- D-ANY
-            if (this.operadorIzq.tipoDato.getTipo() === DataType.ENTERO && this.operadorDer.tipoDato.getTipo()===DataType.ENTERO) {
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq) > Number(valorDer));
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.ENTERO && this.operadorDer.tipoDato.getTipo()===DataType.DECIMAL){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq)>Number(valorDer));
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.ENTERO && this.operadorDer.tipoDato.getTipo()===DataType.CARACTER){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq)>Number(valorDer.charCodeAt(0)));
+            if (valorIzq.type===DataType.ENTERO&& valorDer.type===DataType.ENTERO) {
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) > Number(valorDer.value))
+                }
+            }else if(valorIzq.type === DataType.ENTERO && valorDer.type===DataType.DECIMAL){
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) > Number(valorDer.value))
+                }
+            }else if(valorIzq.type === DataType.ENTERO && valorDer.type===DataType.CARACTER){
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) > Number(valorDer.value.charCodeAt(0)))
+                }
             }
             //I-DECIMAL -- D-ANY
-            else if (this.operadorIzq.tipoDato.getTipo() === DataType.DECIMAL && this.operadorDer.tipoDato.getTipo()===DataType.ENTERO) {
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq) > Number(valorDer));
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.DECIMAL && this.operadorDer.tipoDato.getTipo()===DataType.DECIMAL){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq)>Number(valorDer));
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.DECIMAL && this.operadorDer.tipoDato.getTipo()===DataType.CARACTER){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq)>valorDer.charCodeAt(0));
+            else if (valorIzq.type === DataType.DECIMAL && valorDer.type===DataType.ENTERO) {
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) > Number(valorDer.value))
+                }
+            }else if(valorIzq.type === DataType.DECIMAL && valorDer.type===DataType.DECIMAL){
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) > Number(valorDer.value))
+                }
+            }else if(valorIzq.type === DataType.DECIMAL && valorDer.type===DataType.CARACTER){
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) > Number(valorDer.value.charCodeAt(0)))
+                }
             }
             //I-CARACTER -- D-ANY
-            else if (this.operadorIzq.tipoDato.getTipo() === DataType.CARACTER && this.operadorDer.tipoDato.getTipo()===DataType.ENTERO) {
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq.charCodeAt(0)) > Number(valorDer));
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.CARACTER && this.operadorDer.tipoDato.getTipo()===DataType.DECIMAL){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq.charCodeAt(0))>Number(valorDer));
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.CARACTER && this.operadorDer.tipoDato.getTipo()===DataType.CARACTER){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq.charCodeAt(0))>Number(valorDer.charCodeAt(0)));
+            else if (valorIzq.type === DataType.CARACTER && valorDer.type===DataType.ENTERO) {
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value.charCodeAt(0)) > Number(valorDer.value))
+                }
+            }else if(valorIzq.type === DataType.CARACTER && valorDer.type===DataType.DECIMAL){
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value.charCodeAt(0)) > Number(valorDer.value))
+                }
+            }else if(valorIzq.type === DataType.CARACTER && valorDer.type===DataType.CARACTER){
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value.charCodeAt(0)) > Number(valorDer.value.charCodeAt(0)))
+                }
             }else{
                 //ERROR SEMANTICO
-                return (null);
+                throw new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
             }
         }else if(this.tipo === tipoRel.MENOR){
             let valorIzq = this.operadorIzq.interpretar(arbol, tabla);
             let valorDer = this.operadorDer.interpretar(arbol,tabla);
-            //I-ENTERO -- D-ANY
-            if (this.operadorIzq.tipoDato.getTipo() === DataType.ENTERO && this.operadorDer.tipoDato.getTipo()===DataType.ENTERO) {
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq) < Number(valorDer));
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.ENTERO && this.operadorDer.tipoDato.getTipo()===DataType.DECIMAL){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq)<Number(valorDer));
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.ENTERO && this.operadorDer.tipoDato.getTipo()===DataType.CARACTER){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq)<Number(valorDer.charCodeAt(0)));
+            if (valorIzq.type===DataType.ENTERO&& valorDer.type===DataType.ENTERO) {
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) < Number(valorDer.value))
+                }
+            }else if(valorIzq.type === DataType.ENTERO && valorDer.type===DataType.DECIMAL){
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) < Number(valorDer.value))
+                }
+            }else if(valorIzq.type === DataType.ENTERO && valorDer.type===DataType.CARACTER){
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) < Number(valorDer.value.charCodeAt(0)))
+                }
             }
             //I-DECIMAL -- D-ANY
-            else if (this.operadorIzq.tipoDato.getTipo() === DataType.DECIMAL && this.operadorDer.tipoDato.getTipo()===DataType.ENTERO) {
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq) < Number(valorDer));
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.DECIMAL && this.operadorDer.tipoDato.getTipo()===DataType.DECIMAL){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq)<Number(valorDer));
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.DECIMAL && this.operadorDer.tipoDato.getTipo()===DataType.CARACTER){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq)<valorDer.charCodeAt(0));
+            else if (valorIzq.type === DataType.DECIMAL && valorDer.type===DataType.ENTERO) {
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) < Number(valorDer.value))
+                }
+            }else if(valorIzq.type === DataType.DECIMAL && valorDer.type===DataType.DECIMAL){
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) < Number(valorDer.value))
+                }
+            }else if(valorIzq.type === DataType.DECIMAL && valorDer.type===DataType.CARACTER){
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) < Number(valorDer.value.charCodeAt(0)))
+                }
             }
             //I-CARACTER -- D-ANY
-            else if (this.operadorIzq.tipoDato.getTipo() === DataType.CARACTER && this.operadorDer.tipoDato.getTipo()===DataType.ENTERO) {
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq.charCodeAt(0)) < Number(valorDer));
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.CARACTER && this.operadorDer.tipoDato.getTipo()===DataType.DECIMAL){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq.charCodeAt(0))<Number(valorDer));
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.CARACTER && this.operadorDer.tipoDato.getTipo()===DataType.CARACTER){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq.charCodeAt(0))<Number(valorDer.charCodeAt(0)));
+            else if (valorIzq.type === DataType.CARACTER && valorDer.type===DataType.ENTERO) {
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value.charCodeAt(0)) < Number(valorDer.value))
+                }
+            }else if(valorIzq.type === DataType.CARACTER && valorDer.type===DataType.DECIMAL){
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value.charCodeAt(0)) < Number(valorDer.value))
+                }
+            }else if(valorIzq.type === DataType.CARACTER && valorDer.type===DataType.CARACTER){
+                return {
+                    "type": DataType.ENTERO,
+                    "value": (Number(valorIzq.value.charCodeAt(0)) < Number(valorDer.value.charCodeAt(0)))
+                }
             }else{
                 //ERROR SEMANTICO
-                return (null);
+                throw new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
             }
         }else if(this.tipo === tipoRel.MAYOR_IGUAL){
             let valorIzq = this.operadorIzq.interpretar(arbol, tabla);
             let valorDer = this.operadorDer.interpretar(arbol,tabla);
-            //I-ENTERO -- D-ANY
-            if (this.operadorIzq.tipoDato.getTipo() === DataType.ENTERO && this.operadorDer.tipoDato.getTipo()===DataType.ENTERO) {
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq) >= Number(valorDer));
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.ENTERO && this.operadorDer.tipoDato.getTipo()===DataType.DECIMAL){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq)>=Number(valorDer));
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.ENTERO && this.operadorDer.tipoDato.getTipo()===DataType.CARACTER){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq)>=Number(valorDer.charCodeAt(0)));
+            if (valorIzq.type===DataType.ENTERO&& valorDer.type===DataType.ENTERO) {
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) >= Number(valorDer.value))
+                }
+            }else if(valorIzq.type === DataType.ENTERO && valorDer.type===DataType.DECIMAL){
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) >= Number(valorDer.value))
+                }
+            }else if(valorIzq.type === DataType.ENTERO && valorDer.type===DataType.CARACTER){
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) >= Number(valorDer.value.charCodeAt(0)))
+                }
             }
             //I-DECIMAL -- D-ANY
-            else if (this.operadorIzq.tipoDato.getTipo() === DataType.DECIMAL && this.operadorDer.tipoDato.getTipo()===DataType.ENTERO) {
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq) >= Number(valorDer));
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.DECIMAL && this.operadorDer.tipoDato.getTipo()===DataType.DECIMAL){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq)>=Number(valorDer));
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.DECIMAL && this.operadorDer.tipoDato.getTipo()===DataType.CARACTER){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq)>=valorDer.charCodeAt(0));
+            else if (valorIzq.type === DataType.DECIMAL && valorDer.type===DataType.ENTERO) {
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) >= Number(valorDer.value))
+                }
+            }else if(valorIzq.type === DataType.DECIMAL && valorDer.type===DataType.DECIMAL){
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) >= Number(valorDer.value))
+                }
+            }else if(valorIzq.type === DataType.DECIMAL && valorDer.type===DataType.CARACTER){
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) >= Number(valorDer.value.charCodeAt(0)))
+                }
             }
             //I-CARACTER -- D-ANY
-            else if (this.operadorIzq.tipoDato.getTipo() === DataType.CARACTER && this.operadorDer.tipoDato.getTipo()===DataType.ENTERO) {
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq.charCodeAt(0)) >= Number(valorDer));
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.CARACTER && this.operadorDer.tipoDato.getTipo()===DataType.DECIMAL){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq.charCodeAt(0))>=Number(valorDer));
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.CARACTER && this.operadorDer.tipoDato.getTipo()===DataType.CARACTER){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq.charCodeAt(0))>=Number(valorDer.charCodeAt(0)));
+            else if (valorIzq.type === DataType.CARACTER && valorDer.type===DataType.ENTERO) {
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value.charCodeAt(0)) >= Number(valorDer.value))
+                }
+            }else if(valorIzq.type === DataType.CARACTER && valorDer.type===DataType.DECIMAL){
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value.charCodeAt(0)) >= Number(valorDer.value))
+                }
+            }else if(valorIzq.type === DataType.CARACTER && valorDer.type===DataType.CARACTER){
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value.charCodeAt(0)) >= Number(valorDer.value.charCodeAt(0)))
+                }
             }else{
                 //ERROR SEMANTICO
-                return (null);
+                throw new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
             }
         }else if(this.tipo === tipoRel.MENOR_IGUAL){
             let valorIzq = this.operadorIzq.interpretar(arbol, tabla);
             let valorDer = this.operadorDer.interpretar(arbol,tabla);
-            //I-ENTERO -- D-ANY
-            if (this.operadorIzq.tipoDato.getTipo() === DataType.ENTERO && this.operadorDer.tipoDato.getTipo()===DataType.ENTERO) {
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq) <= Number(valorDer));
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.ENTERO && this.operadorDer.tipoDato.getTipo()===DataType.DECIMAL){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq)<=Number(valorDer));
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.ENTERO && this.operadorDer.tipoDato.getTipo()===DataType.CARACTER){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq)<=Number(valorDer.charCodeAt(0)));
+            if (valorIzq.type===DataType.ENTERO&& valorDer.type===DataType.ENTERO) {
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) <= Number(valorDer.value))
+                }
+            }else if(valorIzq.type === DataType.ENTERO && valorDer.type===DataType.DECIMAL){
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) <= Number(valorDer.value))
+                }
+            }else if(valorIzq.type === DataType.ENTERO && valorDer.type===DataType.CARACTER){
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) <= Number(valorDer.value.charCodeAt(0)))
+                }
             }
             //I-DECIMAL -- D-ANY
-            else if (this.operadorIzq.tipoDato.getTipo() === DataType.DECIMAL && this.operadorDer.tipoDato.getTipo()===DataType.ENTERO) {
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq) <= Number(valorDer));
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.DECIMAL && this.operadorDer.tipoDato.getTipo()===DataType.DECIMAL){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq)<=Number(valorDer));
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.DECIMAL && this.operadorDer.tipoDato.getTipo()===DataType.CARACTER){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq)<=valorDer.charCodeAt(0));
+            else if (valorIzq.type === DataType.DECIMAL && valorDer.type===DataType.ENTERO) {
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) <= Number(valorDer.value))
+                }
+            }else if(valorIzq.type === DataType.DECIMAL && valorDer.type===DataType.DECIMAL){
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) <= Number(valorDer.value))
+                }
+            }else if(valorIzq.type === DataType.DECIMAL && valorDer.type===DataType.CARACTER){
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) <= Number(valorDer.value.charCodeAt(0)))
+                }
             }
             //I-CARACTER -- D-ANY
-            else if (this.operadorIzq.tipoDato.getTipo() === DataType.CARACTER && this.operadorDer.tipoDato.getTipo()===DataType.ENTERO) {
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq.charCodeAt(0)) <= Number(valorDer));
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.CARACTER && this.operadorDer.tipoDato.getTipo()===DataType.DECIMAL){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq.charCodeAt(0))<=Number(valorDer));
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.CARACTER && this.operadorDer.tipoDato.getTipo()===DataType.CARACTER){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq.charCodeAt(0))<=Number(valorDer.charCodeAt(0)));
+            else if (valorIzq.type === DataType.CARACTER && valorDer.type===DataType.ENTERO) {
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value.charCodeAt(0)) <= Number(valorDer.value))
+                }
+            }else if(valorIzq.type === DataType.CARACTER && valorDer.type===DataType.DECIMAL){
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value.charCodeAt(0)) <= Number(valorDer.value))
+                }
+            }else if(valorIzq.type === DataType.CARACTER && valorDer.type===DataType.CARACTER){
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value.charCodeAt(0)) <= Number(valorDer.value.charCodeAt(0)))
+                }
             }else{
                 //ERROR SEMANTICO
-                return (null);
+                throw new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
             }
         }else if(this.tipo === tipoRel.IGUAL){
             let valorIzq = this.operadorIzq.interpretar(arbol, tabla);
             let valorDer = this.operadorDer.interpretar(arbol,tabla);
-            //I-ENTERO -- D-ANY
-            if (this.operadorIzq.tipoDato.getTipo() === DataType.ENTERO && this.operadorDer.tipoDato.getTipo()===DataType.ENTERO) {
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq) == Number(valorDer));
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.ENTERO && this.operadorDer.tipoDato.getTipo()===DataType.DECIMAL){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq)==Number(valorDer));
+            if (valorIzq.type===DataType.ENTERO&& valorDer.type===DataType.ENTERO) {
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) == Number(valorDer.value))
+                }
+            }else if(valorIzq.type === DataType.ENTERO && valorDer.type===DataType.DECIMAL){
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) == Number(valorDer.value))
+                }
             }
             //I-DECIMAL -- D-ANY
-            else if (this.operadorIzq.tipoDato.getTipo() === DataType.DECIMAL && this.operadorDer.tipoDato.getTipo()===DataType.ENTERO) {
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq) == Number(valorDer));
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.DECIMAL && this.operadorDer.tipoDato.getTipo()===DataType.DECIMAL){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq)==Number(valorDer));
+            else if (valorIzq.type === DataType.DECIMAL && valorDer.type===DataType.ENTERO) {
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) == Number(valorDer.value))
+                }
+            }else if(valorIzq.type === DataType.DECIMAL && valorDer.type===DataType.DECIMAL){
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) == Number(valorDer.value))
+                }
             }
-            //I-BOOLEAN -- D-BOOLEAN
-            else if(this.operadorIzq.tipoDato.getTipo() === DataType.BOOLEANO && this.operadorDer.tipoDato.getTipo()===DataType.BOOLEANO){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Boolean(valorIzq)==Boolean(valorDer));
+            //I-BOOLEANO -- D-ANY
+            else if (valorIzq.type === DataType.BOOLEANO && valorDer.type===DataType.BOOLEANO) {
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (valorIzq.value == valorDer.value)
+                }
             }
             //I-CARACTER -- D-ANY
-            else if (this.operadorIzq.tipoDato.getTipo() === DataType.CARACTER && this.operadorDer.tipoDato.getTipo()===DataType.CARACTER) {
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (valorIzq == valorDer);
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.CARACTER && this.operadorDer.tipoDato.getTipo()===DataType.CADENA){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (String(valorIzq) == String(valorDer));
+            else if (valorIzq.type === DataType.CARACTER && valorDer.type===DataType.CARACTER) {
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (String(valorIzq.value) == String(valorDer.value))
+                }
+            }else if(valorIzq.type === DataType.CARACTER && valorDer.type===DataType.CADENA){
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (String(valorIzq.value) == String(valorDer.value))
+                }
             }
             //I-CADENA -- D-ANY
-            else if(this.operadorIzq.tipoDato.getTipo() === DataType.CADENA && this.operadorDer.tipoDato.getTipo()===DataType.CARACTER){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (String(valorIzq) == String(valorDer));
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.CADENA && this.operadorDer.tipoDato.getTipo()===DataType.CADENA){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (String(valorIzq) == String(valorDer));
+            else if (valorIzq.type === DataType.CADENA && valorDer.type===DataType.CARACTER) {
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (String(valorIzq.value) == String(valorDer.value))
+                }
+            }else if (valorIzq.type === DataType.CADENA && valorDer.type===DataType.CADENA) {
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (String(valorIzq.value) == String(valorDer.value))
+                }
             }else{
                 //ERROR SEMANTICO
-                this.tipoDato.setTipo(DataType.INDEFINIDO);
-                return (null);
+                throw new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
             }
         }else if(this.tipo === tipoRel.DIFERENTE){
             let valorIzq = this.operadorIzq.interpretar(arbol, tabla);
             let valorDer = this.operadorDer.interpretar(arbol,tabla);
-            //I-ENTERO -- D-ANY
-            if (this.operadorIzq.tipoDato.getTipo() === DataType.ENTERO && this.operadorDer.tipoDato.getTipo()===DataType.ENTERO) {
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq) != Number(valorDer));
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.ENTERO && this.operadorDer.tipoDato.getTipo()===DataType.DECIMAL){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq)!=Number(valorDer));
+            if (valorIzq.type===DataType.ENTERO&& valorDer.type===DataType.ENTERO) {
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) != Number(valorDer.value))
+                }
+            }else if(valorIzq.type === DataType.ENTERO && valorDer.type===DataType.DECIMAL){
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) != Number(valorDer.value))
+                }
             }
             //I-DECIMAL -- D-ANY
-            else if (this.operadorIzq.tipoDato.getTipo() === DataType.DECIMAL && this.operadorDer.tipoDato.getTipo()===DataType.ENTERO) {
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq) != Number(valorDer));
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.DECIMAL && this.operadorDer.tipoDato.getTipo()===DataType.DECIMAL){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Number(valorIzq)!=Number(valorDer));
+            else if (valorIzq.type === DataType.DECIMAL && valorDer.type===DataType.ENTERO) {
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) != Number(valorDer.value))
+                }
+            }else if(valorIzq.type === DataType.DECIMAL && valorDer.type===DataType.DECIMAL){
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (Number(valorIzq.value) != Number(valorDer.value))
+                }
             }
-            //I-BOOLEAN -- D-BOOLEAN
-            else if(this.operadorIzq.tipoDato.getTipo() === DataType.BOOLEANO && this.operadorDer.tipoDato.getTipo()===DataType.BOOLEANO){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (Boolean(valorIzq)!=Boolean(valorDer));
+            //I-BOOLEANO -- D-ANY
+            else if (valorIzq.type === DataType.BOOLEANO && valorDer.type===DataType.BOOLEANO) {
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (valorIzq.value != valorDer.value)
+                }
             }
             //I-CARACTER -- D-ANY
-            else if (this.operadorIzq.tipoDato.getTipo() === DataType.CARACTER && this.operadorDer.tipoDato.getTipo()===DataType.CARACTER) {
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (valorIzq != valorDer);
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.CARACTER && this.operadorDer.tipoDato.getTipo()===DataType.CADENA){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (String(valorIzq) != String(valorDer));
+            else if (valorIzq.type === DataType.CARACTER && valorDer.type===DataType.CARACTER) {
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (String(valorIzq.value) != String(valorDer.value))
+                }
+            }else if(valorIzq.type === DataType.CARACTER && valorDer.type===DataType.CADENA){
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (String(valorIzq.value) != String(valorDer.value))
+                }
             }
             //I-CADENA -- D-ANY
-            else if(this.operadorIzq.tipoDato.getTipo() === DataType.CADENA && this.operadorDer.tipoDato.getTipo()===DataType.CARACTER){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (String(valorIzq) != String(valorDer));
-            }else if(this.operadorIzq.tipoDato.getTipo() === DataType.CADENA && this.operadorDer.tipoDato.getTipo()===DataType.CADENA){
-                this.tipoDato = new Type(DataType.BOOLEANO);
-                return (String(valorIzq) != String(valorDer));
+            else if (valorIzq.type === DataType.CADENA && valorDer.type===DataType.CARACTER) {
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (String(valorIzq.value) != String(valorDer.value))
+                }
+            }else if (valorIzq.type === DataType.CADENA && valorDer.type===DataType.CADENA) {
+                return {
+                    "type": DataType.BOOLEANO,
+                    "value": (String(valorIzq.value) != String(valorDer.value))
+                }
             }else{
                 //ERROR SEMANTICO
-                return (null);
+                throw new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
             }
         }
     }
 }
 
-export enum tipoRel{
-    MAYOR,
-    MENOR,
-    MAYOR_IGUAL,
-    MENOR_IGUAL,
-    IGUAL,
-    DIFERENTE
-}

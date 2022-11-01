@@ -1,35 +1,32 @@
 import { Instruccion } from "../Abstract/Instruccion";
 import Three from '../Symbol/Three';
 import SymbolTable from '../Symbol/SymbolTable';
-import Type, { DataType } from '../Symbol/Type';
+import { DataType, tipoLog, tipoErr} from '../Data/Data';
+import Error from "../Exceptions/Error";
 import get from "lodash/get"
 
-export default class Aritmetica extends Instruccion {
-    operadorIzq: Instruccion;
-    operadorDer: Instruccion;
-    tipo: tipoLog;
+export default class Logico extends Instruccion {
 
-    constructor(tipo: tipoLog, operadorIzq: Instruccion, operadorDer: Instruccion, fila: number, columna: number){
-        super(new Type(DataType.INDEFINIDO), fila, columna);
-        this.operadorIzq = operadorIzq;
-        this.operadorDer = operadorDer;
-        this.tipo = tipo;
+    constructor(private tipo: tipoLog,private operadorIzq: Instruccion, private operadorDer: Instruccion, fila: number, columna: number){
+        super(fila, columna);
     }
 
     interpretar(arbol: Three, tabla: SymbolTable) {
         let valorIzq = this.operadorIzq.interpretar(arbol, tabla);
         let valorDer = this.operadorDer.interpretar(arbol,tabla);
         if(this.tipo === tipoLog.OR){
-            this.tipoDato.setTipo(DataType.BOOLEANO);
-            return (valorIzq || valorDer); 
+            return {
+                "type": DataType.BOOLEANO,
+                "value": (valorIzq.value || valorDer.value)
+            }
         }else if(this.tipo === tipoLog.AND){
-            this.tipoDato.setTipo(DataType.BOOLEANO);
-            return (valorIzq && valorDer); 
+            return {
+                "type": DataType.BOOLEANO,
+                "value": (valorIzq.value && valorDer.value)
+            }
+        }else{
+            throw new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
         }
     }
 }
 
-export enum tipoLog{
-    AND,
-    OR
-}

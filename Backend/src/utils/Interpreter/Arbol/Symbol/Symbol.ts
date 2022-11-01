@@ -1,19 +1,19 @@
-import Tipo from './Type';
+import { DataType } from "../Data/Data";
 
 export default class Symbol{
-    private tipo: Tipo;
+    private tipo: DataType;
     private identificador: String;
     private valor: any;
 
-    constructor(tipo: Tipo, identificador: String, valor?: any){
+    constructor(tipo: DataType, identificador: String, valor?: any){
         this.tipo = tipo;
         this.identificador = identificador;
         this.valor = valor;
     }
-    public getTipo(): Tipo{
+    public getTipo(): DataType{
         return this.tipo;
     }
-    public setTipo(value: Tipo){
+    public setTipo(value: DataType){
         this.tipo = value;
     }
     public getIdentificador(): String{
