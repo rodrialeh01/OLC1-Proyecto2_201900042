@@ -3,7 +3,8 @@ import Operacion from "../Expresions/Native";
 import Arbol from "../Symbol/Three";
 import Simbolo from "../Symbol/Symbol";
 import tablaSimbolo from "../Symbol/SymbolTable";
-import { DataType } from "../Data/Data";
+import { DataType, tipoErr } from "../Data/Data";
+import Error from "../Exceptions/Error";
 const controller = require('../../../../controller/parser/parser')
 const errores = require('../Exceptions/Error')
 
@@ -18,30 +19,17 @@ export default class Asignacion extends Instruccion {
     }
 
     public interpretar(arbol: Arbol, tabla: tablaSimbolo) {
-        /*
-        const valorset = this.valor.interpretar(arbol,tabla);
-        for (let index = 0; index < this.ids.length; index++) {
-            if(tabla.getValor(this.ids[index]) != null){
-                if(tabla.getValor(this.ids[index]).tipo.getTipo()===DataType.ENTERO && this.valor.tipoDato.getTipo()===DataType.ENTERO){
-                    tabla.setValor(this.ids[index],new Simbolo(this.valor.tipoDato,this.ids[index], valorset), false);
-                    console.log(tabla.getValor(this.ids[index]));
-                }else if(tabla.getValor(this.ids[index]).tipo.getTipo()===DataType.DECIMAL && this.valor.tipoDato.getTipo()===DataType.DECIMAL){
-                    tabla.setValor(this.ids[index],new Simbolo(this.valor.tipoDato,this.ids[index], valorset), false);
-                }else if(tabla.getValor(this.ids[index]).tipo.getTipo()===DataType.CADENA && this.valor.tipoDato.getTipo()===DataType.CADENA){
-                    tabla.setValor(this.ids[index],new Simbolo(this.valor.tipoDato,this.ids[index], valorset), false);
-                }else if(tabla.getValor(this.ids[index]).tipo.getTipo()===DataType.BOOLEANO && this.valor.tipoDato.getTipo()===DataType.BOOLEANO){
-                    tabla.setValor(this.ids[index],new Simbolo(this.valor.tipoDato,this.ids[index], valorset), false);
-                }else if(tabla.getValor(this.ids[index]).tipo.getTipo()===DataType.CARACTER && this.valor.tipoDato.getTipo()===DataType.CARACTER){
-                    tabla.setValor(this.ids[index],new Simbolo(this.valor.tipoDato,this.ids[index], valorset), false);
+        let valorasig = this.valor.interpretar(arbol,tabla);
+        for(let id of this.ids){
+            let variable = tabla.getVariable(id);
+            if(variable != null){
+                if(tabla.getTipo(id) == valorasig?.type){
+                    tabla.asignar(id,valorasig.value);
+                    console.log("Se asigno a la variable " + id)
                 }else{
-                    throw new Error(new errores.default('ERROR SEMANTICO', "No existe la variable", this.linea, this.columna));
+                    throw new Error(tipoErr.SEMANTICO,"No coinciden los tipos de datos", this.linea, this.columna);
                 }
-            }else{
-                //ERROR SEMANTICO
-                throw new Error(new errores.default('ERROR SEMANTICO', "No existe la variable", this.linea, this.columna));
             }
         }
-        return null;
-        */
     }
 }

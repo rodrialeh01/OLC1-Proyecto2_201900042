@@ -4,8 +4,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const Instruccion_1 = require("../Abstract/Instruccion");
+const Break_1 = __importDefault(require("./Break"));
 const SymbolTable_1 = __importDefault(require("../Symbol/SymbolTable"));
-const cloneDeep_1 = __importDefault(require("lodash/cloneDeep"));
+const Data_1 = require("../Data/Data");
+const Error_1 = __importDefault(require("../Exceptions/Error"));
 const controller = require('../../../../controller/parser/parser');
 const errores = require('../Exceptions/Error');
 class While extends Instruccion_1.Instruccion {
@@ -15,19 +17,26 @@ class While extends Instruccion_1.Instruccion {
         this.listainstrucciones = listainstrucciones;
     }
     interpretar(arbol, tabla) {
-        const tablaLocal = new SymbolTable_1.default(tabla);
-        if (typeof (0, cloneDeep_1.default)(this.condicion).interpretar(arbol, tablaLocal) == "boolean") {
-            while ((0, cloneDeep_1.default)(this.condicion).interpretar(arbol, tablaLocal)) {
-                const instrucciones = (0, cloneDeep_1.default)(this.listainstrucciones);
-                for (let i of instrucciones) {
-                    if (i instanceof Instruccion_1.Instruccion) {
-                        console.log("Instruccion: ", (i.constructor.name));
-                        if (i.constructor.name == "Break") {
-                            return i.interpretar(arbol, tablaLocal);
+        let condiciontemp = true;
+        while (condiciontemp) {
+            let condicion = this.condicion.interpretar(arbol, tabla);
+            if (condicion.type == Data_1.DataType.BOOLEANO) {
+                if (condicion.value == true) {
+                    const tablaLocal = new SymbolTable_1.default(tabla);
+                    for (let i of this.listainstrucciones) {
+                        let instrucciones = i.interpretar(arbol, tablaLocal);
+                        if (instrucciones instanceof Break_1.default) {
+                            return instrucciones;
                         }
-                        i.interpretar(arbol, tablaLocal);
                     }
                 }
+                else {
+                    condiciontemp = false;
+                    break;
+                }
+            }
+            else {
+                throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "La condicion no es booleana", this.linea, this.columna);
             }
         }
     }

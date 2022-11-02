@@ -107,4 +107,14 @@ export default class SymbolTable{
         }
     }
 
+    public asignar(nombreid: String, valor:any){
+        let temp: SymbolTable = this;
+        while(temp!= null){
+            let sym = temp.tablaActual.get(nombreid.toLowerCase());
+            if(sym != null){
+                sym.setValor(valor);
+            }
+            temp = temp.getAnterior();
+        }
+    }
 }

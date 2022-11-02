@@ -2,8 +2,8 @@ import { Instruccion } from "../Abstract/Instruccion";
 import Break from "./Break";
 import Three from '../Symbol/Three';
 import SymbolTable from '../Symbol/SymbolTable';
-import { DataType } from "../Data/Data";
-import cloneDeep from "lodash/cloneDeep"
+import { DataType, tipoErr } from "../Data/Data";
+import Error from "../Exceptions/Error";
 const controller = require('../../../../controller/parser/parser')
 const errores = require('../Exceptions/Error')
 
@@ -18,19 +18,24 @@ export default class While extends Instruccion{
     }
 
     interpretar(arbol: Three, tabla: SymbolTable) {
-        const tablaLocal = new SymbolTable(tabla);
-        if(typeof cloneDeep(this.condicion).interpretar(arbol,tablaLocal) == "boolean"){
-            while(cloneDeep(this.condicion).interpretar(arbol,tablaLocal)){
-                const instrucciones = cloneDeep(this.listainstrucciones);
-                for(let i of instrucciones){
-                    if(i instanceof Instruccion){
-                        console.log("Instruccion: ",(i.constructor.name));
-                        if(i.constructor.name == "Break"){
-                            return i.interpretar(arbol,tablaLocal);
+        let condiciontemp = true
+        while(condiciontemp){
+            let condicion = this.condicion.interpretar(arbol, tabla);
+            if(condicion.type == DataType.BOOLEANO){
+                if(condicion.value == true){
+                    const tablaLocal = new SymbolTable(tabla);
+                    for(let i of this.listainstrucciones){
+                        let instrucciones = i.interpretar(arbol, tablaLocal);
+                        if(instrucciones instanceof Break){
+                            return instrucciones;
                         }
-                        i.interpretar(arbol,tablaLocal);
                     }
+                }else{
+                    condiciontemp = false
+                    break;
                 }
+            }else{
+                throw new Error(tipoErr.SEMANTICO, "La condicion no es booleana", this.linea, this.columna);
             }
         }
     }

@@ -5,6 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const Instruccion_1 = require("../Abstract/Instruccion");
 const SymbolTable_1 = __importDefault(require("../Symbol/SymbolTable"));
+const Data_1 = require("../Data/Data");
+const Break_1 = __importDefault(require("./Break"));
 const controller = require('../../../../controller/parser/parser');
 const errores = require('../Exceptions/Error');
 class Elif extends Instruccion_1.Instruccion {
@@ -14,16 +16,17 @@ class Elif extends Instruccion_1.Instruccion {
         this.listainstrucciones = listainstrucciones;
     }
     interpretar(arbol, tabla) {
-        const operacion = this.condicion.interpretar(arbol, tabla);
-        if (operacion) {
-            const tablaLocal = new SymbolTable_1.default(tabla);
-            for (let i of this.listainstrucciones) {
-                i.interpretar(arbol, tablaLocal);
+        let tablaLocal = new SymbolTable_1.default(tabla);
+        let condicion = this.condicion.interpretar(arbol, tabla);
+        if (condicion.type == Data_1.DataType.BOOLEANO) {
+            if (condicion.value == true) {
+                for (let i of this.listainstrucciones) {
+                    let instrucciones1 = i.interpretar(arbol, tablaLocal);
+                    if (instrucciones1 instanceof Break_1.default) {
+                        return instrucciones1;
+                    }
+                }
             }
-            return true;
-        }
-        else {
-            return false;
         }
     }
 }

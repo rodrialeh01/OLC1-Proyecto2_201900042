@@ -105,5 +105,15 @@ class SymbolTable {
             temp = temp.getAnterior();
         }
     }
+    asignar(nombreid, valor) {
+        let temp = this;
+        while (temp != null) {
+            let sym = temp.tablaActual.get(nombreid.toLowerCase());
+            if (sym != null) {
+                sym.setValor(valor);
+            }
+            temp = temp.getAnterior();
+        }
+    }
 }
 exports.default = SymbolTable;
