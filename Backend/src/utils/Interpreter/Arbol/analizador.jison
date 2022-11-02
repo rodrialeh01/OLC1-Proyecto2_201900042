@@ -26,6 +26,9 @@
     const casteo = require('./Expresions/Casteo');
     const increment = require('./Expresions/Incremento');
     const decrement = require('./Expresions/Decremento');
+    const insfor = require('./Instructions/Ciclo_For');
+    const insdowhile = require('./Instructions/CicloDoWhile');
+    const insdountil = require('./Instructions/CicloDoUntil');
 %}
 %lex 
 
@@ -160,7 +163,10 @@ AMBITO_GLOBAL : IMPRIMIR                                                    {$$=
               | SENTENCIA_IF                                                {$$=$1;}
               | CICLO_WHILE                                                 {$$=$1;}
               | INS_BREAK                                                   {$$=$1;}
-              | SENTENCIA_SWITCH                                            {$$=$1;}                                         
+              | SENTENCIA_SWITCH                                            {$$=$1;}
+              | CICLO_FOR                                                   {$$=$1;}
+              | CICLO_DO_WHILE                                              {$$=$1;}
+              | CICLO_DO_UNTIL                                              {$$=$1;}                                         
 ;
 
 IMPRIMIR : RPRINT PARABRE EXPRESION PARCIERRA PTCOMA                        {$$=new impresion.default($3,@1.first_line,@1.first_column);}
@@ -205,9 +211,6 @@ LISTA_ELIF : LISTA_ELIF RELIF PARABRE EXPRESION PARCIERRA ENCAPSULAMIENTO   {$1.
            | RELIF PARABRE EXPRESION PARCIERRA ENCAPSULAMIENTO              {$$=[new elif.default($3,$5,@1.first_line,@1.first_column)];}
 ;
 
-CICLO_WHILE : RWHILE PARABRE EXPRESION PARCIERRA ENCAPSULAMIENTO            {$$ = new inswhile.default($3,$5,@1.first_line,@1.first_column);}
-;
-
 INS_BREAK : RBREAK PTCOMA                                                   {$$=new insbreak.default(@1.first_line,@1.first_column);}
 ;
 
@@ -218,6 +221,27 @@ SENTENCIA_SWITCH : RSWITCH PARABRE EXPRESION PARCIERRA LLAVEA LISTA_CASES LLAVEC
 
 LISTA_CASES : LISTA_CASES RCASE EXPRESION DOSPUNTOS INSTRUCCIONES            {$1.push(new inscase.default($3,$5,@1.first_line,@1.first_column)); $$=$1;}
             | RCASE EXPRESION DOSPUNTOS INSTRUCCIONES                        {$$=[new inscase.default($2,$4,@1.first_line,@1.first_column)];}
+;
+
+CICLO_WHILE : RWHILE PARABRE EXPRESION PARCIERRA ENCAPSULAMIENTO            {$$ = new inswhile.default($3,$5,@1.first_line,@1.first_column);}
+;
+
+CICLO_FOR : RFOR PARABRE DECLARACION_ASIG_FOR PTCOMA EXPRESION PTCOMA ACTUALIZACION_FOR PARCIERRA ENCAPSULAMIENTO {$$= new insfor.default($3,$5,$7,$9,@1.first_line,@1.first_column);}
+;
+
+CICLO_DO_WHILE : RDO ENCAPSULAMIENTO RWHILE PARABRE EXPRESION PARCIERRA PTCOMA  {$$= new insdowhile.default($5,$2,@1.first_line,@1.first_column);}
+;
+
+CICLO_DO_UNTIL : RDO ENCAPSULAMIENTO RUNTIL PARABRE EXPRESION PARCIERRA PTCOMA  {$$= new insdountil.default($5,$2,@1.first_line,@1.first_column);}
+;
+
+DECLARACION_ASIG_FOR : RINT LISTA_IDENTIFICADORES IGUAL EXPRESION           {$$=new DeclaracionAsignacion.default($2,Tipo.DataType.ENTERO, $4, @1.first_line, @1.first_column);}
+                    | IDENTIFICADOR IGUAL EXPRESION                         {$$= new Asignacion.default($1, $3, @1.first_line, @1.first_column);}
+;
+
+ACTUALIZACION_FOR : LISTA_IDENTIFICADORES IGUAL EXPRESION                   {$$= new Asignacion.default($1, $3, @1.first_line, @1.first_column);}
+                  | IDENTIFICADOR INCREMENTO                                {$$ = new increment.default($1,@1.first_line,@1.first_column);}
+                  | IDENTIFICADOR DECREMENTO                                {$$ = new decrement.default($1,@1.first_line,@1.first_column);}
 ;
 
 EXPRESION : ENTERO                                                          {$$ = new nativo.default(Tipo.DataType.ENTERO,$1, @1.first_line, @1.first_column);}

@@ -346,7 +346,7 @@ class Aritmetica extends Instruccion_1.Instruccion {
         else if (this.tipo === Data_1.tipoOp.DIVISION) {
             let valorIzq = this.operadorIzq.interpretar(arbol, tabla);
             let valorDer = this.operadorDer.interpretar(arbol, tabla);
-            if (!(Number(valorDer) === 0 || Number(valorDer.value.charCodeAt(0)) === 0)) {
+            if (!(Number(valorDer.value) === 0)) {
                 if (valorIzq.type === Data_1.DataType.ENTERO && valorDer.type === Data_1.DataType.ENTERO) {
                     return {
                         "type": Data_1.DataType.DECIMAL,

@@ -303,8 +303,8 @@ export default class Aritmetica extends Instruccion {
         }else if (this.tipo === tipoOp.DIVISION) {
             let valorIzq = this.operadorIzq.interpretar(arbol, tabla);
             let valorDer = this.operadorDer.interpretar(arbol,tabla);
-            if(!(Number(valorDer) === 0 || Number(valorDer.value.charCodeAt(0))===0)){
-                if (valorIzq.type===DataType.ENTERO&& valorDer.type===DataType.ENTERO) {
+            if(!(Number(valorDer.value) === 0)){
+                if (valorIzq.type===DataType.ENTERO && valorDer.type===DataType.ENTERO) {
                     return {
                         "type": DataType.DECIMAL,
                         "value": (Number(valorIzq.value) / Number(valorDer.value))
