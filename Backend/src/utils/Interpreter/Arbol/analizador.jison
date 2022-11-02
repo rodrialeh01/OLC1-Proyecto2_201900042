@@ -24,6 +24,8 @@
     const opternario = require('./Expresions/Operador_Ternario');
     const identificador = require('./Expresions/Identificador');
     const casteo = require('./Expresions/Casteo');
+    const increment = require('./Expresions/Incremento');
+    const decrement = require('./Expresions/Decremento');
 %}
 %lex 
 
@@ -175,6 +177,8 @@ DECLARACION : RINT LISTA_IDENTIFICADORES PTCOMA                             {$$=
 ASIGNACION : LISTA_IDENTIFICADORES IGUAL EXPRESION PTCOMA                                                   {$$= new Asignacion.default($1, $3, @1.first_line, @1.first_column);}
            | IDENTIFICADOR CORABRE EXPRESION CORCIERRA IGUAL EXPRESION PTCOMA                               {;}
            | IDENTIFICADOR CORABRE EXPRESION CORCIERRA CORABRE EXPRESION CORCIERRA IGUAL EXPRESION PTCOMA   {;}
+           | IDENTIFICADOR INCREMENTO PTCOMA                                                                {$$ = new increment.default($1,@1.first_line,@1.first_column);}
+           | IDENTIFICADOR DECREMENTO PTCOMA                                                                {$$ = new decrement.default($1,@1.first_line,@1.first_column);}
 ;
 
 DECLARACION_ASIGNACION : RINT LISTA_IDENTIFICADORES IGUAL EXPRESION PTCOMA      {$$=new DeclaracionAsignacion.default($2,Tipo.DataType.ENTERO, $4, @1.first_line, @1.first_column);}
@@ -240,8 +244,8 @@ EXPRESION : ENTERO                                                          {$$ 
           | EXPRESION MAYOR EXPRESION                                       {$$ = new Relacional.default(Tipo.tipoRel.MAYOR, $1, $3, @1.first_line, @1.first_column);}
           | EXPRESION MENOROIGUAL EXPRESION                                 {$$ = new Relacional.default(Tipo.tipoRel.MENOR_IGUAL, $1, $3, @1.first_line, @1.first_column);}
           | EXPRESION MAYOROIGUAL EXPRESION                                 {$$ = new Relacional.default(Tipo.tipoRel.MAYOR_IGUAL, $1, $3, @1.first_line, @1.first_column);}
-          | IDENTIFICADOR INCREMENTO                                        {;}
-          | IDENTIFICADOR DECREMENTO                                        {;}
+          | IDENTIFICADOR INCREMENTO                                        {$$ = new increment.default($1,@1.first_line,@1.first_column);}
+          | IDENTIFICADOR DECREMENTO                                        {$$ = new decrement.default($1,@1.first_line,@1.first_column);}
           | LLAMADA                                                         {;}
           | OPERADOR_TERNARIO                                               {$$=$1;}
           | CASTEOS                                                         {$$=$1;}
