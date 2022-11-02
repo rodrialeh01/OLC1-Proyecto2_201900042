@@ -23,6 +23,7 @@
     const inscase = require('./Instructions/Caso');
     const opternario = require('./Expresions/Operador_Ternario');
     const identificador = require('./Expresions/Identificador');
+    const casteo = require('./Expresions/Casteo');
 %}
 %lex 
 
@@ -243,10 +244,17 @@ EXPRESION : ENTERO                                                          {$$ 
           | IDENTIFICADOR DECREMENTO                                        {;}
           | LLAMADA                                                         {;}
           | OPERADOR_TERNARIO                                               {$$=$1;}
-          | CASTEOS                                                         {;}
+          | CASTEOS                                                         {$$=$1;}
           | ACCESO_VECTORES                                                 {;}
           | FUNCIONES_NATIVAS                                               {;}
 ;
 
 OPERADOR_TERNARIO : EXPRESION INTERROGACION EXPRESION DOSPUNTOS EXPRESION   {$$ = new opternario.default($1,$3,$5,@1.first_line,@1.first_column);}
+;
+
+CASTEOS : PARABRE RINT PARCIERRA EXPRESION                                  {$$= new casteo.default(Tipo.DataType.ENTERO,$4,@1.first_line,@1.first_column);}
+        | PARABRE RSTRING PARCIERRA EXPRESION                               {$$= new casteo.default(Tipo.DataType.CADENA,$4,@1.first_line,@1.first_column);}
+        | PARABRE RCHAR PARCIERRA EXPRESION                                 {$$= new casteo.default(Tipo.DataType.CARACTER,$4,@1.first_line,@1.first_column);}
+        | PARABRE RBOOLEAN PARCIERRA EXPRESION                              {$$= new casteo.default(Tipo.DataType.BOOLEANO,$4,@1.first_line,@1.first_column);}
+        | PARABRE RDOUBLE PARCIERRA EXPRESION                               {$$= new casteo.default(Tipo.DataType.DECIMAL,$4,@1.first_line,@1.first_column);}
 ;
