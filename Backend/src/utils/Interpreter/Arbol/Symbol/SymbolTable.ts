@@ -1,14 +1,17 @@
 import Simbolo from './Symbol';
+import Metodo from '../Instructions/Metodo';
 import { DataType } from '../Data/Data';
 import { RetornoVal } from '../Abstract/RetornoVal';
 
 export default class SymbolTable{
     private tablaAnterior: SymbolTable | any;
     private tablaActual: Map<String, Simbolo>;
+    private tablaMetodos: Map<String, Metodo>;
 
     constructor(anterior?: SymbolTable){
         this.tablaAnterior = anterior;
         this.tablaActual = new Map<String, Simbolo>();
+        this.tablaMetodos = new Map<String, Metodo>();
     }
     public getValor(id: String): any{
         let Valor= this.tablaActual.get(id.toLowerCase());
@@ -116,5 +119,35 @@ export default class SymbolTable{
             }
             temp = temp.getAnterior();
         }
+    }
+
+    public saveMetodo(nombreid: String,met: Metodo){
+        if(!this.tablaMetodos.has(nombreid.toLowerCase())){
+            this.tablaMetodos.set(nombreid.toLowerCase(),met);
+            return true;
+        }
+    }
+
+    public getMetodo(nombreid: String){
+        let temp: SymbolTable = this;
+        while(temp!= null){
+            if(temp.tablaMetodos.has(nombreid.toLowerCase())){
+                return temp.tablaMetodos.get(nombreid.toLowerCase());
+            }
+            temp = temp.getAnterior();
+        }
+        return null;
+    }
+
+    public validarMetodo(nombreid: String){
+        let temp: SymbolTable = this;
+        while(temp!= null){
+            let sym = temp.tablaMetodos.get(nombreid.toLowerCase());
+            if(sym != null){
+                return false;
+            }
+            temp = temp.getAnterior();
+        }
+        return true;
     }
 }

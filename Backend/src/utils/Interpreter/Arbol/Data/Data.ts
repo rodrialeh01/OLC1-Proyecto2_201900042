@@ -4,6 +4,7 @@ export enum DataType{
     DECIMAL,
     CARACTER,
     BOOLEANO,
+    VOID,
     INDEFINIDO
 }
 

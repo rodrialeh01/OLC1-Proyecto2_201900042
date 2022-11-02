@@ -9,6 +9,7 @@ class SymbolTable {
     constructor(anterior) {
         this.tablaAnterior = anterior;
         this.tablaActual = new Map();
+        this.tablaMetodos = new Map();
     }
     getValor(id) {
         let Valor = this.tablaActual.get(id.toLowerCase());
@@ -114,6 +115,33 @@ class SymbolTable {
             }
             temp = temp.getAnterior();
         }
+    }
+    saveMetodo(nombreid, met) {
+        if (!this.tablaMetodos.has(nombreid.toLowerCase())) {
+            this.tablaMetodos.set(nombreid.toLowerCase(), met);
+            return true;
+        }
+    }
+    getMetodo(nombreid) {
+        let temp = this;
+        while (temp != null) {
+            if (temp.tablaMetodos.has(nombreid.toLowerCase())) {
+                return temp.tablaMetodos.get(nombreid.toLowerCase());
+            }
+            temp = temp.getAnterior();
+        }
+        return null;
+    }
+    validarMetodo(nombreid) {
+        let temp = this;
+        while (temp != null) {
+            let sym = temp.tablaMetodos.get(nombreid.toLowerCase());
+            if (sym != null) {
+                return false;
+            }
+            temp = temp.getAnterior();
+        }
+        return true;
     }
 }
 exports.default = SymbolTable;

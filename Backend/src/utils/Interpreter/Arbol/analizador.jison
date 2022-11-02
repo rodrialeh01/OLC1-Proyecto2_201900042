@@ -31,6 +31,8 @@
     const insdountil = require('./Instructions/CicloDoUntil');
     const insreturn = require('./Instructions/Return');
     const inscontinue = require('./Instructions/Continue');
+    const metodo = require('./Instructions/Metodo');
+    const llamadamet = require('./Instructions/LlamadaMetodo');
 %}
 %lex 
 
@@ -170,7 +172,34 @@ AMBITO_GLOBAL : IMPRIMIR                                                    {$$=
               | CICLO_DO_UNTIL                                              {$$=$1;}
               | RBREAK PTCOMA                                               {$$=new insbreak.default(@1.first_line,@1.first_column);}
               | RCONTINUE PTCOMA                                            {$$=new inscontinue.default(@1.first_line,@1.first_column);}
-              | INS_RETURN                                                  {$$=$1;}                                         
+              | INS_RETURN                                                  {$$=$1;}
+              | LLAMADA                                                     {$$=$1;}
+              | METODO                                                      {$$=$1;}                                                       
+;
+
+LLAMADA : IDENTIFICADOR PARABRE PARCIERRA PTCOMA                            {$$= new llamadamet.default($1,null,@1.first_line,@1.first_column);}
+        | IDENTIFICADOR PARABRE LISTA_EXPRESIONES PARCIERRA PTCOMA          {$$= new llamadamet.default($1,$3,@1.first_line,@1.first_column);}
+;
+
+LISTA_EXPRESIONES : LISTA_EXPRESIONES COMA EXPRESION                        {$1.push($3); $$=$1;}
+                  | EXPRESION                                               {$$=[$1];}
+;
+
+METODO : IDENTIFICADOR PARABRE LISTA_PARAMETROS PARCIERRA DOSPUNTOS RVOID ENCAPSULAMIENTO   {$$ = new metodo.default($1,$3,Tipo.DataType.VOID,$7,@1.first_line,@1.first_column);}
+       | IDENTIFICADOR PARABRE LISTA_PARAMETROS PARCIERRA ENCAPSULAMIENTO                   {$$ = new metodo.default($1,$3,Tipo.DataType.VOID,$5,@1.first_line,@1.first_column);}
+       | IDENTIFICADOR PARABRE PARCIERRA DOSPUNTOS RVOID ENCAPSULAMIENTO                    {$$ = new metodo.default($1,null,Tipo.DataType.VOID,$6,@1.first_line,@1.first_column);}
+       | IDENTIFICADOR PARABRE PARCIERRA ENCAPSULAMIENTO                                    {$$ = new metodo.default($1,null,Tipo.DataType.VOID,$4,@1.first_line,@1.first_column);}
+;
+
+LISTA_PARAMETROS : LISTA_PARAMETROS COMA TIPO_DATO IDENTIFICADOR            {$1.push($4 + "," + $3); $$ = $1}
+                 | TIPO_DATO IDENTIFICADOR                                  {$$= [$2 + "," + $1];}
+;
+
+TIPO_DATO : RINT                                                            {$$=Tipo.DataType.ENTERO;}
+          | RSTRING                                                         {$$=Tipo.DataType.CADENA;}
+          | RCHAR                                                           {$$=Tipo.DataType.CARACTER;}
+          | RDOUBLE                                                         {$$=Tipo.DataType.DECIMAL;}
+          | RBOOLEAN                                                        {$$=Tipo.DataType.BOOLEANO;}
 ;
 
 IMPRIMIR : RPRINT PARABRE EXPRESION PARCIERRA PTCOMA                        {$$=new impresion.default($3,@1.first_line,@1.first_column);}

@@ -7,7 +7,7 @@ const controller = require('../../../../controller/parser/parser')
 const errores = require('../Exceptions/Error')
 
 export default class Return extends Instruccion{
-    exp: Instruccion;
+    public exp: Instruccion;
     constructor(exp: Instruccion,fila: number, columna: number){
         super( fila, columna);
         this.exp = exp;
