@@ -166,7 +166,7 @@ IMPRIMIR : RPRINT PARABRE EXPRESION PARCIERRA PTCOMA                        {$$=
 
 DECLARACION : RINT LISTA_IDENTIFICADORES PTCOMA                             {$$= new Declaracion.default($2,Tipo.DataType.ENTERO, @1.first_line,@1.first_column);}
             | RDOUBLE LISTA_IDENTIFICADORES PTCOMA                          {$$= new Declaracion.default($2,Tipo.DataType.DECIMAL, @1.first_line,@1.first_column);}
-            | RCHAR LISTA_IDENTIFICADORES PTCOMA                            {$$= new Declaracion.default($2,Tipo.DataType.CADENA, @1.first_line,@1.first_column);}
+            | RCHAR LISTA_IDENTIFICADORES PTCOMA                            {$$= new Declaracion.default($2,Tipo.DataType.CARACTER, @1.first_line,@1.first_column);}
             | RSTRING LISTA_IDENTIFICADORES PTCOMA                          {$$= new Declaracion.default($2,Tipo.DataType.CARACTER, @1.first_line,@1.first_column);}
             | RBOOLEAN LISTA_IDENTIFICADORES PTCOMA                         {$$= new Declaracion.default($2,Tipo.DataType.BOOLEANO, @1.first_line,@1.first_column);}
 ;

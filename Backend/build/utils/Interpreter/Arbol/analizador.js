@@ -113,10 +113,7 @@ break;
 case 17:
 this.$= new Declaracion.default($$[$0-1],Tipo.DataType.DECIMAL, _$[$0-2].first_line,_$[$0-2].first_column);
 break;
-case 18:
-this.$= new Declaracion.default($$[$0-1],Tipo.DataType.CADENA, _$[$0-2].first_line,_$[$0-2].first_column);
-break;
-case 19:
+case 18: case 19:
 this.$= new Declaracion.default($$[$0-1],Tipo.DataType.CARACTER, _$[$0-2].first_line,_$[$0-2].first_column);
 break;
 case 20:

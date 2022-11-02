@@ -13,9 +13,8 @@ export default class Imprimir extends Instruccion {
     }
 
     public interpretar(arbol: Three, tabla: SymbolTable) {
-        console.log(this.expresion);
         let valor = this.expresion.interpretar(arbol, tabla);
-        console.log(valor)
+        if(valor instanceof Errores) return valor;
         arbol.actualizaConsola(String(valor.value));
     }
 }
