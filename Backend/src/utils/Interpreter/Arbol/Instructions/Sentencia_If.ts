@@ -37,10 +37,7 @@ export default class If extends Instruccion{
             }else{
                 if(this.listaelif != null){
                     for(let i of this.listaelif){
-                        let instrucciones2 = i.interpretar(arbol, tablaLocal);
-                        if(instrucciones2 instanceof Break){
-                            return instrucciones2;
-                        }
+                        i.interpretar(arbol, tablaLocal);
                     }
                 }
                 if(this.listainstruccioneselse != null){

@@ -1,19 +1,21 @@
 import { Instruccion } from "../Abstract/Instruccion";
 import Three from '../Symbol/Three';
 import SymbolTable from '../Symbol/SymbolTable';
-import { DataType } from "../Data/Data";
-const insbreak = require('./Break');
+import { DataType, tipoErr } from "../Data/Data";
+import Break from "./Break";
+import Error from "../Exceptions/Error";
+import Caso from "./Caso";
 import get from "lodash/get"
 const controller = require('../../../../controller/parser/parser')
 const errores = require('../Exceptions/Error')
 
 export default class Switch extends Instruccion{
     condicion: Instruccion;
-    listacasos: Instruccion[];
+    listacasos: Caso[];
     listainsdefault: Instruccion[] | undefined;
     listainstruccioneselse: Instruccion[] | undefined;
 
-    constructor(condicion: Instruccion,listacasos: Instruccion[],listainsdefault: Instruccion[],fila: number, columna: number){
+    constructor(condicion: Instruccion,listacasos: Caso[],listainsdefault: Instruccion[],fila: number, columna: number){
         super(fila, columna);
         this.condicion = condicion;
         this.listacasos = listacasos;
@@ -25,16 +27,31 @@ export default class Switch extends Instruccion{
         let entrar = false;
         let breakint = false;
         for(let caso of this.listacasos){
-            let valid = this.condicion.interpretar(arbol,tabla);
-            let expcaso = caso.interpretar(arbol,tabla);
-            if(valid == expcaso || entrar){
-                entrar = true;
-                let ejecutar = caso.interpretar(arbol,tablalocal);
-                if(ejecutar instanceof insbreak.Break){
-                    breakint = true;
-                    return ejecutar;
+            if(this.condicion.interpretar(arbol,tabla).type == caso.condicion.interpretar(arbol, tabla).type){
+                let condswitch = this.condicion.interpretar(arbol,tabla).value;
+                let condcaso = caso.condicion.interpretar(arbol,tabla).value;
+                if(condswitch == condcaso || entrar){
+                    entrar = true;
+                    let ejecutar = caso.interpretar(arbol,tablalocal);
+                    if(ejecutar instanceof Break){
+                        breakint = true;
+                        return ejecutar;
+                    }
+                }
+            }else{
+                throw new Error(tipoErr.SEMANTICO, "La condicion no concuerda con el tipo del dato del caso", this.linea, this.columna);
+            }
+        }
+        //DEFAULT
+        if(!breakint){
+            if(this.listainsdefault != null){
+                for(let i of this.listainsdefault){
+                    let instrucciones1 = i.interpretar(arbol, tablalocal);
+                    if(instrucciones1 instanceof Break){
+                        return instrucciones1;
+                    }
                 }
             }
-        }   
+        } 
     }
 }

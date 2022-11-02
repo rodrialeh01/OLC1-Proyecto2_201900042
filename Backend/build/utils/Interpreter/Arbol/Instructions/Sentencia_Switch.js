@@ -5,7 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const Instruccion_1 = require("../Abstract/Instruccion");
 const SymbolTable_1 = __importDefault(require("../Symbol/SymbolTable"));
-const insbreak = require('./Break');
+const Data_1 = require("../Data/Data");
+const Break_1 = __importDefault(require("./Break"));
+const Error_1 = __importDefault(require("../Exceptions/Error"));
 const controller = require('../../../../controller/parser/parser');
 const errores = require('../Exceptions/Error');
 class Switch extends Instruccion_1.Instruccion {
@@ -20,14 +22,30 @@ class Switch extends Instruccion_1.Instruccion {
         let entrar = false;
         let breakint = false;
         for (let caso of this.listacasos) {
-            let valid = this.condicion.interpretar(arbol, tabla);
-            let expcaso = caso.interpretar(arbol, tabla);
-            if (valid == expcaso || entrar) {
-                entrar = true;
-                let ejecutar = caso.interpretar(arbol, tablalocal);
-                if (ejecutar instanceof insbreak.Break) {
-                    breakint = true;
-                    return ejecutar;
+            if (this.condicion.interpretar(arbol, tabla).type == caso.condicion.interpretar(arbol, tabla).type) {
+                let condswitch = this.condicion.interpretar(arbol, tabla).value;
+                let condcaso = caso.condicion.interpretar(arbol, tabla).value;
+                if (condswitch == condcaso || entrar) {
+                    entrar = true;
+                    let ejecutar = caso.interpretar(arbol, tablalocal);
+                    if (ejecutar instanceof Break_1.default) {
+                        breakint = true;
+                        return ejecutar;
+                    }
+                }
+            }
+            else {
+                throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "La condicion no concuerda con el tipo del dato del caso", this.linea, this.columna);
+            }
+        }
+        //DEFAULT
+        if (!breakint) {
+            if (this.listainsdefault != null) {
+                for (let i of this.listainsdefault) {
+                    let instrucciones1 = i.interpretar(arbol, tablalocal);
+                    if (instrucciones1 instanceof Break_1.default) {
+                        return instrucciones1;
+                    }
                 }
             }
         }

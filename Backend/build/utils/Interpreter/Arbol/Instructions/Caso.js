@@ -16,12 +16,10 @@ class Caso extends Instruccion_1.Instruccion {
     }
     interpretar(arbol, tabla) {
         let tablalocal = new SymbolTable_1.default(tabla);
-        if (this.instrucciones != null) {
-            for (let i of this.instrucciones) {
-                let ins = i.interpretar(arbol, tablalocal);
-                if (ins instanceof Break_1.default) {
-                    return ins;
-                }
+        for (let i of this.instrucciones) {
+            let ins = i.interpretar(arbol, tablalocal);
+            if (ins instanceof Break_1.default) {
+                return ins;
             }
         }
     }

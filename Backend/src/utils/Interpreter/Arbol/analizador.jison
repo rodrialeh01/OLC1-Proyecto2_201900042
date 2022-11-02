@@ -207,12 +207,12 @@ INS_BREAK : RBREAK PTCOMA                                                   {$$=
 ;
 
 SENTENCIA_SWITCH : RSWITCH PARABRE EXPRESION PARCIERRA LLAVEA LISTA_CASES LLAVEC                                    {$$=new inswitch.default($3,$6,null,@1.first_line,@1.first_column);}
-                 | RSWITCH PARABRE EXPRESION PARCIERRA LLAVEA LISTA_CASES RDEFAULT DOSPUNTOS AMBITO_LOCAL LLAVEC    {$$= new inswitch.default($3,$6,$9,@1.first_line,@1.first_column);}
-                 | RSWITCH PARABRE EXPRESION PARCIERRA LLAVEA RDEFAULT DOSPUNTOS AMBITO_LOCAL LLAVEC                {$$= new inswitch.default($3,null,$8,@1.first_line,@1.first_column);}
+                 | RSWITCH PARABRE EXPRESION PARCIERRA LLAVEA LISTA_CASES RDEFAULT DOSPUNTOS INSTRUCCIONES LLAVEC    {$$= new inswitch.default($3,$6,$9,@1.first_line,@1.first_column);}
+                 | RSWITCH PARABRE EXPRESION PARCIERRA LLAVEA RDEFAULT DOSPUNTOS INSTRUCCIONES LLAVEC                {$$= new inswitch.default($3,null,$8,@1.first_line,@1.first_column);}
 ;
 
-LISTA_CASES : LISTA_CASES RCASE EXPRESION DOSPUNTOS AMBITO_LOCAL            {$1.push(new Caso.default($3,$5,@1.first_line,@1.first_column));}
-            | RCASE EXPRESION DOSPUNTOS AMBITO_LOCAL                        {$$=[new Caso.default($3,$5,@1.first_line,@1.first_column)];}
+LISTA_CASES : LISTA_CASES RCASE EXPRESION DOSPUNTOS INSTRUCCIONES            {$1.push(new inscase.default($3,$5,@1.first_line,@1.first_column)); $$=$1;}
+            | RCASE EXPRESION DOSPUNTOS INSTRUCCIONES                        {$$=[new inscase.default($2,$4,@1.first_line,@1.first_column)];}
 ;
 
 EXPRESION : ENTERO                                                          {$$ = new nativo.default(Tipo.DataType.ENTERO,$1, @1.first_line, @1.first_column);}

@@ -35,10 +35,7 @@ class If extends Instruccion_1.Instruccion {
             else {
                 if (this.listaelif != null) {
                     for (let i of this.listaelif) {
-                        let instrucciones2 = i.interpretar(arbol, tablaLocal);
-                        if (instrucciones2 instanceof Break_1.default) {
-                            return instrucciones2;
-                        }
+                        i.interpretar(arbol, tablaLocal);
                     }
                 }
                 if (this.listainstruccioneselse != null) {
