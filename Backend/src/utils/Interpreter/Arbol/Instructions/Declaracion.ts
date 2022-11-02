@@ -2,7 +2,8 @@ import { Instruccion } from "../Abstract/Instruccion";
 import Arbol from "../Symbol/Three";
 import Simbolo from "../Symbol/Symbol";
 import tablaSimbolo from "../Symbol/SymbolTable";
-import { DataType } from "../Data/Data";
+import { DataType, tipoErr } from "../Data/Data";
+import Error from "../Exceptions/Error";
 const controller = require('../../../../controller/parser/parser')
 const errores = require('../Exceptions/Error')
 
@@ -17,25 +18,45 @@ export default class Declaracion extends Instruccion {
     }
 
     public interpretar(arbol: Arbol, tabla: tablaSimbolo) {
-        /*
-        for (let index = 0; index < this.ids.length; index++) {
-            if(tabla.getValor(this.ids[index]) == null){
-                if (this.tipo.getTipo() === DataType.ENTERO) {
-                    tabla.setValor(this.ids[index].toLowerCase(), new Simbolo(this.tipo, this.ids[index],0));
-                }else if (this.tipo.getTipo() === DataType.CADENA) {
-                    tabla.setValor(this.ids[index].toLowerCase(), new Simbolo(this.tipo, this.ids[index],""));
-                }else if (this.tipo.getTipo() === DataType.DECIMAL) {
-                    tabla.setValor(this.ids[index].toLowerCase(), new Simbolo(this.tipo, this.ids[index],0.0));
-                }else if (this.tipo.getTipo() === DataType.CARACTER) {
-                    tabla.setValor(this.ids[index].toLowerCase(), new Simbolo(this.tipo, this.ids[index],'0'));
-                }else if (this.tipo.getTipo() === DataType.BOOLEANO) {
-                    tabla.setValor(this.ids[index].toLowerCase(), new Simbolo(this.tipo, this.ids[index],true));
+        for(let id of this.ids){
+            if(this.tipo === DataType.ENTERO){
+                const validar = tabla.saveSymbol(id,0,DataType.ENTERO,this.linea,this.columna);
+                if(validar){
+
+                }else{
+                    throw new Error(tipoErr.SEMANTICO,"La variable ya fue declarada anteriormente", this.linea, this.columna);
+                }
+            }else if(this.tipo === DataType.DECIMAL){
+                const validar = tabla.saveSymbol(id,0.0,DataType.DECIMAL,this.linea,this.columna);
+                if(validar){
+
+                }else{
+                    throw new Error(tipoErr.SEMANTICO,"La variable ya fue declarada anteriormente", this.linea, this.columna);
+                }
+            }else if(this.tipo === DataType.BOOLEANO){
+                const validar = tabla.saveSymbol(id,true,DataType.BOOLEANO,this.linea,this.columna);
+                if(validar){
+
+                }else{
+                    throw new Error(tipoErr.SEMANTICO,"La variable ya fue declarada anteriormente", this.linea, this.columna);
+                }
+            }else if(this.tipo === DataType.CARACTER){
+                const validar = tabla.saveSymbol(id,"0",DataType.CARACTER,this.linea,this.columna);
+                if(validar){
+
+                }else{
+                    throw new Error(tipoErr.SEMANTICO,"La variable ya fue declarada anteriormente", this.linea, this.columna);
+                }
+            }else if(this.tipo === DataType.CADENA){
+                const validar = tabla.saveSymbol(id,"",DataType.CADENA,this.linea,this.columna);
+                if(validar){
+
+                }else{
+                    throw new Error(tipoErr.SEMANTICO,"La variable ya fue declarada anteriormente", this.linea, this.columna);
                 }
             }else{
-                controller.listaErrores.push(new Error(new errores.default('ERROR SEMANTICO', "Ya existe un identificador con este nombre", this.linea, this.columna)))
+                throw new Error(tipoErr.SEMANTICO,"Tipo de dato mal ingresado", this.linea, this.columna);
             }
         }
-        */
-        return null;
     }
 }

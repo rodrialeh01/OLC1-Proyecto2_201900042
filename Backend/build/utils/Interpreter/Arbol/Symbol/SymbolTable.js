@@ -1,5 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const Symbol_1 = __importDefault(require("./Symbol"));
+const Data_1 = require("../Data/Data");
 class SymbolTable {
     constructor(anterior) {
         this.tablaAnterior = anterior;
@@ -47,6 +52,58 @@ class SymbolTable {
     }
     setTabla(Tabla) {
         this.tablaActual = Tabla;
+    }
+    saveSymbol(nombreid, value, tipo, linea, columna) {
+        console.log("Valor: " + value);
+        nombreid = nombreid.toLowerCase();
+        if (!this.tablaActual.has(nombreid) == true) {
+            this.tablaActual.set(nombreid, new Symbol_1.default(tipo, nombreid, "Variable", value));
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    getVariable(id) {
+        let temp = this;
+        while (temp != null) {
+            let sym = temp.tablaActual.get(id.toLowerCase());
+            if (sym != null) {
+                return sym;
+            }
+            temp = temp.getAnterior();
+        }
+        return null;
+    }
+    getExp(valor, tipo) {
+        if (tipo === Data_1.DataType.CADENA) {
+            return { value: valor, type: Data_1.DataType.CADENA };
+        }
+        else if (tipo === Data_1.DataType.ENTERO) {
+            return { value: valor, type: Data_1.DataType.ENTERO };
+        }
+        else if (tipo === Data_1.DataType.DECIMAL) {
+            return { value: valor, type: Data_1.DataType.DECIMAL };
+        }
+        else if (tipo === Data_1.DataType.BOOLEANO) {
+            return { value: valor, type: Data_1.DataType.BOOLEANO };
+        }
+        else if (tipo === Data_1.DataType.CARACTER) {
+            return { value: valor, type: Data_1.DataType.CARACTER };
+        }
+        else {
+            return { value: null, type: Data_1.DataType.INDEFINIDO };
+        }
+    }
+    getTipo(nombreid) {
+        let temp = this;
+        while (temp != null) {
+            let sym = temp.tablaActual.get(nombreid.toLowerCase());
+            if (sym != null) {
+                return sym.getType();
+            }
+            temp = temp.getAnterior();
+        }
     }
 }
 exports.default = SymbolTable;

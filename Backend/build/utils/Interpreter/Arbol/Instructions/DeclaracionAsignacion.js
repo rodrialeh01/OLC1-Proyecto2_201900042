@@ -1,6 +1,11 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const Instruccion_1 = require("../Abstract/Instruccion");
+const Data_1 = require("../Data/Data");
+const Error_1 = __importDefault(require("../Exceptions/Error"));
 const controller = require('../../../../controller/parser/parser');
 const errores = require('../Exceptions/Error');
 class Declaracion_Asignacion extends Instruccion_1.Instruccion {
@@ -12,33 +17,20 @@ class Declaracion_Asignacion extends Instruccion_1.Instruccion {
     }
     interpretar(arbol, tabla) {
         let valorasig = this.valor.interpretar(arbol, tabla);
-        /*
-        if(this.tipo.getTipo() == DataType.ENTERO && this.valor.tipoDato.getTipo() == DataType.ENTERO){
-            for (let index = 0; index < this.ids.length; index++) {
-                tabla.setValor(this.ids[index], new Simbolo(this.tipo, this.ids[index], this.valor.interpretar(arbol, tabla)));
+        for (let id of this.ids) {
+            if ((valorasig === null || valorasig === void 0 ? void 0 : valorasig.type) == this.tipo) {
+                const valid = tabla.saveSymbol(id, valorasig.value, this.tipo, this.linea, this.columna);
+                if (valid) {
+                    console.log("Se declaro la variable " + id);
+                }
+                else {
+                    throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "La variable ya fue declarada anteriormente", this.linea, this.columna);
+                }
             }
-        }else if(this.tipo.getTipo() == DataType.DECIMAL && this.valor.tipoDato.getTipo() == DataType.DECIMAL){
-            for (let index = 0; index < this.ids.length; index++) {
-                tabla.setValor(this.ids[index], new Simbolo(this.tipo, this.ids[index], this.valor.interpretar(arbol, tabla)));
+            else {
+                throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "No coinciden los tipos de datos", this.linea, this.columna);
             }
-        }else if(this.tipo.getTipo() == DataType.CARACTER && this.valor.tipoDato.getTipo() == DataType.CARACTER){
-            for (let index = 0; index < this.ids.length; index++) {
-                tabla.setValor(this.ids[index], new Simbolo(this.tipo, this.ids[index], this.valor.interpretar(arbol, tabla)));
-            }
-        }else if(this.tipo.getTipo() == DataType.CADENA && this.valor.tipoDato.getTipo() == DataType.CADENA){
-            for (let index = 0; index < this.ids.length; index++) {
-                tabla.setValor(this.ids[index], new Simbolo(this.tipo, this.ids[index], this.valor.interpretar(arbol, tabla)));
-            }
-        }else if(this.tipo.getTipo() == DataType.BOOLEANO && this.valor.tipoDato.getTipo() == DataType.BOOLEANO){
-            for (let index = 0; index < this.ids.length; index++) {
-                tabla.setValor(this.ids[index], new Simbolo(this.tipo, this.ids[index], this.valor.interpretar(arbol, tabla)));
-            }
-        }else{
-            //ERROR SEMANTICO
-            controller.listaErrores.push(new Error(new errores.default('ERROR SEMANTICO', "No coinciden los tipos de datos", this.linea, this.columna)))
         }
-        return null;
-        */
     }
 }
 exports.default = Declaracion_Asignacion;

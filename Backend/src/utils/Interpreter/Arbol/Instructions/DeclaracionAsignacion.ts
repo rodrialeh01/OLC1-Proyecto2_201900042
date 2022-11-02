@@ -3,7 +3,8 @@ import Operacion from "../Expresions/Native";
 import Arbol from "../Symbol/Three";
 import Simbolo from "../Symbol/Symbol";
 import tablaSimbolo from "../Symbol/SymbolTable";
-import { DataType } from "../Data/Data";
+import { DataType, tipoErr } from "../Data/Data";
+import Error from "../Exceptions/Error";
 const controller = require('../../../../controller/parser/parser')
 const errores = require('../Exceptions/Error')
 
@@ -21,32 +22,17 @@ export default class Declaracion_Asignacion extends Instruccion {
 
     public interpretar(arbol: Arbol, tabla: tablaSimbolo) {
         let valorasig = this.valor.interpretar(arbol,tabla)
-        /*
-        if(this.tipo.getTipo() == DataType.ENTERO && this.valor.tipoDato.getTipo() == DataType.ENTERO){
-            for (let index = 0; index < this.ids.length; index++) {
-                tabla.setValor(this.ids[index], new Simbolo(this.tipo, this.ids[index], this.valor.interpretar(arbol, tabla)));
+        for(let id of this.ids){
+            if(valorasig?.type == this.tipo){
+                const valid = tabla.saveSymbol(id,valorasig.value, this.tipo, this.linea, this.columna);
+                if(valid){  
+                    console.log("Se declaro la variable " + id);
+                }else{
+                    throw new Error(tipoErr.SEMANTICO,"La variable ya fue declarada anteriormente", this.linea, this.columna);
+                }
+            }else{
+                throw new Error(tipoErr.SEMANTICO,"No coinciden los tipos de datos", this.linea, this.columna);
             }
-        }else if(this.tipo.getTipo() == DataType.DECIMAL && this.valor.tipoDato.getTipo() == DataType.DECIMAL){
-            for (let index = 0; index < this.ids.length; index++) {
-                tabla.setValor(this.ids[index], new Simbolo(this.tipo, this.ids[index], this.valor.interpretar(arbol, tabla)));
-            }
-        }else if(this.tipo.getTipo() == DataType.CARACTER && this.valor.tipoDato.getTipo() == DataType.CARACTER){
-            for (let index = 0; index < this.ids.length; index++) {
-                tabla.setValor(this.ids[index], new Simbolo(this.tipo, this.ids[index], this.valor.interpretar(arbol, tabla)));
-            }
-        }else if(this.tipo.getTipo() == DataType.CADENA && this.valor.tipoDato.getTipo() == DataType.CADENA){
-            for (let index = 0; index < this.ids.length; index++) {
-                tabla.setValor(this.ids[index], new Simbolo(this.tipo, this.ids[index], this.valor.interpretar(arbol, tabla)));
-            }
-        }else if(this.tipo.getTipo() == DataType.BOOLEANO && this.valor.tipoDato.getTipo() == DataType.BOOLEANO){
-            for (let index = 0; index < this.ids.length; index++) {
-                tabla.setValor(this.ids[index], new Simbolo(this.tipo, this.ids[index], this.valor.interpretar(arbol, tabla)));
-            }
-        }else{
-            //ERROR SEMANTICO
-            controller.listaErrores.push(new Error(new errores.default('ERROR SEMANTICO', "No coinciden los tipos de datos", this.linea, this.columna)))
         }
-        return null;
-        */
     }
 }

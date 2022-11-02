@@ -1,16 +1,23 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class Symbol {
-    constructor(tipo, identificador, valor) {
-        this.tipo = tipo;
+    constructor(type, identificador, tipo, valor) {
+        this.type = type;
         this.identificador = identificador;
         this.valor = valor;
+        this.tipo = tipo;
     }
     getTipo() {
         return this.tipo;
     }
     setTipo(value) {
         this.tipo = value;
+    }
+    getType() {
+        return this.type;
+    }
+    setType(value) {
+        this.type = value;
     }
     getIdentificador() {
         return this.identificador;

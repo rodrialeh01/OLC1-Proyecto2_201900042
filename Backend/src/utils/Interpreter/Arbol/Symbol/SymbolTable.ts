@@ -1,4 +1,6 @@
 import Simbolo from './Symbol';
+import { DataType } from '../Data/Data';
+import { RetornoVal } from '../Abstract/RetornoVal';
 
 export default class SymbolTable{
     private tablaAnterior: SymbolTable | any;
@@ -53,4 +55,56 @@ export default class SymbolTable{
     public setTabla(Tabla: Map<String, Simbolo>){
         this.tablaActual = Tabla
     }
+
+    public saveSymbol(nombreid: String, value: any, tipo: DataType, linea: number, columna: number){
+        console.log("Valor: " + value);
+        
+        nombreid = nombreid.toLowerCase();
+        if(!this.tablaActual.has(nombreid) == true){
+            this.tablaActual.set(nombreid, new Simbolo(tipo,nombreid,"Variable",value));
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public getVariable(id: String): any{
+        let temp: SymbolTable = this;
+        while(temp!= null){
+            let sym = temp.tablaActual.get(id.toLowerCase());
+            if(sym != null){
+                return sym;
+            }
+            temp = temp.getAnterior();
+        }
+        return null;
+    }
+
+    public getExp(valor: any, tipo: DataType): RetornoVal{
+        if(tipo === DataType.CADENA){
+            return {value: valor, type: DataType.CADENA};
+        }else if(tipo === DataType.ENTERO){
+            return {value: valor, type: DataType.ENTERO};
+        }else if(tipo === DataType.DECIMAL){
+            return {value: valor, type: DataType.DECIMAL};
+        }else if(tipo === DataType.BOOLEANO){
+            return {value: valor, type: DataType.BOOLEANO};
+        }else if(tipo === DataType.CARACTER){         
+            return {value: valor, type: DataType.CARACTER};
+        }else{
+            return {value: null, type: DataType.INDEFINIDO};
+        }
+    }
+
+    public getTipo(nombreid: String){
+        let temp: SymbolTable = this;
+        while(temp!= null){
+            let sym = temp.tablaActual.get(nombreid.toLowerCase());
+            if(sym != null){
+                return sym.getType();
+            }
+            temp = temp.getAnterior();
+        }
+    }
+
 }

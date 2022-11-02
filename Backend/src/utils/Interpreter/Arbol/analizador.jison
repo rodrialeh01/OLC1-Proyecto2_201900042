@@ -22,6 +22,7 @@
     const inswitch = require('./Instructions/Sentencia_Switch');
     const inscase = require('./Instructions/Caso');
     const opternario = require('./Expresions/Operador_Ternario');
+    const identificador = require('./Expresions/Identificador');
 %}
 %lex 
 
@@ -218,7 +219,7 @@ EXPRESION : ENTERO                                                          {$$ 
           | CADENA                                                          {$$ = new nativo.default(Tipo.DataType.CADENA,$1, @1.first_line, @1.first_column);}
           | CARACTER                                                        {$$ = new nativo.default(Tipo.DataType.CARACTER,$1, @1.first_line, @1.first_column);}
           | DECIMAL                                                         {$$ = new nativo.default(Tipo.DataType.DECIMAL,$1, @1.first_line, @1.first_column);}
-          | IDENTIFICADOR                                                   {$$ = new nativo.default(Tipo.DataType.IDENTIFICADOR, $1, @1.first_line, @1.first_column);}
+          | IDENTIFICADOR                                                   {$$ = new identificador.default($1, @1.first_line, @1.first_column);}
           | RTRUE                                                           {$$ = new nativo.default(Tipo.DataType.BOOLEANO,$1, @1.first_line, @1.first_column);}
           | RFALSE                                                          {$$ = new nativo.default(Tipo.DataType.BOOLEANO,$1, @1.first_line, @1.first_column);}
           | EXPRESION MAS EXPRESION                                         {$$ = new Aritmetica.default(Tipo.tipoOp.SUMA,$1,$3,@1.first_line, @1.first_column);}

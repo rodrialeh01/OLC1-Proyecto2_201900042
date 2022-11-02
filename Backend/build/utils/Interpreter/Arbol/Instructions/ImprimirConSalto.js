@@ -14,7 +14,7 @@ class ImprimirConSalto extends Instruccion_1.Instruccion {
         let valor = this.expresion.interpretar(arbol, tabla);
         if (valor instanceof Error_1.default)
             return valor;
-        arbol.actualizaConsola(valor + '\n');
+        arbol.actualizaConsola((valor === null || valor === void 0 ? void 0 : valor.value) + '\n');
     }
 }
 exports.default = ImprimirConSalto;

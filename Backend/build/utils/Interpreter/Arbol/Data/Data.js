@@ -8,8 +8,7 @@ var DataType;
     DataType[DataType["DECIMAL"] = 2] = "DECIMAL";
     DataType[DataType["CARACTER"] = 3] = "CARACTER";
     DataType[DataType["BOOLEANO"] = 4] = "BOOLEANO";
-    DataType[DataType["IDENTIFICADOR"] = 5] = "IDENTIFICADOR";
-    DataType[DataType["INDEFINIDO"] = 6] = "INDEFINIDO";
+    DataType[DataType["INDEFINIDO"] = 5] = "INDEFINIDO";
 })(DataType = exports.DataType || (exports.DataType = {}));
 var tipoOp;
 (function (tipoOp) {

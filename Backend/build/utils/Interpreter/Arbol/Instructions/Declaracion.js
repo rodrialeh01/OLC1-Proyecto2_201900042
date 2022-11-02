@@ -1,6 +1,11 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const Instruccion_1 = require("../Abstract/Instruccion");
+const Data_1 = require("../Data/Data");
+const Error_1 = __importDefault(require("../Exceptions/Error"));
 const controller = require('../../../../controller/parser/parser');
 const errores = require('../Exceptions/Error');
 class Declaracion extends Instruccion_1.Instruccion {
@@ -10,26 +15,51 @@ class Declaracion extends Instruccion_1.Instruccion {
         this.tipo = tipo;
     }
     interpretar(arbol, tabla) {
-        /*
-        for (let index = 0; index < this.ids.length; index++) {
-            if(tabla.getValor(this.ids[index]) == null){
-                if (this.tipo.getTipo() === DataType.ENTERO) {
-                    tabla.setValor(this.ids[index].toLowerCase(), new Simbolo(this.tipo, this.ids[index],0));
-                }else if (this.tipo.getTipo() === DataType.CADENA) {
-                    tabla.setValor(this.ids[index].toLowerCase(), new Simbolo(this.tipo, this.ids[index],""));
-                }else if (this.tipo.getTipo() === DataType.DECIMAL) {
-                    tabla.setValor(this.ids[index].toLowerCase(), new Simbolo(this.tipo, this.ids[index],0.0));
-                }else if (this.tipo.getTipo() === DataType.CARACTER) {
-                    tabla.setValor(this.ids[index].toLowerCase(), new Simbolo(this.tipo, this.ids[index],'0'));
-                }else if (this.tipo.getTipo() === DataType.BOOLEANO) {
-                    tabla.setValor(this.ids[index].toLowerCase(), new Simbolo(this.tipo, this.ids[index],true));
+        for (let id of this.ids) {
+            if (this.tipo === Data_1.DataType.ENTERO) {
+                const validar = tabla.saveSymbol(id, 0, Data_1.DataType.ENTERO, this.linea, this.columna);
+                if (validar) {
                 }
-            }else{
-                controller.listaErrores.push(new Error(new errores.default('ERROR SEMANTICO', "Ya existe un identificador con este nombre", this.linea, this.columna)))
+                else {
+                    throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "La variable ya fue declarada anteriormente", this.linea, this.columna);
+                }
+            }
+            else if (this.tipo === Data_1.DataType.DECIMAL) {
+                const validar = tabla.saveSymbol(id, 0.0, Data_1.DataType.DECIMAL, this.linea, this.columna);
+                if (validar) {
+                }
+                else {
+                    throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "La variable ya fue declarada anteriormente", this.linea, this.columna);
+                }
+            }
+            else if (this.tipo === Data_1.DataType.BOOLEANO) {
+                const validar = tabla.saveSymbol(id, true, Data_1.DataType.BOOLEANO, this.linea, this.columna);
+                if (validar) {
+                }
+                else {
+                    throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "La variable ya fue declarada anteriormente", this.linea, this.columna);
+                }
+            }
+            else if (this.tipo === Data_1.DataType.CARACTER) {
+                const validar = tabla.saveSymbol(id, "0", Data_1.DataType.CARACTER, this.linea, this.columna);
+                if (validar) {
+                }
+                else {
+                    throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "La variable ya fue declarada anteriormente", this.linea, this.columna);
+                }
+            }
+            else if (this.tipo === Data_1.DataType.CADENA) {
+                const validar = tabla.saveSymbol(id, "", Data_1.DataType.CADENA, this.linea, this.columna);
+                if (validar) {
+                }
+                else {
+                    throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "La variable ya fue declarada anteriormente", this.linea, this.columna);
+                }
+            }
+            else {
+                throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "Tipo de dato mal ingresado", this.linea, this.columna);
             }
         }
-        */
-        return null;
     }
 }
 exports.default = Declaracion;
