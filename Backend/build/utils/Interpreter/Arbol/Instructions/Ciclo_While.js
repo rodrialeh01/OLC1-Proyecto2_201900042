@@ -8,6 +8,8 @@ const Break_1 = __importDefault(require("./Break"));
 const SymbolTable_1 = __importDefault(require("../Symbol/SymbolTable"));
 const Data_1 = require("../Data/Data");
 const Error_1 = __importDefault(require("../Exceptions/Error"));
+const Continue_1 = __importDefault(require("./Continue"));
+const Return_1 = __importDefault(require("./Return"));
 const controller = require('../../../../controller/parser/parser');
 const errores = require('../Exceptions/Error');
 class While extends Instruccion_1.Instruccion {
@@ -18,7 +20,7 @@ class While extends Instruccion_1.Instruccion {
     }
     interpretar(arbol, tabla) {
         let condiciontemp = true;
-        while (condiciontemp) {
+        Continuacion: while (condiciontemp) {
             let condicion = this.condicion.interpretar(arbol, tabla);
             if (condicion.type == Data_1.DataType.BOOLEANO) {
                 if (condicion.value == true) {
@@ -26,6 +28,12 @@ class While extends Instruccion_1.Instruccion {
                     for (let i of this.listainstrucciones) {
                         let instrucciones = i.interpretar(arbol, tablaLocal);
                         if (instrucciones instanceof Break_1.default) {
+                            return instrucciones;
+                        }
+                        else if (instrucciones instanceof Continue_1.default) {
+                            continue Continuacion;
+                        }
+                        else if (instrucciones instanceof Return_1.default) {
                             return instrucciones;
                         }
                     }

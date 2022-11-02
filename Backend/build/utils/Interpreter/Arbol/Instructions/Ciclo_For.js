@@ -6,6 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Instruccion_1 = require("../Abstract/Instruccion");
 const Break_1 = __importDefault(require("./Break"));
 const SymbolTable_1 = __importDefault(require("../Symbol/SymbolTable"));
+const Continue_1 = __importDefault(require("./Continue"));
+const Return_1 = __importDefault(require("./Return"));
 const controller = require('../../../../controller/parser/parser');
 const errores = require('../Exceptions/Error');
 class For extends Instruccion_1.Instruccion {
@@ -18,20 +20,18 @@ class For extends Instruccion_1.Instruccion {
     }
     interpretar(arbol, tabla) {
         let tablaLocal = new SymbolTable_1.default(tabla);
-        this.insvar.interpretar(arbol, tablaLocal);
-        while (true) {
-            let tablaLocal2 = new SymbolTable_1.default(tablaLocal);
-            if (this.condicion.interpretar(arbol, tablaLocal).value == true) {
-                for (let i of this.listainstrucciones) {
-                    let instrucciones = i.interpretar(arbol, tablaLocal2);
-                    if (instrucciones instanceof Break_1.default) {
-                        return instrucciones;
-                    }
+        for (this.insvar.interpretar(arbol, tablaLocal); this.condicion.interpretar(arbol, tablaLocal).value; this.actualizacion.interpretar(arbol, tablaLocal)) {
+            for (let i of this.listainstrucciones) {
+                let instrucciones1 = i.interpretar(arbol, tablaLocal);
+                if (instrucciones1 instanceof Break_1.default) {
+                    break;
                 }
-                this.actualizacion.interpretar(arbol, tablaLocal2);
-            }
-            else {
-                break;
+                else if (instrucciones1 instanceof Return_1.default) {
+                    return instrucciones1;
+                }
+                else if (instrucciones1 instanceof Continue_1.default) {
+                    continue;
+                }
             }
         }
     }

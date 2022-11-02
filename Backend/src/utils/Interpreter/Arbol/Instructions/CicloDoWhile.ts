@@ -4,6 +4,8 @@ import Three from '../Symbol/Three';
 import SymbolTable from '../Symbol/SymbolTable';
 import { DataType, tipoErr } from "../Data/Data";
 import Error from "../Exceptions/Error";
+import Continue from "./Continue";
+import Return from "./Return";
 const controller = require('../../../../controller/parser/parser')
 const errores = require('../Exceptions/Error')
 
@@ -21,11 +23,15 @@ export default class DoWhile extends Instruccion{
         let tablaLocal = new SymbolTable(tabla);
         let condicion = this.condicion.interpretar(arbol, tablaLocal);
         if(condicion.type == DataType.BOOLEANO){
-            while(true){
+            Continuacion: while(true){
                 let tablaLocal2 = new SymbolTable(tablaLocal);
                 for(let i of this.listainstrucciones){
                     let instrucciones = i.interpretar(arbol, tablaLocal2);
                     if(instrucciones instanceof Break){
+                        return instrucciones;
+                    }else if(instrucciones instanceof Continue){
+                        continue Continuacion;
+                    }else if(instrucciones instanceof Return){
                         return instrucciones;
                     }
                 }

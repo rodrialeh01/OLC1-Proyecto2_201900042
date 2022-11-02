@@ -29,6 +29,8 @@
     const insfor = require('./Instructions/Ciclo_For');
     const insdowhile = require('./Instructions/CicloDoWhile');
     const insdountil = require('./Instructions/CicloDoUntil');
+    const insreturn = require('./Instructions/Return');
+    const inscontinue = require('./Instructions/Continue');
 %}
 %lex 
 
@@ -162,11 +164,13 @@ AMBITO_GLOBAL : IMPRIMIR                                                    {$$=
               | ASIGNACION                                                  {$$=$1;} 
               | SENTENCIA_IF                                                {$$=$1;}
               | CICLO_WHILE                                                 {$$=$1;}
-              | INS_BREAK                                                   {$$=$1;}
               | SENTENCIA_SWITCH                                            {$$=$1;}
               | CICLO_FOR                                                   {$$=$1;}
               | CICLO_DO_WHILE                                              {$$=$1;}
-              | CICLO_DO_UNTIL                                              {$$=$1;}                                         
+              | CICLO_DO_UNTIL                                              {$$=$1;}
+              | RBREAK PTCOMA                                               {$$=new insbreak.default(@1.first_line,@1.first_column);}
+              | RCONTINUE PTCOMA                                            {$$=new inscontinue.default(@1.first_line,@1.first_column);}
+              | INS_RETURN                                                  {$$=$1;}                                         
 ;
 
 IMPRIMIR : RPRINT PARABRE EXPRESION PARCIERRA PTCOMA                        {$$=new impresion.default($3,@1.first_line,@1.first_column);}
@@ -211,7 +215,8 @@ LISTA_ELIF : LISTA_ELIF RELIF PARABRE EXPRESION PARCIERRA ENCAPSULAMIENTO   {$1.
            | RELIF PARABRE EXPRESION PARCIERRA ENCAPSULAMIENTO              {$$=[new elif.default($3,$5,@1.first_line,@1.first_column)];}
 ;
 
-INS_BREAK : RBREAK PTCOMA                                                   {$$=new insbreak.default(@1.first_line,@1.first_column);}
+INS_RETURN : RRETURN PTCOMA                                                 {$$=new insreturn.default(null,@1.first_line,@1.first_column);}
+           | RRETURN EXPRESION PTCOMA                                       {$$=new insreturn.default($2,@1.first_line,@1.first_column);}
 ;
 
 SENTENCIA_SWITCH : RSWITCH PARABRE EXPRESION PARCIERRA LLAVEA LISTA_CASES LLAVEC                                    {$$=new inswitch.default($3,$6,null,@1.first_line,@1.first_column);}

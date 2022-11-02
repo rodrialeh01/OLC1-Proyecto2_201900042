@@ -8,6 +8,8 @@ import Incremento from '../Expresions/Incremento';
 import Decremento from '../Expresions/Decremento';
 import Asignacion from './Asignacion';
 import Declaracion_Asignacion from './DeclaracionAsignacion';
+import Continue from "./Continue";
+import Return from "./Return";
 const controller = require('../../../../controller/parser/parser')
 const errores = require('../Exceptions/Error')
 
@@ -27,19 +29,16 @@ export default class For extends Instruccion{
 
     interpretar(arbol: Three, tabla: SymbolTable) {
         let tablaLocal = new SymbolTable(tabla);
-        this.insvar.interpretar(arbol, tablaLocal);
-        while(true){
-            let tablaLocal2 = new SymbolTable(tablaLocal);
-            if(this.condicion.interpretar(arbol, tablaLocal).value == true){
-                for(let i of this.listainstrucciones){
-                    let instrucciones = i.interpretar(arbol, tablaLocal2);
-                    if(instrucciones instanceof Break){
-                        return instrucciones;
-                    }
+        for(this.insvar.interpretar(arbol, tablaLocal); this.condicion.interpretar(arbol, tablaLocal).value; this.actualizacion.interpretar(arbol, tablaLocal)){
+            for(let i of this.listainstrucciones){
+                let instrucciones1 = i.interpretar(arbol, tablaLocal);
+                if(instrucciones1 instanceof Break){
+                    break;
+                }else if(instrucciones1 instanceof Return){
+                    return instrucciones1;
+                }else if(instrucciones1 instanceof Continue){
+                    continue;
                 }
-                this.actualizacion.interpretar(arbol, tablaLocal2);
-            }else{
-                break;
             }
         }
     }

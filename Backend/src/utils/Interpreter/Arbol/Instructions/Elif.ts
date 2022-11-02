@@ -3,6 +3,8 @@ import Three from '../Symbol/Three';
 import SymbolTable from '../Symbol/SymbolTable';
 import { DataType } from "../Data/Data";
 import Break from "./Break";
+import Continue from "./Continue";
+import Return from "./Return";
 const controller = require('../../../../controller/parser/parser')
 const errores = require('../Exceptions/Error')
 
@@ -25,6 +27,10 @@ export default class Elif extends Instruccion{
                 for(let i of this.listainstrucciones){
                     let instrucciones1 = i.interpretar(arbol, tablaLocal);
                     if(instrucciones1 instanceof Break){
+                        return instrucciones1;
+                    }else if(instrucciones1 instanceof Return){
+                        return instrucciones1;
+                    }else if(instrucciones1 instanceof Continue){
                         return instrucciones1;
                     }
                 }

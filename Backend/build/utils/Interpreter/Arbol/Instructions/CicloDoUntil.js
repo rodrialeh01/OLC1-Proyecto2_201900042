@@ -8,6 +8,8 @@ const Break_1 = __importDefault(require("./Break"));
 const SymbolTable_1 = __importDefault(require("../Symbol/SymbolTable"));
 const Data_1 = require("../Data/Data");
 const Error_1 = __importDefault(require("../Exceptions/Error"));
+const Continue_1 = __importDefault(require("./Continue"));
+const Return_1 = __importDefault(require("./Return"));
 const controller = require('../../../../controller/parser/parser');
 const errores = require('../Exceptions/Error');
 class DoUntil extends Instruccion_1.Instruccion {
@@ -20,11 +22,17 @@ class DoUntil extends Instruccion_1.Instruccion {
         let tablaLocal = new SymbolTable_1.default(tabla);
         let condicion = this.condicion.interpretar(arbol, tablaLocal);
         if (condicion.type == Data_1.DataType.BOOLEANO) {
-            while (true) {
+            Continuacion: while (true) {
                 let tablaLocal2 = new SymbolTable_1.default(tablaLocal);
                 for (let i of this.listainstrucciones) {
                     let instrucciones = i.interpretar(arbol, tablaLocal2);
                     if (instrucciones instanceof Break_1.default) {
+                        return instrucciones;
+                    }
+                    else if (instrucciones instanceof Continue_1.default) {
+                        continue Continuacion;
+                    }
+                    else if (instrucciones instanceof Return_1.default) {
                         return instrucciones;
                     }
                 }

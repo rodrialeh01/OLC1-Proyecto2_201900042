@@ -7,6 +7,8 @@ const Instruccion_1 = require("../Abstract/Instruccion");
 const SymbolTable_1 = __importDefault(require("../Symbol/SymbolTable"));
 const Data_1 = require("../Data/Data");
 const Break_1 = __importDefault(require("./Break"));
+const Continue_1 = __importDefault(require("./Continue"));
+const Return_1 = __importDefault(require("./Return"));
 const controller = require('../../../../controller/parser/parser');
 const errores = require('../Exceptions/Error');
 class Elif extends Instruccion_1.Instruccion {
@@ -23,6 +25,12 @@ class Elif extends Instruccion_1.Instruccion {
                 for (let i of this.listainstrucciones) {
                     let instrucciones1 = i.interpretar(arbol, tablaLocal);
                     if (instrucciones1 instanceof Break_1.default) {
+                        return instrucciones1;
+                    }
+                    else if (instrucciones1 instanceof Return_1.default) {
+                        return instrucciones1;
+                    }
+                    else if (instrucciones1 instanceof Continue_1.default) {
                         return instrucciones1;
                     }
                 }
