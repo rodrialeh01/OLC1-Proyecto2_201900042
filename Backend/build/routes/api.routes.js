@@ -8,4 +8,5 @@ const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 router.get("/ping", api_controller_1.default.ping);
 router.post('/parse', api_controller_1.default.parse);
+router.post('/arbolast', api_controller_1.default.arbolast);
 exports.default = router;

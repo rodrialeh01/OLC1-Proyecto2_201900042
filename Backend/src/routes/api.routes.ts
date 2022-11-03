@@ -4,5 +4,6 @@ const router = express.Router();
 
 router.get("/ping", controller.ping)
 router.post('/parse', controller.parse)
+router.post('/arbolast', controller.arbolast)
 
 export default router;

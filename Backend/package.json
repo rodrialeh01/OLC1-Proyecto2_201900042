@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "set NODE_ENV=DEV&&nodemon",
-    "jison": "jison src/utils/Interpreter/Arbol/analizador.jison && copy analizador.js build\\utils\\Interpreter\\Arbol && rimraf analizador.js",
+    "jison": "jison src/utils/Interpreter/Arbol/analizador.jison && copy analizador.js build\\utils\\Interpreter\\Arbol && rimraf analizador.js && jison src/utils/Interpreter/Arbol/AST.jison && copy AST.js build\\utils\\Interpreter\\Arbol && rimraf AST.js",
     "build": "rimraf ./build&&tsc&&npm run jison",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
