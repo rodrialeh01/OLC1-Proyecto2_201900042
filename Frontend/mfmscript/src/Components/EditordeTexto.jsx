@@ -5,8 +5,11 @@ import { useRef } from "react";
 import Service from "../Services/Service";
 import './Consola.css';
 import './NavBarStyle.css'
+import Graphviz from 'graphviz-react';
+import { saveAs } from 'file-saver';
 
 function EditordeTexto(){
+    const[astgraph, setAstgraph] = useState(`digraph G { "AST"->"INICIO";}`);
     const[contentLanguaje, setContentLanguaje] = useState('')
     const editorRef = useRef(null)
     const [response, setResponse] = useState('MFMScript Console\nCopyright (C) MFMScript-OLC1-P2. Created by Rodrigo Hernández 2022')
@@ -22,6 +25,38 @@ function EditordeTexto(){
             setResponse('MFMScript Console\nCopyright (C) MFMScript-OLC1-P2. Created by Rodrigo Hernández 2022\n\n'+consola)
         })
     }
+    const runThree =()=>{
+        console.log(editorRef.current.getValue())
+        Service.arbol(editorRef.current.getValue())
+        .then(({grafo})=>{
+            setAstgraph(grafo);
+        })
+    }
+    const crearArchivo= ()=>{
+        editorRef.current.setValue('//Welcome :D, Start your code here...');
+        setContentLanguaje('');
+    }
+
+    const guardarArchivo= ()=>{
+        let nombre =  'NewCode';
+        nombre = prompt('Ingrese el nombre del archivo que vas a guardar');
+        const archivo = new Blob([ editorRef.current.getValue() ], {type: 'text/plain; charset=utf-8'});
+        saveAs(archivo, nombre + '.olc');
+    }
+
+    const abrirArchivo= ( e )=>{
+        const archivo =e.target.files[0];
+        const fileReader = new FileReader();
+
+        fileReader.readAsText(archivo, 'UTF-8');
+        fileReader.onload = () => {
+            setContentLanguaje(fileReader.result);
+            editorRef.current.setValue(fileReader.result);
+        } 
+        fileReader.onerror = () =>{
+            alert('Error al abrir el archivo');
+        }
+    }
     return(
         <>
         <nav className="navbar navbar-icon-top navbar-expand-lg bg-dark" >
@@ -35,18 +70,17 @@ function EditordeTexto(){
             </ul>
             <ul className="navbar-nav ">
             <li className="nav-item">
-                <a className="nav-link" href="#">
-                <img src="https://img.icons8.com/windows/40/FFFFFF/add-file.png"/>
+                <a onClick={crearArchivo} role="button">
+                <img src="https://img.icons8.com/windows/50/FFFFFF/add-file.png"/>
                 </a>
             </li>
             <li className="nav-item">
-                <a className="nav-link" href="#">
-                <img src="https://img.icons8.com/fluency-systems-filled/40/FFFFFF/import-file.png"/>
-                </a>
+                <label htmlFor="inputff"><img src="https://img.icons8.com/fluency-systems-filled/50/FFFFFF/import-file.png"/></label>
+                <input onChange={abrirArchivo} type="file" id='inputff' accept=".olc" />
             </li>
             <li className="nav-item">
-                <a className="nav-link" href="#">
-                <img src="https://img.icons8.com/fluency-systems-regular/40/FFFFFF/save.png"/>
+                <a onClick={guardarArchivo} role="button">
+                <img src="https://img.icons8.com/fluency-systems-regular/50/FFFFFF/save.png"/>
                 </a>
             </li>
             <li className="nav-item">
@@ -55,8 +89,8 @@ function EditordeTexto(){
                 </a>
             </li>
             <li className="nav-item">
-                <a className="nav-link" href="#">
-                <img src="https://img.icons8.com/windows/40/FFFFFF/genealogy.png"/>
+                <a onClick={runThree} role="button">
+                <img src="https://img.icons8.com/windows/50/FFFFFF/genealogy.png"/>
                 </a>
             </li>
             <li className="nav-item">
@@ -87,6 +121,9 @@ function EditordeTexto(){
         <div className='consola' id="consola">
             <textarea readOnly  className="texta" value={response}></textarea>
         <br /> 
+        </div>
+        <div id="grafoarbol">
+        <Graphviz dot={astgraph} />
         </div>
         </>
     )

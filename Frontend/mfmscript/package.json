@@ -10,6 +10,12 @@
   "dependencies": {
     "@monaco-editor/react": "^4.4.6",
     "axios": "^1.1.2",
+    "d3-graphviz": "^4.4.0",
+    "downloadjs": "^1.4.7",
+    "file-saver": "^2.0.5",
+    "file-server": "^2.2.1",
+    "graphviz-react": "^1.2.5",
+    "html2canvas": "^1.4.1",
     "monaco-editor": "^0.34.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",

@@ -14,3 +14,8 @@ export const parse = async (value) => {
     const { data } = await instance.post('/parse', { peticion : value})
     return data
 }
+
+export const arbol = async (value) => {
+    const { data } = await instance.post('/arbolast', { peticion : value})
+    return data
+}
