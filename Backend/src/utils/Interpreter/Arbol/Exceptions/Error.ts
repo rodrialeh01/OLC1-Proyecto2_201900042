@@ -27,23 +27,20 @@ export default class Error {
     public returnError(): String {
         if(this.getTipoError() === tipoErr.LEXICO){
             return (
-                'Se obtuvo: ERROR LEXICO' + 
-                ' desc: {' + this.desc + 
-                '} en la fila: ' + this.fila + 
+                '<LEXICAL ERROR>: ' + this.desc + 
+                ' en la fila: ' + this.fila + 
                 ' en la columna: ' + this.columna + '\n'
             );
         }else if(this.getTipoError() === tipoErr.SINTACTICO){
             return (
-                'Se obtuvo: ERROR SINTACTICO' + 
-                ' desc: {' + this.desc + 
-                '} en la fila: ' + this.fila + 
+                '<SINTAX ERROR>: ' + this.desc + 
+                ' en la fila: ' + this.fila + 
                 ' en la columna: ' + this.columna + '\n'
             );
         }else if(this.getTipoError() === tipoErr.SEMANTICO){
             return (
-                'Se obtuvo: ERROR SEMANTICO' + 
-                ' desc: {' + this.desc + 
-                '} en la fila: ' + this.fila + 
+                '<SEMANTIC ERROR>: ' + this.desc + 
+                ' en la fila: ' + this.fila + 
                 ' en la columna: ' + this.columna + '\n'
             );
         }else{

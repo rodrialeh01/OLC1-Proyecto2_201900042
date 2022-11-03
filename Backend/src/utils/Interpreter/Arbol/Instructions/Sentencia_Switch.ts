@@ -39,7 +39,7 @@ export default class Switch extends Instruccion{
                     }
                 }
             }else{
-                throw new Error(tipoErr.SEMANTICO, "La condicion no concuerda con el tipo del dato del caso", this.linea, this.columna);
+                return  new Error(tipoErr.SEMANTICO, "La condicion no concuerda con el tipo del dato del caso", this.linea, this.columna);
             }
         }
         //DEFAULT

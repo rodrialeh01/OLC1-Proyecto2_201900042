@@ -21,7 +21,7 @@ class Declaracion extends Instruccion_1.Instruccion {
                 if (validar) {
                 }
                 else {
-                    throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "La variable ya fue declarada anteriormente", this.linea, this.columna);
+                    return new Error_1.default(Data_1.tipoErr.SEMANTICO, "La variable ya fue declarada anteriormente", this.linea, this.columna);
                 }
             }
             else if (this.tipo === Data_1.DataType.DECIMAL) {
@@ -29,7 +29,7 @@ class Declaracion extends Instruccion_1.Instruccion {
                 if (validar) {
                 }
                 else {
-                    throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "La variable ya fue declarada anteriormente", this.linea, this.columna);
+                    return new Error_1.default(Data_1.tipoErr.SEMANTICO, "La variable ya fue declarada anteriormente", this.linea, this.columna);
                 }
             }
             else if (this.tipo === Data_1.DataType.BOOLEANO) {
@@ -37,7 +37,7 @@ class Declaracion extends Instruccion_1.Instruccion {
                 if (validar) {
                 }
                 else {
-                    throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "La variable ya fue declarada anteriormente", this.linea, this.columna);
+                    return new Error_1.default(Data_1.tipoErr.SEMANTICO, "La variable ya fue declarada anteriormente", this.linea, this.columna);
                 }
             }
             else if (this.tipo === Data_1.DataType.CARACTER) {
@@ -45,7 +45,7 @@ class Declaracion extends Instruccion_1.Instruccion {
                 if (validar) {
                 }
                 else {
-                    throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "La variable ya fue declarada anteriormente", this.linea, this.columna);
+                    return new Error_1.default(Data_1.tipoErr.SEMANTICO, "La variable ya fue declarada anteriormente", this.linea, this.columna);
                 }
             }
             else if (this.tipo === Data_1.DataType.CADENA) {
@@ -53,11 +53,12 @@ class Declaracion extends Instruccion_1.Instruccion {
                 if (validar) {
                 }
                 else {
-                    throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "La variable ya fue declarada anteriormente", this.linea, this.columna);
+                    return new Error_1.default(Data_1.tipoErr.SEMANTICO, "La variable ya fue declarada anteriormente", this.linea, this.columna);
                 }
             }
             else {
-                throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "Tipo de dato mal ingresado", this.linea, this.columna);
+                console.log("XD");
+                return new Error_1.default(Data_1.tipoErr.SEMANTICO, "Tipo de dato mal ingresado", this.linea, this.columna);
             }
         }
     }

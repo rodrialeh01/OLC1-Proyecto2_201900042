@@ -25,7 +25,7 @@ export default class Unario extends Instruccion {
             }
         }else{
             //ERROR SEMANTICO
-            throw new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
+            return  new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
         }
     }
 }

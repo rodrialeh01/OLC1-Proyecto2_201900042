@@ -27,7 +27,7 @@ export default class Asignacion extends Instruccion {
                     tabla.asignar(id,valorasig.value);
                     console.log("Se asigno a la variable " + id)
                 }else{
-                    throw new Error(tipoErr.SEMANTICO,"No coinciden los tipos de datos", this.linea, this.columna);
+                    return  new Error(tipoErr.SEMANTICO,"No coinciden los tipos de datos", this.linea, this.columna);
                 }
             }
         }

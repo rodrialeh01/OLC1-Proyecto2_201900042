@@ -61,7 +61,7 @@ export default class If extends Instruccion{
                 }
             }
         }else{
-            throw new Error(tipoErr.SEMANTICO, "La condicion no es booleana", this.linea, this.columna);
+            return  new Error(tipoErr.SEMANTICO, "La condicion no es booleana", this.linea, this.columna);
         }
     }
 }

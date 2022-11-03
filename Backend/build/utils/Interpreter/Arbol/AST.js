@@ -174,7 +174,7 @@ this.$ = new Nodo.default("METODO","");
                                                                                             this.$.agregarHijo(new Nodo.default(")","PARCIERRA"));
                                                                                             this.$.agregarHijo(new Nodo.default(":","DOSPUNTOS"));
                                                                                             this.$.agregarHijo(new Nodo.default("void","RVOID"));
-                                                                                            this.$.agregarHijo($$[$0-1]);
+                                                                                            this.$.agregarHijo($$[$0]);
                                                                                             
 break;
 case 28:
@@ -927,11 +927,11 @@ this.$ = new Nodo.default("EXPRESION","");
                                                                             this.$.agregarHijo(new Nodo.default("--","DECREMENTO"));
                                                                             
 break;
-case 118: case 121: case 122:
-;
-break;
-case 119: case 120:
+case 118: case 119: case 120:
 this.$=$$[$0];
+break;
+case 121: case 122:
+;
 break;
 case 123:
 this.$ = new Nodo.default("OPERADOR_TERNARIO","");

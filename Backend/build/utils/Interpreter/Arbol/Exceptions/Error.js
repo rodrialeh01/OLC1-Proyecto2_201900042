@@ -22,21 +22,18 @@ class Error {
     }
     returnError() {
         if (this.getTipoError() === Data_1.tipoErr.LEXICO) {
-            return ('Se obtuvo: ERROR LEXICO' +
-                ' desc: {' + this.desc +
-                '} en la fila: ' + this.fila +
+            return ('<LEXICAL ERROR>: ' + this.desc +
+                ' en la fila: ' + this.fila +
                 ' en la columna: ' + this.columna + '\n');
         }
         else if (this.getTipoError() === Data_1.tipoErr.SINTACTICO) {
-            return ('Se obtuvo: ERROR SINTACTICO' +
-                ' desc: {' + this.desc +
-                '} en la fila: ' + this.fila +
+            return ('<SINTAX ERROR>: ' + this.desc +
+                ' en la fila: ' + this.fila +
                 ' en la columna: ' + this.columna + '\n');
         }
         else if (this.getTipoError() === Data_1.tipoErr.SEMANTICO) {
-            return ('Se obtuvo: ERROR SEMANTICO' +
-                ' desc: {' + this.desc +
-                '} en la fila: ' + this.fila +
+            return ('<SEMANTIC ERROR>: ' + this.desc +
+                ' en la fila: ' + this.fila +
                 ' en la columna: ' + this.columna + '\n');
         }
         else {

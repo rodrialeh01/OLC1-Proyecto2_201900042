@@ -24,38 +24,39 @@ export default class Declaracion extends Instruccion {
                 if(validar){
 
                 }else{
-                    throw new Error(tipoErr.SEMANTICO,"La variable ya fue declarada anteriormente", this.linea, this.columna);
+                    return  new Error(tipoErr.SEMANTICO,"La variable ya fue declarada anteriormente", this.linea, this.columna);
                 }
             }else if(this.tipo === DataType.DECIMAL){
                 const validar = tabla.saveSymbol(id,0.0,DataType.DECIMAL,this.linea,this.columna);
                 if(validar){
 
                 }else{
-                    throw new Error(tipoErr.SEMANTICO,"La variable ya fue declarada anteriormente", this.linea, this.columna);
+                    return  new Error(tipoErr.SEMANTICO,"La variable ya fue declarada anteriormente", this.linea, this.columna);
                 }
             }else if(this.tipo === DataType.BOOLEANO){
                 const validar = tabla.saveSymbol(id,true,DataType.BOOLEANO,this.linea,this.columna);
                 if(validar){
 
                 }else{
-                    throw new Error(tipoErr.SEMANTICO,"La variable ya fue declarada anteriormente", this.linea, this.columna);
+                    return  new Error(tipoErr.SEMANTICO,"La variable ya fue declarada anteriormente", this.linea, this.columna);
                 }
             }else if(this.tipo === DataType.CARACTER){
                 const validar = tabla.saveSymbol(id,"0",DataType.CARACTER,this.linea,this.columna);
                 if(validar){
 
                 }else{
-                    throw new Error(tipoErr.SEMANTICO,"La variable ya fue declarada anteriormente", this.linea, this.columna);
+                    return  new Error(tipoErr.SEMANTICO,"La variable ya fue declarada anteriormente", this.linea, this.columna);
                 }
             }else if(this.tipo === DataType.CADENA){
                 const validar = tabla.saveSymbol(id,"",DataType.CADENA,this.linea,this.columna);
                 if(validar){
 
                 }else{
-                    throw new Error(tipoErr.SEMANTICO,"La variable ya fue declarada anteriormente", this.linea, this.columna);
+                    return new Error(tipoErr.SEMANTICO,"La variable ya fue declarada anteriormente", this.linea, this.columna);
                 }
             }else{
-                throw new Error(tipoErr.SEMANTICO,"Tipo de dato mal ingresado", this.linea, this.columna);
+                console.log("XD");
+                return new Error(tipoErr.SEMANTICO,"Tipo de dato mal ingresado", this.linea, this.columna);
             }
         }
     }

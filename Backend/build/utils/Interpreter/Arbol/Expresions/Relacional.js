@@ -75,7 +75,7 @@ class Relacional extends Instruccion_1.Instruccion {
             }
             else {
                 //ERROR SEMANTICO
-                throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
+                return new Error_1.default(Data_1.tipoErr.SEMANTICO, "Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
             }
         }
         else if (this.tipo === Data_1.tipoRel.MENOR) {
@@ -141,7 +141,7 @@ class Relacional extends Instruccion_1.Instruccion {
             }
             else {
                 //ERROR SEMANTICO
-                throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
+                return new Error_1.default(Data_1.tipoErr.SEMANTICO, "Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
             }
         }
         else if (this.tipo === Data_1.tipoRel.MAYOR_IGUAL) {
@@ -205,7 +205,7 @@ class Relacional extends Instruccion_1.Instruccion {
             }
             else {
                 //ERROR SEMANTICO
-                throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
+                return new Error_1.default(Data_1.tipoErr.SEMANTICO, "Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
             }
         }
         else if (this.tipo === Data_1.tipoRel.MENOR_IGUAL) {
@@ -269,7 +269,7 @@ class Relacional extends Instruccion_1.Instruccion {
             }
             else {
                 //ERROR SEMANTICO
-                throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
+                return new Error_1.default(Data_1.tipoErr.SEMANTICO, "Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
             }
         }
         else if (this.tipo === Data_1.tipoRel.IGUAL) {
@@ -335,7 +335,7 @@ class Relacional extends Instruccion_1.Instruccion {
             }
             else {
                 //ERROR SEMANTICO
-                throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
+                return new Error_1.default(Data_1.tipoErr.SEMANTICO, "Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
             }
         }
         else if (this.tipo === Data_1.tipoRel.DIFERENTE) {
@@ -401,7 +401,7 @@ class Relacional extends Instruccion_1.Instruccion {
             }
             else {
                 //ERROR SEMANTICO
-                throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
+                return new Error_1.default(Data_1.tipoErr.SEMANTICO, "Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
             }
         }
     }

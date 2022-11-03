@@ -43,7 +43,7 @@ class DoUntil extends Instruccion_1.Instruccion {
             }
         }
         else {
-            throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "La condicion no es booleana", this.linea, this.columna);
+            return new Error_1.default(Data_1.tipoErr.SEMANTICO, "La condicion no es booleana", this.linea, this.columna);
         }
     }
 }

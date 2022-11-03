@@ -1,7 +1,7 @@
 %{
     //codigo js
-    const controller = require('../../../controller/parser/parser')
-    const errores = require('./Exceptions/Error')
+    const controller = require('../../../controller/parser/parser');
+    const Errores = require('./Exceptions/Error');
     const nativo = require('./Expresions/Native');
     const Tipo = require('./Data/Data');
     const impresion = require('./Instructions/imprimir');
@@ -132,7 +132,7 @@
 ([a-zA-Z_$])[a-zA-Z0-9_]*                                                   {console.log(yytext);return 'IDENTIFICADOR';}
 
 <<EOF>>                                                                     return 'EOF';
-.                                                                           return 'INVALID';
+.                                                                           {controller.listaErrores.push(new Errores.default(Tipo.tipoErr.LEXICO, "No se esperaba el caracter " + yytext, yylloc.first_line, yylloc.first_column));}
 
 /lex
 //PRECEDENCIA DE OPERADORES
@@ -158,8 +158,6 @@ INIT: INSTRUCCIONES EOF                                                     {ret
 
 INSTRUCCIONES : INSTRUCCIONES AMBITO_GLOBAL                                 {$1.push($2); $$=$1;}
               | AMBITO_GLOBAL                                               {$$=[$1];}
-              | INVALID                                                     {controller.listaErrores.push(new errores.default('ERROR LEXICO', "No se esperaba el caracter " , @1.first_line, @1.first_column));}
-              | error PTCOMA                                                {controller.listaErrores.push(new errores.default('ERROR SINTACTICO', "Se esperaba token " + $1, @1.first_line, @1.first_column));}
 ;
 
 AMBITO_GLOBAL : IMPRIMIR                                                    {$$=$1;}
@@ -175,7 +173,8 @@ AMBITO_GLOBAL : IMPRIMIR                                                    {$$=
               | INS_RETURN                                                  {$$=$1;}
               | LLAMADA PTCOMA                                              {$$=$1;}
               | METODO                                                      {$$=$1;}
-              | FUNCION                                                     {$$=$1;}                                                      
+              | FUNCION                                                     {$$=$1;}
+              | error                                                       {controller.listaErrores.push(new Errores.default(Tipo.tipoErr.SINTACTICO, "Se esperaba token " + $1, @1.first_line, @1.first_column));}                                                      
 ;
 
 LLAMADA : IDENTIFICADOR PARABRE PARCIERRA                             {$$= new llamada.default($1,null,@1.first_line,@1.first_column);}

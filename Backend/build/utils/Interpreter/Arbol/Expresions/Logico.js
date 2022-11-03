@@ -29,7 +29,7 @@ class Logico extends Instruccion_1.Instruccion {
             };
         }
         else {
-            throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
+            return new Error_1.default(Data_1.tipoErr.SEMANTICO, "Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
         }
     }
 }

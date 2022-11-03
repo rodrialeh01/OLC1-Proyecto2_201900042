@@ -23,7 +23,7 @@ export default class DeclaracionVector1D1 extends Instruccion {
         console.log("entro a declaracion vector 1d");
         const tamanio = this.cantidad.interpretar(arbol,tabla);
         if(tamanio.type != DataType.ENTERO){
-            throw new Error(tipoErr.SEMANTICO,"El tamaño del vector debe ser un entero", this.linea, this.columna);
+            return  new Error(tipoErr.SEMANTICO,"El tamaño del vector debe ser un entero", this.linea, this.columna);
         }
         if(this.tipo === DataType.ENTERO){
             let temporal = [];

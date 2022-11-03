@@ -139,7 +139,7 @@ export default class Aritmetica extends Instruccion {
                 }
             }else{
                 //ERROR SEMANTICO
-                throw new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
+                return  new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
             }
         //* ---------------------- RESTA ---------------------------
         }else if (this.tipo === tipoOp.RESTA) {
@@ -218,7 +218,7 @@ export default class Aritmetica extends Instruccion {
                 }
             }else{
                 //ERROR SEMANTICO
-                throw new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
+                return  new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
             }
         //* ---------------------- MULTIPLICACION ---------------------------
         }else if (this.tipo === tipoOp.MULTIPLICACION) {
@@ -297,7 +297,7 @@ export default class Aritmetica extends Instruccion {
                 }
             }else{
                 //ERROR SEMANTICO
-                throw new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
+                return  new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
             }
         //* ---------------------- DIVISION ---------------------------
         }else if (this.tipo === tipoOp.DIVISION) {
@@ -377,10 +377,10 @@ export default class Aritmetica extends Instruccion {
                     }
                 }else{
                     //ERROR SEMANTICO
-                    throw new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
+                    return  new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
                 }
             }else{
-                throw new Error(tipoErr.SEMANTICO,"No se puede dividir con 0", this.linea, this.columna);
+                return  new Error(tipoErr.SEMANTICO,"No se puede dividir con 0", this.linea, this.columna);
             }
         //* ---------------------- POTENCIA ---------------------------
         }else if(this.tipo === tipoOp.POTENCIA){
@@ -438,7 +438,7 @@ export default class Aritmetica extends Instruccion {
                 }
             }else{
                 //ErrorL SEMANTICO
-                throw new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
+                return  new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
             }
         //* ---------------------- MODULO ---------------------------
         }else if(this.tipo === tipoOp.MODULO){
@@ -468,7 +468,7 @@ export default class Aritmetica extends Instruccion {
                 }
             }else{
                 //ErrorL SEMANTICO
-                throw new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
+                return  new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
             }
         }
 

@@ -19,9 +19,10 @@ export const parse = (req: Request, res: Response): void => {
     let parser = require('../../utils/Interpreter/Arbol/analizador');
     let parserast = require('../../utils/Interpreter/Arbol/AST');
     const { peticion } = req.body;
-
+    let salidaconsola = "";
     try{
-        let ast = new Three(parser.parse(peticion));
+        const returnThree = parser.parse(peticion);
+        let ast = new Three(returnThree);
         var tabla = new SymbolTable();
         var raiz = new GenerarAST();
         raiz.recorrer_arbol(parserast.parse(peticion));
@@ -30,26 +31,22 @@ export const parse = (req: Request, res: Response): void => {
         ast.settablaGlobal(tabla);
         for(let i of ast.getinstrucciones()){
             try{
-                if(i instanceof Funcion){
-                    i.interpretar(ast, tabla);
-                }else if(i instanceof Declaracion || i instanceof Declaracion_Asignacion || i instanceof Asignacion){
-                    i.interpretar(ast, tabla);
+                let interp = i.interpretar(ast,tabla);
+                if(interp instanceof Error){
+                    salidaconsola += interp.returnError();
+                    listaErrores.push(interp);
                 }
-            }catch(error: any){
-                if(error instanceof Error){
-                    listaErrores.push(error);
-                }else{
-                    console.log(error);
+            }catch(inter){
+                for(let x = 0; x<listaErrores.length; x++){
+                    salidaconsola+=listaErrores[x].returnError();
                 }
             }
         }
-        console.log("errores: " + listaErrores.length);
-        for(let er of listaErrores){
-            console.log(er);
-        }
-        res.json({ consola: ast.getconsola(), errores: listaErrores, simbolos: [] })
+        salidaconsola+= ast.getconsola();
     }catch(err){
-        console.log(err)
-        res.json({ consola: '', error: err, errores: listaErrores, simbolos: [] })
+        for(let x = 0; x<listaErrores.length; x++){
+            salidaconsola+=listaErrores[x].returnError();
+        }
     }
+    res.json({ consola: salidaconsola, errores: listaErrores, simbolos: [] })
 }

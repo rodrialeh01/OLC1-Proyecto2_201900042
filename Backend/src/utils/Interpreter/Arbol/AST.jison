@@ -230,7 +230,7 @@ METODO : IDENTIFICADOR PARABRE LISTA_PARAMETROS PARCIERRA DOSPUNTOS RVOID ENCAPS
                                                                                             $$.agregarHijo(new Nodo.default(")","PARCIERRA"));
                                                                                             $$.agregarHijo(new Nodo.default(":","DOSPUNTOS"));
                                                                                             $$.agregarHijo(new Nodo.default("void","RVOID"));
-                                                                                            $$.agregarHijo($6);
+                                                                                            $$.agregarHijo($7);
                                                                                             }
        | IDENTIFICADOR PARABRE LISTA_PARAMETROS PARCIERRA ENCAPSULAMIENTO                   {$$ = new Nodo.default("METODO","");
                                                                                             $$.agregarHijo(new Nodo.default($1,"IDENTIFICADOR"));
@@ -847,7 +847,7 @@ EXPRESION : ENTERO                                                          {$$ 
                                                                             $$.agregarHijo($1);
                                                                             $$.agregarHijo(new Nodo.default("--","DECREMENTO"));
                                                                             }
-          | LLAMADA                                                         {;}
+          | LLAMADA                                                         {$$=$1;}
           | OPERADOR_TERNARIO                                               {$$=$1;}
           | CASTEOS                                                         {$$=$1;}
           | ACCESO_VECTORES                                                 {;}

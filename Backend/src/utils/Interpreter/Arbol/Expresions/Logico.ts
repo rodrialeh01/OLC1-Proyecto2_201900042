@@ -25,7 +25,7 @@ export default class Logico extends Instruccion {
                 "value": (valorIzq.value && valorDer.value)
             }
         }else{
-            throw new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
+            return  new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
         }
     }
 }

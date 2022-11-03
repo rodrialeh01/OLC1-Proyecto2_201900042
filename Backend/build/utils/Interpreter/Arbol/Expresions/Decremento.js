@@ -20,11 +20,11 @@ class Decremento extends Instruccion_1.Instruccion {
                 return tabla.getExp(valor, variable.type);
             }
             else {
-                throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "No se puede decrementar una variable que no sea entera o decimal", this.linea, this.columna);
+                return new Error_1.default(Data_1.tipoErr.SEMANTICO, "No se puede decrementar una variable que no sea entera o decimal", this.linea, this.columna);
             }
         }
         else {
-            throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "No se encontro la variable", this.linea, this.columna);
+            return new Error_1.default(Data_1.tipoErr.SEMANTICO, "No se encontro la variable", this.linea, this.columna);
         }
     }
 }

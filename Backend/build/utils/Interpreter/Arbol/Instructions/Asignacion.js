@@ -24,7 +24,7 @@ class Asignacion extends Instruccion_1.Instruccion {
                     console.log("Se asigno a la variable " + id);
                 }
                 else {
-                    throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "No coinciden los tipos de datos", this.linea, this.columna);
+                    return new Error_1.default(Data_1.tipoErr.SEMANTICO, "No coinciden los tipos de datos", this.linea, this.columna);
                 }
             }
         }

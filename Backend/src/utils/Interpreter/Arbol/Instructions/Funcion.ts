@@ -54,13 +54,13 @@ export default class Funcion extends Instruccion{
                                 this.listatipos.push(DataType.BOOLEANO);
                                 break;
                             default:
-                                throw new Error(tipoErr.SEMANTICO, "El tipo de dato no es válido", this.linea, this.columna);
+                                return  new Error(tipoErr.SEMANTICO, "El tipo de dato no es válido", this.linea, this.columna);
                         }
                     }
                 }
                 tabla.saveFuncion(this.identificador,this);
             }else{
-                throw new Error(tipoErr.SEMANTICO,"El metodo "+this.identificador+" ya existe",this.linea,this.columna);
+                return  new Error(tipoErr.SEMANTICO,"El metodo "+this.identificador+" ya existe",this.linea,this.columna);
             }
         }else if(this.tipo == DataType.BOOLEANO || this.tipo == DataType.CADENA || this.tipo == DataType.CARACTER || this.tipo == DataType.DECIMAL || this.tipo == DataType.ENTERO){
             const valid = tabla.validarFuncion(this.identificador);
@@ -87,16 +87,16 @@ export default class Funcion extends Instruccion{
                                 this.listatipos.push(DataType.BOOLEANO);
                                 break;
                             default:
-                                throw new Error(tipoErr.SEMANTICO, "El tipo de dato no es válido", this.linea, this.columna);
+                                return  new Error(tipoErr.SEMANTICO, "El tipo de dato no es válido", this.linea, this.columna);
                         }
                     }
                 }
                 tabla.saveFuncion(this.identificador,this);
             }else{
-                throw new Error(tipoErr.SEMANTICO,"El metodo "+this.identificador+" ya existe",this.linea,this.columna);
+                return  new Error(tipoErr.SEMANTICO,"El metodo "+this.identificador+" ya existe",this.linea,this.columna);
             }
         }else{
-            throw new Error(tipoErr.SEMANTICO, "El tipo de dato no es válido", this.linea, this.columna);
+            return  new Error(tipoErr.SEMANTICO, "El tipo de dato no es válido", this.linea, this.columna);
         }
     }
 }

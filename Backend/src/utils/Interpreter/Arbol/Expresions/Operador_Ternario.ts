@@ -20,7 +20,7 @@ export default class Op_Ternario extends Instruccion {
                 return this.ins2.interpretar(arbol,tabla);
             }
         }else{
-            throw new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
+            return  new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
         }
     }
 }

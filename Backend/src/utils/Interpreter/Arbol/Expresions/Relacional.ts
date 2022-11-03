@@ -66,7 +66,7 @@ export default class Relacional extends Instruccion {
                 }
             }else{
                 //ERROR SEMANTICO
-                throw new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
+                return  new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
             }
         }else if(this.tipo === tipoRel.MENOR){
             let valorIzq = this.operadorIzq.interpretar(arbol, tabla);
@@ -124,7 +124,7 @@ export default class Relacional extends Instruccion {
                 }
             }else{
                 //ERROR SEMANTICO
-                throw new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
+                return  new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
             }
         }else if(this.tipo === tipoRel.MAYOR_IGUAL){
             let valorIzq = this.operadorIzq.interpretar(arbol, tabla);
@@ -180,7 +180,7 @@ export default class Relacional extends Instruccion {
                 }
             }else{
                 //ERROR SEMANTICO
-                throw new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
+                return  new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
             }
         }else if(this.tipo === tipoRel.MENOR_IGUAL){
             let valorIzq = this.operadorIzq.interpretar(arbol, tabla);
@@ -236,7 +236,7 @@ export default class Relacional extends Instruccion {
                 }
             }else{
                 //ERROR SEMANTICO
-                throw new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
+                return  new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
             }
         }else if(this.tipo === tipoRel.IGUAL){
             let valorIzq = this.operadorIzq.interpretar(arbol, tabla);
@@ -296,7 +296,7 @@ export default class Relacional extends Instruccion {
                 }
             }else{
                 //ERROR SEMANTICO
-                throw new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
+                return  new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
             }
         }else if(this.tipo === tipoRel.DIFERENTE){
             let valorIzq = this.operadorIzq.interpretar(arbol, tabla);
@@ -356,7 +356,7 @@ export default class Relacional extends Instruccion {
                 }
             }else{
                 //ERROR SEMANTICO
-                throw new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
+                return  new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
             }
         }
     }

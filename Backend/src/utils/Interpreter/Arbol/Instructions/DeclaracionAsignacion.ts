@@ -28,10 +28,10 @@ export default class Declaracion_Asignacion extends Instruccion {
                 if(valid){  
                     console.log("Se declaro la variable " + id);
                 }else{
-                    throw new Error(tipoErr.SEMANTICO,"La variable ya fue declarada anteriormente", this.linea, this.columna);
+                    return  new Error(tipoErr.SEMANTICO,"La variable ya fue declarada anteriormente", this.linea, this.columna);
                 }
             }else{
-                throw new Error(tipoErr.SEMANTICO,"No coinciden los tipos de datos", this.linea, this.columna);
+                return  new Error(tipoErr.SEMANTICO,"No coinciden los tipos de datos", this.linea, this.columna);
             }
         }
     }

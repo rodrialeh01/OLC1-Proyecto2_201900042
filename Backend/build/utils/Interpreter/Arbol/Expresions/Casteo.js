@@ -54,7 +54,7 @@ class Casteo extends Instruccion_1.Instruccion {
                 }
             }
             else {
-                throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "No se puede castear a entero", this.linea, this.columna);
+                return new Error_1.default(Data_1.tipoErr.SEMANTICO, "No se puede castear a entero", this.linea, this.columna);
             }
         }
         else if (this.tipo == Data_1.DataType.DECIMAL) {
@@ -77,7 +77,7 @@ class Casteo extends Instruccion_1.Instruccion {
                 };
             }
             else {
-                throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "No se puede castear a decimal", this.linea, this.columna);
+                return new Error_1.default(Data_1.tipoErr.SEMANTICO, "No se puede castear a decimal", this.linea, this.columna);
             }
         }
         else if (this.tipo == Data_1.DataType.BOOLEANO) {
@@ -95,7 +95,7 @@ class Casteo extends Instruccion_1.Instruccion {
                     };
                 }
                 else {
-                    throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "No se puede castear a booleano", this.linea, this.columna);
+                    return new Error_1.default(Data_1.tipoErr.SEMANTICO, "No se puede castear a booleano", this.linea, this.columna);
                 }
             }
             else if (exp.type == Data_1.DataType.DECIMAL) {
@@ -112,7 +112,7 @@ class Casteo extends Instruccion_1.Instruccion {
                     };
                 }
                 else {
-                    throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "No se puede castear a booleano", this.linea, this.columna);
+                    return new Error_1.default(Data_1.tipoErr.SEMANTICO, "No se puede castear a booleano", this.linea, this.columna);
                 }
             }
             else if (exp.type == Data_1.DataType.CARACTER) {
@@ -129,7 +129,7 @@ class Casteo extends Instruccion_1.Instruccion {
                     };
                 }
                 else {
-                    throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "No se puede castear a booleano", this.linea, this.columna);
+                    return new Error_1.default(Data_1.tipoErr.SEMANTICO, "No se puede castear a booleano", this.linea, this.columna);
                 }
             }
             else if (exp.type == Data_1.DataType.CADENA) {
@@ -146,7 +146,7 @@ class Casteo extends Instruccion_1.Instruccion {
                     };
                 }
                 else {
-                    throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "No se puede castear a booleano", this.linea, this.columna);
+                    return new Error_1.default(Data_1.tipoErr.SEMANTICO, "No se puede castear a booleano", this.linea, this.columna);
                 }
             }
             else if (exp.type == Data_1.DataType.BOOLEANO) {
@@ -156,7 +156,7 @@ class Casteo extends Instruccion_1.Instruccion {
                 };
             }
             else {
-                throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "No se puede castear a booleano", this.linea, this.columna);
+                return new Error_1.default(Data_1.tipoErr.SEMANTICO, "No se puede castear a booleano", this.linea, this.columna);
             }
         }
         else if (this.tipo == Data_1.DataType.CARACTER) {
@@ -199,7 +199,7 @@ class Casteo extends Instruccion_1.Instruccion {
                 }
             }
             else {
-                throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "No se puede castear a caracter", this.linea, this.columna);
+                return new Error_1.default(Data_1.tipoErr.SEMANTICO, "No se puede castear a caracter", this.linea, this.columna);
             }
         }
         else if (this.tipo == Data_1.DataType.CADENA) {
@@ -242,11 +242,11 @@ class Casteo extends Instruccion_1.Instruccion {
                 }
             }
             else {
-                throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "No se puede castear a cadena", this.linea, this.columna);
+                return new Error_1.default(Data_1.tipoErr.SEMANTICO, "No se puede castear a cadena", this.linea, this.columna);
             }
         }
         else {
-            throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "No se puede castear la expresion", this.linea, this.columna);
+            return new Error_1.default(Data_1.tipoErr.SEMANTICO, "No se puede castear la expresion", this.linea, this.columna);
         }
     }
 }

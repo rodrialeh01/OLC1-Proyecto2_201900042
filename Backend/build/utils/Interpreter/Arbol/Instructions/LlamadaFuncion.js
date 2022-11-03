@@ -27,7 +27,7 @@ class LlamadaFuncion extends Instruccion_1.Instruccion {
                         for (let i = 0; i < this.parametros.length; i++) {
                             let param = this.parametros[i].interpretar(arbol, tabla);
                             if (param.type != met.listatipos[i]) {
-                                throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "El tipo de parametro no coincide con el tipo de parametro del metodo", this.linea, this.columna);
+                                return new Error_1.default(Data_1.tipoErr.SEMANTICO, "El tipo de parametro no coincide con el tipo de parametro del metodo", this.linea, this.columna);
                             }
                         }
                         let tablaLocal = new SymbolTable_1.default(tabla);
@@ -35,7 +35,7 @@ class LlamadaFuncion extends Instruccion_1.Instruccion {
                             let valor = this.parametros[i].interpretar(arbol, tabla);
                             const valid = tablaLocal.saveSymbol(met.listaparametros[i], valor.value, valor.type, this.linea, this.columna);
                             if (!valid) {
-                                throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "El parametro ya existe en el metodo", this.linea, this.columna);
+                                return new Error_1.default(Data_1.tipoErr.SEMANTICO, "El parametro ya existe en el metodo", this.linea, this.columna);
                             }
                         }
                         for (let i of met.listainstrucciones) {
@@ -44,14 +44,14 @@ class LlamadaFuncion extends Instruccion_1.Instruccion {
                                     return i;
                                 }
                                 else {
-                                    throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "El metodo no puede retornar un valor", this.linea, this.columna);
+                                    return new Error_1.default(Data_1.tipoErr.SEMANTICO, "El metodo no puede retornar un valor", this.linea, this.columna);
                                 }
                             }
                             i.interpretar(arbol, tablaLocal);
                         }
                     }
                     else {
-                        throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "La cantidad de parametros no coincide con la cantidad de parametros del metodo", this.linea, this.columna);
+                        return new Error_1.default(Data_1.tipoErr.SEMANTICO, "La cantidad de parametros no coincide con la cantidad de parametros del metodo", this.linea, this.columna);
                     }
                 }
                 else {
@@ -60,7 +60,7 @@ class LlamadaFuncion extends Instruccion_1.Instruccion {
                         let valor = this.parametros[i].interpretar(arbol, tabla);
                         const valid = tablaLocal.saveSymbol(met.listaparametros[i], valor.value, valor.type, this.linea, this.columna);
                         if (!valid) {
-                            throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "El parametro ya existe en el metodo", this.linea, this.columna);
+                            return new Error_1.default(Data_1.tipoErr.SEMANTICO, "El parametro ya existe en el metodo", this.linea, this.columna);
                         }
                     }
                     for (let i of met.listainstrucciones) {
@@ -72,7 +72,7 @@ class LlamadaFuncion extends Instruccion_1.Instruccion {
                                 return i;
                             }
                             else {
-                                throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "El metodo no puede retornar un valor", this.linea, this.columna);
+                                return new Error_1.default(Data_1.tipoErr.SEMANTICO, "El metodo no puede retornar un valor", this.linea, this.columna);
                             }
                         }
                     }
@@ -87,7 +87,7 @@ class LlamadaFuncion extends Instruccion_1.Instruccion {
                         for (let i = 0; i < this.parametros.length; i++) {
                             let param = this.parametros[i].interpretar(arbol, tabla);
                             if (param.type != met.listatipos[i]) {
-                                throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "El tipo de parametro no coincide con el tipo de parametro de la funcion", this.linea, this.columna);
+                                return new Error_1.default(Data_1.tipoErr.SEMANTICO, "El tipo de parametro no coincide con el tipo de parametro de la funcion", this.linea, this.columna);
                             }
                         }
                         let tablaLocal = new SymbolTable_1.default(tabla);
@@ -95,7 +95,7 @@ class LlamadaFuncion extends Instruccion_1.Instruccion {
                             let valor = this.parametros[i].interpretar(arbol, tabla);
                             const valid = tablaLocal.saveSymbol(met.listaparametros[i], valor.value, valor.type, this.linea, this.columna);
                             if (!valid) {
-                                throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "El parametro ya existe en la funcion", this.linea, this.columna);
+                                return new Error_1.default(Data_1.tipoErr.SEMANTICO, "El parametro ya existe en la funcion", this.linea, this.columna);
                             }
                         }
                         for (let i of met.listainstrucciones) {
@@ -104,19 +104,19 @@ class LlamadaFuncion extends Instruccion_1.Instruccion {
                                     returns += 1;
                                     if (i.exp.interpretar(arbol, tablaLocal).type != met.tipo) {
                                         ejecutarf = null;
-                                        throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "El tipo de retorno no coincide con el tipo de retorno de la funcion", this.linea, this.columna);
+                                        return new Error_1.default(Data_1.tipoErr.SEMANTICO, "El tipo de retorno no coincide con el tipo de retorno de la funcion", this.linea, this.columna);
                                     }
                                 }
                                 else {
                                     ejecutarf = null;
-                                    throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "La funcion debe retornar un valor", this.linea, this.columna);
+                                    return new Error_1.default(Data_1.tipoErr.SEMANTICO, "La funcion debe retornar un valor", this.linea, this.columna);
                                 }
                             }
                             i.interpretar(arbol, tablaLocal);
                             ejecutarf === null || ejecutarf === void 0 ? void 0 : ejecutarf.push(i);
                         }
                         if (returns == 0) {
-                            throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "La funcion debe retornar un valor", this.linea, this.columna);
+                            return new Error_1.default(Data_1.tipoErr.SEMANTICO, "La funcion debe retornar un valor", this.linea, this.columna);
                         }
                         if (ejecutarf != null) {
                             for (let i of ejecutarf) {
@@ -128,7 +128,7 @@ class LlamadaFuncion extends Instruccion_1.Instruccion {
                         }
                     }
                     else {
-                        throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "La cantidad de parametros no coincide con la cantidad de parametros del metodo", this.linea, this.columna);
+                        return new Error_1.default(Data_1.tipoErr.SEMANTICO, "La cantidad de parametros no coincide con la cantidad de parametros del metodo", this.linea, this.columna);
                     }
                 }
                 else {
@@ -138,7 +138,7 @@ class LlamadaFuncion extends Instruccion_1.Instruccion {
                         let valor = this.parametros[i].interpretar(arbol, tabla);
                         const valid = tablaLocal.saveSymbol(met.listaparametros[i], valor.value, valor.type, this.linea, this.columna);
                         if (!valid) {
-                            throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "El parametro ya existe en la funcion", this.linea, this.columna);
+                            return new Error_1.default(Data_1.tipoErr.SEMANTICO, "El parametro ya existe en la funcion", this.linea, this.columna);
                         }
                     }
                     for (let i of met.listainstrucciones) {
@@ -147,26 +147,26 @@ class LlamadaFuncion extends Instruccion_1.Instruccion {
                             if (i.exp != null) {
                                 returns += 1;
                                 if (i.exp.interpretar(arbol, tablaLocal).type != met.tipo) {
-                                    throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "El tipo de retorno no coincide con el tipo de retorno de la funcion", this.linea, this.columna);
+                                    return new Error_1.default(Data_1.tipoErr.SEMANTICO, "El tipo de retorno no coincide con el tipo de retorno de la funcion", this.linea, this.columna);
                                 }
                                 else {
                                     return i.exp.interpretar(arbol, tablaLocal);
                                 }
                             }
                             else {
-                                throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "La funcion debe retornar un valor", this.linea, this.columna);
+                                return new Error_1.default(Data_1.tipoErr.SEMANTICO, "La funcion debe retornar un valor", this.linea, this.columna);
                             }
                         }
                         i.interpretar(arbol, tablaLocal);
                     }
                     if (returns == 0) {
-                        throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "La funcion debe retornar un valor", this.linea, this.columna);
+                        return new Error_1.default(Data_1.tipoErr.SEMANTICO, "La funcion debe retornar un valor", this.linea, this.columna);
                     }
                 }
             }
         }
         else {
-            throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "El metodo no existe", this.linea, this.columna);
+            return new Error_1.default(Data_1.tipoErr.SEMANTICO, "El metodo no existe", this.linea, this.columna);
         }
     }
 }

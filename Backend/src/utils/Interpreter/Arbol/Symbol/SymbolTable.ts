@@ -158,7 +158,7 @@ export default class SymbolTable{
         let tablaLocal: SymbolTable|null = this;
         while(tablaLocal != null){
             if(tablaLocal.tablaActual.has(nombreid)){
-                throw new Error(tipoErr.SEMANTICO, "El vector ya existe", linea, columna);
+                return new Error(tipoErr.SEMANTICO, "El vector ya existe", linea, columna);
             }
             tablaLocal = tablaLocal.getAnterior();
         }
