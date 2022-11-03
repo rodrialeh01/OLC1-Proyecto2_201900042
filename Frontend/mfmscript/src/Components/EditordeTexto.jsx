@@ -7,10 +7,16 @@ import './Consola.css';
 import './NavBarStyle.css'
 import Graphviz from 'graphviz-react';
 import { saveAs } from 'file-saver';
+import ErrorTable from './ErrorTable';
+import SymbolTable from "./SymbolTable";
 
 function EditordeTexto(){
     const[astgraph, setAstgraph] = useState(`digraph G { "AST"->"INICIO";}`);
     const[contentLanguaje, setContentLanguaje] = useState('')
+    const [ cols, setCols ] = useState(["Tipo de Error", "Descripcion", "Fila", "Columna"])
+    const [ tuplas, setTuplas ] = useState([])
+    const [ colsS, setColsS ] = useState(["Tipo de Dato", "Identificador", "Tipo", "Valor"])
+    const [ tuplasS, setTuplasS ] = useState([])
     const editorRef = useRef(null)
     const [response, setResponse] = useState('MFMScript Console\nCopyright (C) MFMScript-OLC1-P2. Created by Rodrigo Hernández 2022')
 
@@ -32,6 +38,55 @@ function EditordeTexto(){
             setAstgraph(grafo);
         })
     }
+
+    const ErrorTablebutton=()=>{
+        Service.parse(editorRef.current.getValue())
+        .then(({errores})=>{
+            let matriz = []
+            for(let i of errores){
+                let fila = []
+                if(i.tipoError == 0){
+                    fila.push('Lexico');
+                }else if(i.tipoError == 1){
+                    fila.push('Sintactico');
+                }else if(i.tipoError == 2){
+                    fila.push('Semantico');
+                }
+                fila.push(i.desc);
+                fila.push(i.fila);
+                fila.push(i.columna);
+                matriz.push(fila);
+            }
+            setTuplas(matriz);
+        })
+    }
+
+    const SymbolTableButton=()=>{
+        Service.parse(editorRef.current.getValue())
+        .then(({simbolos})=>{
+            let matriz = []
+            for(let i of simbolos){
+                let fila = []
+                if(i.type == 0){
+                    fila.push('Entero (Int)')
+                }else if(i.type == 1){
+                    fila.push('Cadena (String)')
+                }else if(i.type == 2){
+                    fila.push('Decimal (Double)')
+                }else if(i.type == 3){
+                    fila.push('Caracter (Char)')
+                }else if(i.type == 4){
+                    fila.push('Booleano (Boolean)')
+                }
+                fila.push(i.identificador);
+                fila.push(i.valor);
+                fila.push(i.valor);
+                matriz.push(fila)
+            }
+            setTuplasS(matriz);
+        })
+    }
+
     const crearArchivo= ()=>{
         editorRef.current.setValue('//Welcome :D, Start your code here...');
         setContentLanguaje('');
@@ -84,7 +139,7 @@ function EditordeTexto(){
                 </a>
             </li>
             <li className="nav-item">
-                <a className="nav-link" href="#">
+            <a onClick={ErrorTablebutton} role="button">
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAABmJLR0QA/wD/AP+gvaeTAAACxElEQVRYhc2Yz0tUURTHP3eywIzIjFZCJUltoiHatIjCfmxkkKA2/YD6I4I2bfoDWvQDjElaF62llAqMVpL0g6RF5aIkJQ0ppzTLb4t3B2537pt5dxy1A8Pwzjv33M89c8557wykiKRdku5IGpe0qOwyJalX0uY031EiqSDpRwRASMYk7Y7Z1wRAdgIvgfVW9QkYAeYz+NsDuADTwFFjzIsYKBfmlnO6a5KaItZuDER0SlK+Xpj31smEpLVLWO8D7a21NhfQbbXfo8aYhVgY4FtA1wY8qhWhEExZ97sOEACl6NuAJ5L2x8Asp2wCHqRV2UrDQBKhfkmtKwEzl8FmB3DFV4b6TImkxwwaY47Hkkg6AlwGNni31gCdQIu9HjfGtNdyVrLlOBALkgG0zbYM2UP/IyuaM8aYaeB12v3VSOC00l8VmFRZDZg3wM9MlsuZwM4ezZLO/hcwaZL59SBWlPguAN0k/aUZmASeAfcMfKjtpAGREXQJ3gqU8vkluK4EcPlgBBcEC1VA3M+woOIZ1RAYGxEXZDEA4OsGlFbV9cIImgSjzibzgh7BTUf3VXBQMOgBnWk0zAnv9AWrzwmKgilB3uqaBUOO/UijYfq80xbL4bdA2x3bvIVz7Suf4EuAGfKcywLmPLu84EvA9nAjHwehMu0Btnm6c8CWgG1LI2EmvOtkgIMxT38RuB1Y/7lCs4Sf6ZKXwAece3nBVS+H+h37GcG6EMx3C/M4EqbDdtbyBoO2atxkLVqQbsGcm+xhp9I7CzMZO1HaFu8m5dNA1fR7ILPBSrIwvc5YekMxs3YSieEq7T/UjU+W14emgw7gFc5bPPCc6v9CPDTG9FmgVuAucKwGewk4b+B+9RNK3ZJmAwN8mixI6nIilBOcFowEojFjc6f6mOIBdUrqk/RR0p8MQLOSTlX4gXbBIUFBsC9YNVb+AvXjehvnfNBZAAAAAElFTkSuQmCC"/>
                 </a>
             </li>
@@ -94,8 +149,8 @@ function EditordeTexto(){
                 </a>
             </li>
             <li className="nav-item">
-                <a className="nav-link" href="#">
-                <img src="https://img.icons8.com/windows/40/FFFFFF/data-sheet.png"/>
+                <a onClick={SymbolTableButton} role="button">
+                <img src="https://img.icons8.com/windows/50/FFFFFF/data-sheet.png"/>
                 </a>
             </li>
             <li className="nav-item">
@@ -124,6 +179,8 @@ function EditordeTexto(){
         </div>
         <div id="grafoarbol">
         <Graphviz dot={astgraph} />
+        <ErrorTable columnas={cols} tuplas={tuplas}></ErrorTable>
+        <SymbolTable columnas={colsS} tuplas={tuplasS}></SymbolTable>
         </div>
         </>
     )

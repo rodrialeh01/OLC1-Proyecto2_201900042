@@ -20,11 +20,11 @@ export const parse = (req: Request, res: Response): void => {
     let parserast = require('../../utils/Interpreter/Arbol/AST');
     const { peticion } = req.body;
     let salidaconsola = "";
+    var tabla = new SymbolTable();
+    var raiz = new GenerarAST();
     try{
         const returnThree = parser.parse(peticion);
         let ast = new Three(returnThree);
-        var tabla = new SymbolTable();
-        var raiz = new GenerarAST();
         raiz.recorrer_arbol(parserast.parse(peticion));
         var arbol = raiz.cadena + "}";
         console.log(arbol);
@@ -48,5 +48,9 @@ export const parse = (req: Request, res: Response): void => {
             salidaconsola+=listaErrores[x].returnError();
         }
     }
-    res.json({ consola: salidaconsola, errores: listaErrores, simbolos: [] })
+    let simbolos = []
+    for(let z of tabla.getTabla()){
+        simbolos.push(z[1]);
+    }
+    res.json({ consola: salidaconsola, errores: listaErrores, simbolos: simbolos })
 }
