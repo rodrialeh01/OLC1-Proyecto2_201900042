@@ -1,17 +1,17 @@
 import Simbolo from './Symbol';
-import Metodo from '../Instructions/Metodo';
+import Funcion from '../Instructions/Funcion';
 import { DataType } from '../Data/Data';
 import { RetornoVal } from '../Abstract/RetornoVal';
 
 export default class SymbolTable{
     private tablaAnterior: SymbolTable | any;
     private tablaActual: Map<String, Simbolo>;
-    private tablaMetodos: Map<String, Metodo>;
+    private tablaFunciones: Map<String, Funcion>;
 
     constructor(anterior?: SymbolTable){
         this.tablaAnterior = anterior;
         this.tablaActual = new Map<String, Simbolo>();
-        this.tablaMetodos = new Map<String, Metodo>();
+        this.tablaFunciones = new Map<String, Funcion>();
     }
     public getValor(id: String): any{
         let Valor= this.tablaActual.get(id.toLowerCase());
@@ -121,28 +121,28 @@ export default class SymbolTable{
         }
     }
 
-    public saveMetodo(nombreid: String,met: Metodo){
-        if(!this.tablaMetodos.has(nombreid.toLowerCase())){
-            this.tablaMetodos.set(nombreid.toLowerCase(),met);
+    public saveFuncion(nombreid: String,met: Funcion){
+        if(!this.tablaFunciones.has(nombreid.toLowerCase())){
+            this.tablaFunciones.set(nombreid.toLowerCase(),met);
             return true;
         }
     }
 
-    public getMetodo(nombreid: String){
+    public getFuncion(nombreid: String){
         let temp: SymbolTable = this;
         while(temp!= null){
-            if(temp.tablaMetodos.has(nombreid.toLowerCase())){
-                return temp.tablaMetodos.get(nombreid.toLowerCase());
+            if(temp.tablaFunciones.has(nombreid.toLowerCase())){
+                return temp.tablaFunciones.get(nombreid.toLowerCase());
             }
             temp = temp.getAnterior();
         }
         return null;
     }
 
-    public validarMetodo(nombreid: String){
+    public validarFuncion(nombreid: String){
         let temp: SymbolTable = this;
         while(temp!= null){
-            let sym = temp.tablaMetodos.get(nombreid.toLowerCase());
+            let sym = temp.tablaFunciones.get(nombreid.toLowerCase());
             if(sym != null){
                 return false;
             }

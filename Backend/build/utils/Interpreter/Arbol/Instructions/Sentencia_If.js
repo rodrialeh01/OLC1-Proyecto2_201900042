@@ -25,12 +25,13 @@ class If extends Instruccion_1.Instruccion {
     interpretar(arbol, tabla) {
         let tablaLocal = new SymbolTable_1.default(tabla);
         let condicion = this.condicion.interpretar(arbol, tabla);
+        console.log(condicion);
         if (condicion.type == Data_1.DataType.BOOLEANO) {
             if (condicion.value == true) {
                 for (let i of this.listainstrucciones) {
                     let instrucciones1 = i.interpretar(arbol, tablaLocal);
                     if (instrucciones1 instanceof Break_1.default) {
-                        return instrucciones1;
+                        break;
                     }
                     else if (instrucciones1 instanceof Return_1.default) {
                         return instrucciones1;
@@ -50,7 +51,7 @@ class If extends Instruccion_1.Instruccion {
                     for (let i of this.listainstruccioneselse) {
                         let instrucciones3 = i.interpretar(arbol, tablaLocal);
                         if (instrucciones3 instanceof Break_1.default) {
-                            return instrucciones3;
+                            break;
                         }
                         else if (instrucciones3 instanceof Return_1.default) {
                             return instrucciones3;

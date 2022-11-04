@@ -81,6 +81,8 @@ class Relacional extends Instruccion_1.Instruccion {
         else if (this.tipo === Data_1.tipoRel.MENOR) {
             let valorIzq = this.operadorIzq.interpretar(arbol, tabla);
             let valorDer = this.operadorDer.interpretar(arbol, tabla);
+            console.log(valorIzq);
+            console.log(valorDer);
             if (valorIzq.type === Data_1.DataType.ENTERO && valorDer.type === Data_1.DataType.ENTERO) {
                 return {
                     "type": Data_1.DataType.BOOLEANO,

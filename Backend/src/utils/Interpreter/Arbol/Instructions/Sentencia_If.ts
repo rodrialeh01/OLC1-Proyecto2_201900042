@@ -28,12 +28,13 @@ export default class If extends Instruccion{
     interpretar(arbol: Three, tabla: SymbolTable) {
         let tablaLocal = new SymbolTable(tabla);
         let condicion = this.condicion.interpretar(arbol, tabla);
+        console.log(condicion);
         if(condicion.type == DataType.BOOLEANO){
             if(condicion.value == true){
                 for(let i of this.listainstrucciones){
                     let instrucciones1 = i.interpretar(arbol, tablaLocal);
                     if(instrucciones1 instanceof Break){
-                        return instrucciones1;
+                        break;
                     }else if(instrucciones1 instanceof Return){
                         return instrucciones1;
                     }else if(instrucciones1 instanceof Continue){
@@ -50,7 +51,7 @@ export default class If extends Instruccion{
                     for(let i of this.listainstruccioneselse){
                         let instrucciones3 = i.interpretar(arbol, tablaLocal);
                         if(instrucciones3 instanceof Break){
-                            return instrucciones3;
+                            break;
                         }else if(instrucciones3 instanceof Return){
                             return instrucciones3;
                         }else if(instrucciones3 instanceof Continue){

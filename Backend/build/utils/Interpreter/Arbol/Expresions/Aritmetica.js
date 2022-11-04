@@ -498,7 +498,7 @@ class Aritmetica extends Instruccion_1.Instruccion {
                 };
             }
             else {
-                //ERROR SEMANTICO
+                //ErrorL SEMANTICO
                 throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
             }
             //* ---------------------- MODULO ---------------------------
@@ -532,7 +532,7 @@ class Aritmetica extends Instruccion_1.Instruccion {
                 };
             }
             else {
-                //ERROR SEMANTICO
+                //ErrorL SEMANTICO
                 throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
             }
         }

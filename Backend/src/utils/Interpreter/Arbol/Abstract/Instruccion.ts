@@ -4,6 +4,7 @@ import TablaSimbolo from '../Symbol/SymbolTable';
 export abstract class Instruccion {
     public linea: number;
     public columna: number;
+    exp: any;
 
     constructor(linea: number, columna: number) {
         this.linea = linea;

@@ -182,27 +182,26 @@ AMBITO_GLOBAL : IMPRIMIR                                                    {$$=
               | INS_RETURN                                                  {$$=new Nodo.default("AMBITO LOCAL","");
                                                                             $$.agregarHijo($1);
                                                                             }
-              | LLAMADA                                                     {$$=new Nodo.default("AMBITO LOCAL","");
+              | LLAMADA PTCOMA                                              {$$=new Nodo.default("AMBITO LOCAL","");
                                                                             $$.agregarHijo($1);
+                                                                            $$.agregarHijo(new Nodo.default(";","PTCOMA"));
                                                                             }
               | METODO                                                      {$$=new Nodo.default("AMBITO LOCAL","");
                                                                             $$.agregarHijo($1);
                                                                             }                                                      
 ;
 
-LLAMADA : IDENTIFICADOR PARABRE PARCIERRA PTCOMA                            {$$= new Nodo.default("LLAMADA","");
-                                                                            $$.agregarHijo(new Nodo.default("IDENTIFICADOR", $1));
-                                                                            $$.agregarHijo(new Nodo.default("(","PARABRE"));
-                                                                            $$.agregarHijo(new Nodo.default(")","PARCIERRA"));
-                                                                            $$.agregarHijo(new Nodo.default(";","PTCOMA"));
-                                                                            }
-        | IDENTIFICADOR PARABRE LISTA_EXPRESIONES PARCIERRA PTCOMA          {$$= new Nodo.default("LLAMADA","");
-                                                                            $$.agregarHijo(new Nodo.default("IDENTIFICADOR", $1));
-                                                                            $$.agregarHijo(new Nodo.default("(","PARABRE"));
-                                                                            $$.agregarHijo($3);
-                                                                            $$.agregarHijo(new Nodo.default(")","PARCIERRA"));
-                                                                            $$.agregarHijo(new Nodo.default(";","PTCOMA"));
-                                                                            }
+LLAMADA : IDENTIFICADOR PARABRE PARCIERRA                             {$$= new Nodo.default("LLAMADA","");
+                                                                        $$.agregarHijo(new Nodo.default("IDENTIFICADOR", $1));
+                                                                        $$.agregarHijo(new Nodo.default("(","PARABRE"));
+                                                                        $$.agregarHijo(new Nodo.default(")","PARCIERRA"));
+                                                                        }
+        | IDENTIFICADOR PARABRE LISTA_EXPRESIONES PARCIERRA           {$$= new Nodo.default("LLAMADA","");
+                                                                        $$.agregarHijo(new Nodo.default("IDENTIFICADOR", $1));
+                                                                        $$.agregarHijo(new Nodo.default("(","PARABRE"));
+                                                                        $$.agregarHijo($3);
+                                                                        $$.agregarHijo(new Nodo.default(")","PARCIERRA"));
+                                                                        }
 ;
 
 LISTA_EXPRESIONES : LISTA_EXPRESIONES COMA EXPRESION                        {$$ = new Nodo.default("LISTA_EXPRESIONES", "");

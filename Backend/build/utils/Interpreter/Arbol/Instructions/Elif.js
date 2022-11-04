@@ -9,6 +9,7 @@ const Data_1 = require("../Data/Data");
 const Break_1 = __importDefault(require("./Break"));
 const Continue_1 = __importDefault(require("./Continue"));
 const Return_1 = __importDefault(require("./Return"));
+const Error_1 = __importDefault(require("../Exceptions/Error"));
 const controller = require('../../../../controller/parser/parser');
 const errores = require('../Exceptions/Error');
 class Elif extends Instruccion_1.Instruccion {
@@ -35,6 +36,9 @@ class Elif extends Instruccion_1.Instruccion {
                     }
                 }
             }
+        }
+        else {
+            throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "La condicion no es booleana", this.linea, this.columna);
         }
     }
 }

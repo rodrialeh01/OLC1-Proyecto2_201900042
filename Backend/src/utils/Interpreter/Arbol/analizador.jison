@@ -1,6 +1,6 @@
 %{
     //codigo js
-    const controller = require('../../../controller/parser/parser')
+    const listaErrores = require('../../../controller/parser/parser')
     const errores = require('./Exceptions/Error')
     const nativo = require('./Expresions/Native');
     const Tipo = require('./Data/Data');
@@ -31,8 +31,8 @@
     const insdountil = require('./Instructions/CicloDoUntil');
     const insreturn = require('./Instructions/Return');
     const inscontinue = require('./Instructions/Continue');
-    const metodo = require('./Instructions/Metodo');
-    const llamadamet = require('./Instructions/LlamadaMetodo');
+    const funcion = require('./Instructions/Funcion');
+    const llamada = require('./Instructions/LlamadaFuncion');
 %}
 %lex 
 
@@ -48,7 +48,7 @@
 \s+                                                                         //EXPACIOS EN BLANCO
 
 //PALABRAS RESERVADAS
-"int"                                                                       {console.log(yytext);return 'RINT'};
+"int"                                                                       return 'RINT';
 "double"                                                                    return 'RDOUBLE';
 "boolean"                                                                   return 'RBOOLEAN';
 "char"                                                                      return 'RCHAR';
@@ -156,8 +156,8 @@ INIT: INSTRUCCIONES EOF                                                     {ret
 
 INSTRUCCIONES : INSTRUCCIONES AMBITO_GLOBAL                                 {$1.push($2); $$=$1;}
               | AMBITO_GLOBAL                                               {$$=[$1];}
-              | INVALID                                                     {controller.listaErrores.push(new errores.default('ERROR LEXICO', "No se esperaba el caracter " + $1, @1.first_line, @1.first_column));}
-              | error PTCOMA                                                {controller.listaErrores.push(new errores.default('ERROR SINTACTICO', "Se esperaba token", @1.first_line, @1.first_column));}
+              | INVALID                                                     {listaErrores.push(new errores.default('ERROR LEXICO', "No se esperaba el caracter " + $1, @1.first_line, @1.first_column));}
+              | error PTCOMA                                                {listaErrores.push(new errores.default('ERROR SINTACTICO', "Se esperaba token", @1.first_line, @1.first_column));}
 ;
 
 AMBITO_GLOBAL : IMPRIMIR                                                    {$$=$1;}
@@ -173,22 +173,35 @@ AMBITO_GLOBAL : IMPRIMIR                                                    {$$=
               | RBREAK PTCOMA                                               {$$=new insbreak.default(@1.first_line,@1.first_column);}
               | RCONTINUE PTCOMA                                            {$$=new inscontinue.default(@1.first_line,@1.first_column);}
               | INS_RETURN                                                  {$$=$1;}
-              | LLAMADA                                                     {$$=$1;}
-              | METODO                                                      {$$=$1;}                                                       
+              | LLAMADA PTCOMA                                              {$$=$1;}
+              | METODO                                                      {$$=$1;}
+              | FUNCION                                                     {$$=$1;}                                                       
 ;
 
-LLAMADA : IDENTIFICADOR PARABRE PARCIERRA PTCOMA                            {$$= new llamadamet.default($1,null,@1.first_line,@1.first_column);}
-        | IDENTIFICADOR PARABRE LISTA_EXPRESIONES PARCIERRA PTCOMA          {$$= new llamadamet.default($1,$3,@1.first_line,@1.first_column);}
+LLAMADA : IDENTIFICADOR PARABRE PARCIERRA                             {$$= new llamada.default($1,null,@1.first_line,@1.first_column);}
+        | IDENTIFICADOR PARABRE LISTA_EXPRESIONES PARCIERRA           {$$= new llamada.default($1,$3,@1.first_line,@1.first_column);}
 ;
 
 LISTA_EXPRESIONES : LISTA_EXPRESIONES COMA EXPRESION                        {$1.push($3); $$=$1;}
                   | EXPRESION                                               {$$=[$1];}
 ;
 
-METODO : IDENTIFICADOR PARABRE LISTA_PARAMETROS PARCIERRA DOSPUNTOS RVOID ENCAPSULAMIENTO   {$$ = new metodo.default($1,$3,Tipo.DataType.VOID,$7,@1.first_line,@1.first_column);}
-       | IDENTIFICADOR PARABRE LISTA_PARAMETROS PARCIERRA ENCAPSULAMIENTO                   {$$ = new metodo.default($1,$3,Tipo.DataType.VOID,$5,@1.first_line,@1.first_column);}
-       | IDENTIFICADOR PARABRE PARCIERRA DOSPUNTOS RVOID ENCAPSULAMIENTO                    {$$ = new metodo.default($1,null,Tipo.DataType.VOID,$6,@1.first_line,@1.first_column);}
-       | IDENTIFICADOR PARABRE PARCIERRA ENCAPSULAMIENTO                                    {$$ = new metodo.default($1,null,Tipo.DataType.VOID,$4,@1.first_line,@1.first_column);}
+METODO : IDENTIFICADOR PARABRE LISTA_PARAMETROS PARCIERRA DOSPUNTOS RVOID ENCAPSULAMIENTO   {$$ = new funcion.default($1,$3,Tipo.DataType.VOID,$7,@1.first_line,@1.first_column);}
+       | IDENTIFICADOR PARABRE LISTA_PARAMETROS PARCIERRA ENCAPSULAMIENTO                   {$$ = new funcion.default($1,$3,Tipo.DataType.VOID,$5,@1.first_line,@1.first_column);}
+       | IDENTIFICADOR PARABRE PARCIERRA DOSPUNTOS RVOID ENCAPSULAMIENTO                    {$$ = new funcion.default($1,null,Tipo.DataType.VOID,$6,@1.first_line,@1.first_column);}
+       | IDENTIFICADOR PARABRE PARCIERRA ENCAPSULAMIENTO                                    {$$ = new funcion.default($1,null,Tipo.DataType.VOID,$4,@1.first_line,@1.first_column);}
+;
+
+FUNCION : IDENTIFICADOR PARABRE LISTA_PARAMETROS PARCIERRA DOSPUNTOS RINT ENCAPSULAMIENTO       {$$ = new funcion.default($1,$3,Tipo.DataType.ENTERO,$7,@1.first_line,@1.first_column);}
+        | IDENTIFICADOR PARABRE LISTA_PARAMETROS PARCIERRA DOSPUNTOS RDOUBLE ENCAPSULAMIENTO    {$$ = new funcion.default($1,$3,Tipo.DataType.DECIMAL,$7,@1.first_line,@1.first_column);}
+        | IDENTIFICADOR PARABRE LISTA_PARAMETROS PARCIERRA DOSPUNTOS RSTRING ENCAPSULAMIENTO    {$$ = new funcion.default($1,$3,Tipo.DataType.CADENA,$7,@1.first_line,@1.first_column);}
+        | IDENTIFICADOR PARABRE LISTA_PARAMETROS PARCIERRA DOSPUNTOS RCHAR ENCAPSULAMIENTO      {$$ = new funcion.default($1,$3,Tipo.DataType.CARACTER,$7,@1.first_line,@1.first_column);}
+        | IDENTIFICADOR PARABRE LISTA_PARAMETROS PARCIERRA DOSPUNTOS RBOOLEAN ENCAPSULAMIENTO   {$$ = new funcion.default($1,$3,Tipo.DataType.BOOLEANO,$7,@1.first_line,@1.first_column);}
+        | IDENTIFICADOR PARABRE PARCIERRA DOSPUNTOS RINT ENCAPSULAMIENTO                        {$$ = new funcion.default($1,null,Tipo.DataType.ENTERO,$6,@1.first_line,@1.first_column);}
+        | IDENTIFICADOR PARABRE PARCIERRA DOSPUNTOS RSTRING ENCAPSULAMIENTO                     {$$ = new funcion.default($1,null,Tipo.DataType.ENTERO,$6,@1.first_line,@1.first_column);}
+        | IDENTIFICADOR PARABRE PARCIERRA DOSPUNTOS RCHAR ENCAPSULAMIENTO                       {$$ = new funcion.default($1,null,Tipo.DataType.ENTERO,$6,@1.first_line,@1.first_column);}
+        | IDENTIFICADOR PARABRE PARCIERRA DOSPUNTOS RDOUBLE ENCAPSULAMIENTO                     {$$ = new funcion.default($1,null,Tipo.DataType.ENTERO,$6,@1.first_line,@1.first_column);}
+        | IDENTIFICADOR PARABRE PARCIERRA DOSPUNTOS RBOOLEAN ENCAPSULAMIENTO                    {$$ = new funcion.default($1,null,Tipo.DataType.ENTERO,$6,@1.first_line,@1.first_column);}
 ;
 
 LISTA_PARAMETROS : LISTA_PARAMETROS COMA TIPO_DATO IDENTIFICADOR            {$1.push($4 + "," + $3); $$ = $1}
@@ -230,7 +243,7 @@ ENCAPSULAMIENTO : LLAVEA INSTRUCCIONES LLAVEC                               {$$=
                 | LLAVEA LLAVEC                                             {$$=[];}
 ;
 
-LISTA_IDENTIFICADORES : LISTA_IDENTIFICADORES COMA IDENTIFICADOR            {$1.push($3); $$=$1;console.log($$)}
+LISTA_IDENTIFICADORES : LISTA_IDENTIFICADORES COMA IDENTIFICADOR            {$1.push($3); $$=$1;}
                       | IDENTIFICADOR                                       {$$=[$1];}
 ;
 
@@ -304,7 +317,7 @@ EXPRESION : ENTERO                                                          {$$ 
           | EXPRESION MAYOROIGUAL EXPRESION                                 {$$ = new Relacional.default(Tipo.tipoRel.MAYOR_IGUAL, $1, $3, @1.first_line, @1.first_column);}
           | IDENTIFICADOR INCREMENTO                                        {$$ = new increment.default($1,@1.first_line,@1.first_column);}
           | IDENTIFICADOR DECREMENTO                                        {$$ = new decrement.default($1,@1.first_line,@1.first_column);}
-          | LLAMADA                                                         {;}
+          | LLAMADA                                                         {$$=$1;}
           | OPERADOR_TERNARIO                                               {$$=$1;}
           | CASTEOS                                                         {$$=$1;}
           | ACCESO_VECTORES                                                 {;}

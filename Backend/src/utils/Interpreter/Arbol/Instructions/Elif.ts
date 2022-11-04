@@ -1,10 +1,11 @@
 import { Instruccion } from "../Abstract/Instruccion";
 import Three from '../Symbol/Three';
 import SymbolTable from '../Symbol/SymbolTable';
-import { DataType } from "../Data/Data";
+import { DataType, tipoErr } from "../Data/Data";
 import Break from "./Break";
 import Continue from "./Continue";
 import Return from "./Return";
+import Error from "../Exceptions/Error";
 const controller = require('../../../../controller/parser/parser')
 const errores = require('../Exceptions/Error')
 
@@ -35,6 +36,8 @@ export default class Elif extends Instruccion{
                     }
                 }
             }
+        }else{
+            throw new Error(tipoErr.SEMANTICO, "La condicion no es booleana", this.linea, this.columna);
         }
     }
 }

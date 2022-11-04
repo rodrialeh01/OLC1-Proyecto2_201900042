@@ -11,7 +11,7 @@ const controller = require('../../../../controller/parser/parser')
 const errores = require('../Exceptions/Error')
 export let bucle = false;
 
-export default class Metodo extends Instruccion{
+export default class Funcion extends Instruccion{
     identificador: String;
     parametros: String[];
     tipo: DataType;
@@ -29,9 +29,8 @@ export default class Metodo extends Instruccion{
         this.listatipos =[];
     }
     interpretar(arbol: Three, tabla: SymbolTable) {
-        console.log("a: " + this.listainstrucciones)
         if(this.tipo === DataType.VOID){
-            const valid = tabla.validarMetodo(this.identificador);
+            const valid = tabla.validarFuncion(this.identificador);
             if(valid){
                 if(this.parametros != null){
                     for(let i of this.parametros){
@@ -59,10 +58,45 @@ export default class Metodo extends Instruccion{
                         }
                     }
                 }
-                tabla.saveMetodo(this.identificador,this);
+                tabla.saveFuncion(this.identificador,this);
             }else{
                 throw new Error(tipoErr.SEMANTICO,"El metodo "+this.identificador+" ya existe",this.linea,this.columna);
             }
+        }else if(this.tipo == DataType.BOOLEANO || this.tipo == DataType.CADENA || this.tipo == DataType.CARACTER || this.tipo == DataType.DECIMAL || this.tipo == DataType.ENTERO){
+            const valid = tabla.validarFuncion(this.identificador);
+            if(valid){
+                if(this.parametros != null){
+                    for(let i of this.parametros){
+                        let id = i.split(",")[0];
+                        let tipo = i.split(",")[1].toLowerCase();
+                        this.listaparametros.push(id);
+                        switch(tipo){
+                            case "0":
+                                this.listatipos.push(DataType.ENTERO);
+                                break;
+                            case "1":
+                                this.listatipos.push(DataType.CADENA);
+                                break;
+                            case "2":
+                                this.listatipos.push(DataType.DECIMAL);
+                                break;
+                            case "3":
+                                this.listatipos.push(DataType.CARACTER);
+                                break;
+                            case "4":
+                                this.listatipos.push(DataType.BOOLEANO);
+                                break;
+                            default:
+                                throw new Error(tipoErr.SEMANTICO, "El tipo de dato no es válido", this.linea, this.columna);
+                        }
+                    }
+                }
+                tabla.saveFuncion(this.identificador,this);
+            }else{
+                throw new Error(tipoErr.SEMANTICO,"El metodo "+this.identificador+" ya existe",this.linea,this.columna);
+            }
+        }else{
+            throw new Error(tipoErr.SEMANTICO, "El tipo de dato no es válido", this.linea, this.columna);
         }
     }
 }

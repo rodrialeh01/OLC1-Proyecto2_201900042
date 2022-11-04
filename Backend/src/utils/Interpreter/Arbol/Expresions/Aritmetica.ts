@@ -437,7 +437,7 @@ export default class Aritmetica extends Instruccion {
                     "value": (Math.pow(Number(valorIzq.value), Number(valorDer.value)))
                 }
             }else{
-                //ERROR SEMANTICO
+                //ErrorL SEMANTICO
                 throw new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
             }
         //* ---------------------- MODULO ---------------------------
@@ -467,7 +467,7 @@ export default class Aritmetica extends Instruccion {
                     "value": (Number(valorIzq.value) % Number(valorDer.value))
                 }
             }else{
-                //ERROR SEMANTICO
+                //ErrorL SEMANTICO
                 throw new Error(tipoErr.SEMANTICO,"Los tipos de datos de los valores escritos no se pueden operar", this.linea, this.columna);
             }
         }

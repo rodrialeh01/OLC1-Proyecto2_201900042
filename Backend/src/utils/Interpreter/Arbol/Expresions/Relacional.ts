@@ -71,6 +71,8 @@ export default class Relacional extends Instruccion {
         }else if(this.tipo === tipoRel.MENOR){
             let valorIzq = this.operadorIzq.interpretar(arbol, tabla);
             let valorDer = this.operadorDer.interpretar(arbol,tabla);
+            console.log(valorIzq);
+            console.log(valorDer);
             if (valorIzq.type===DataType.ENTERO&& valorDer.type===DataType.ENTERO) {
                 return {
                     "type": DataType.BOOLEANO,

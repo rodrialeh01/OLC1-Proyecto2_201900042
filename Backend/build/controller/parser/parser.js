@@ -4,10 +4,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.parse = exports.listaErrores = void 0;
-const Error_1 = __importDefault(require("../../utils/Interpreter/Arbol/Exceptions/Error"));
 const Three_1 = __importDefault(require("../../utils/Interpreter/Arbol/Symbol/Three"));
 const SymbolTable_1 = __importDefault(require("../../utils/Interpreter/Arbol/Symbol/SymbolTable"));
+const Error_1 = __importDefault(require("../../utils/Interpreter/Arbol/Exceptions/Error"));
 const GenerarAST_1 = __importDefault(require("../../utils/Interpreter/Arbol/GenerarAST"));
+const Funcion_1 = __importDefault(require("../../utils/Interpreter/Arbol/Instructions/Funcion"));
+const Declaracion_1 = __importDefault(require("../../utils/Interpreter/Arbol/Instructions/Declaracion"));
+const Asignacion_1 = __importDefault(require("../../utils/Interpreter/Arbol/Instructions/Asignacion"));
+const DeclaracionAsignacion_1 = __importDefault(require("../../utils/Interpreter/Arbol/Instructions/DeclaracionAsignacion"));
 exports.listaErrores = [];
 const fs = require('fs');
 const parse = (req, res) => {
@@ -24,15 +28,26 @@ const parse = (req, res) => {
         console.log(arbol);
         ast.settablaGlobal(tabla);
         for (let i of ast.getinstrucciones()) {
-            if (i instanceof Error_1.default) {
-                exports.listaErrores.push(i);
-                ast.actualizaConsola(i.returnError());
+            try {
+                if (i instanceof Funcion_1.default) {
+                    i.interpretar(ast, tabla);
+                }
+                else if (i instanceof Declaracion_1.default || i instanceof DeclaracionAsignacion_1.default || i instanceof Asignacion_1.default) {
+                    i.interpretar(ast, tabla);
+                }
             }
-            var resultador = i.interpretar(ast, tabla);
-            if (resultador instanceof Error_1.default) {
-                exports.listaErrores.push(resultador);
-                ast.actualizaConsola(resultador.returnError());
+            catch (error) {
+                if (error instanceof Error_1.default) {
+                    exports.listaErrores.push(error);
+                }
+                else {
+                    console.log(error);
+                }
             }
+        }
+        console.log("errores: " + exports.listaErrores.length);
+        for (let er of exports.listaErrores) {
+            console.log(er);
         }
         res.json({ consola: ast.getconsola(), errores: exports.listaErrores, simbolos: [] });
     }
