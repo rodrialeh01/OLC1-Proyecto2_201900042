@@ -1,6 +1,7 @@
 import Simbolo from './Symbol';
 import Funcion from '../Instructions/Funcion';
-import { DataType } from '../Data/Data';
+import { DataType, tipoErr } from '../Data/Data';
+import Error from '../Exceptions/Error';
 import { RetornoVal } from '../Abstract/RetornoVal';
 
 export default class SymbolTable{
@@ -150,4 +151,19 @@ export default class SymbolTable{
         }
         return true;
     }
+
+    public saveVector(nombreid:String, value:any, tipo: DataType, linea: number, columna: number){
+        console.log(".,v");
+        nombreid = nombreid.toLowerCase();
+        let tablaLocal: SymbolTable|null = this;
+        while(tablaLocal != null){
+            if(tablaLocal.tablaActual.has(nombreid)){
+                throw new Error(tipoErr.SEMANTICO, "El vector ya existe", linea, columna);
+            }
+            tablaLocal = tablaLocal.getAnterior();
+        }
+        this.tablaActual.set(nombreid, new Simbolo(tipo, nombreid, "Vector", value));
+        console.log("Vector guardado");
+    }
+
 }

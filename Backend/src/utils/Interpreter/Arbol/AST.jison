@@ -144,14 +144,9 @@ INSTRUCCIONES : INSTRUCCIONES AMBITO_GLOBAL                                 {$$=
 AMBITO_GLOBAL : IMPRIMIR                                                    {$$=new Nodo.default("AMBITO LOCAL","");
                                                                             $$.agregarHijo($1);
                                                                             }
-              | DECLARACION_ASIGNACION                                      {$$=new Nodo.default("AMBITO LOCAL","");
+              | DECLARACION_VARIABLES                                      {$$=new Nodo.default("AMBITO LOCAL","");
                                                                             $$.agregarHijo($1);
                                                                             }
-              | DECLARACION                                                 {$$=new Nodo.default("AMBITO LOCAL","");
-                                                                            $$.agregarHijo($1);
-                                                                            }
-              | ASIGNACION                                                  {$$=new Nodo.default("AMBITO LOCAL","");
-                                                                            $$.agregarHijo($1);
                                                                             } 
               | SENTENCIA_IF                                                {$$=new Nodo.default("AMBITO LOCAL","");
                                                                             $$.agregarHijo($1);
@@ -188,7 +183,21 @@ AMBITO_GLOBAL : IMPRIMIR                                                    {$$=
                                                                             }
               | METODO                                                      {$$=new Nodo.default("AMBITO LOCAL","");
                                                                             $$.agregarHijo($1);
-                                                                            }                                                      
+                                                                            }}                                                      
+;
+
+DECLARACION_VARIABLES: DECLARACION                                           {$$=new Nodo.default("DECLARACION VARIABLES","");
+                                                                            $$.agregarHijo($1);
+                                                                            }
+                     | ASIGNACION                                            {$$=new Nodo.default("DECLARACION VARIABLES","");
+                                                                            $$.agregarHijo($1);
+                                                                            }
+                     | DECLARACION_ASIGNACION                                {$$=new Nodo.default("DECLARACION VARIABLES","");
+                                                                            $$.agregarHijo($1);
+                                                                            }
+                     | DECLARACION_VECTOR1                                   {$$=new Nodo.default("DECLARACION VARIABLES","");
+                                                                            $$.agregarHijo($1);
+                                                                            }
 ;
 
 LLAMADA : IDENTIFICADOR PARABRE PARCIERRA                             {$$= new Nodo.default("LLAMADA","");
@@ -316,6 +325,140 @@ DECLARACION : RINT LISTA_IDENTIFICADORES PTCOMA                             {$$=
                                                                             $$.agregarHijo($2);
                                                                             $$.agregarHijo(new Nodo.default(";","PTCOMA"));
                                                                             }
+;
+
+DECLARACION_VECTOR1 : RINT CORABRE CORCIERRA IDENTIFICADOR IGUAL RNEW RINT CORABRE EXPRESION CORCIERRA PTCOMA           {$$=new Nodo.default("DECLARACION_VECTOR1","");
+                                                                                                                        $$.agregarHijo(new Nodo.default("int","RINT"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        $$.agregarHijo(new Nodo.default($4,"IDENTIFICADOR"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("=","IGUAL"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("new","RNEW"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("int","RINT"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        $$.agregarHijo($9);
+                                                                                                                        $$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        $$.agregarHijo(new Nodo.default(";","PTCOMA"));
+                                                                                                                        }
+                    | RINT CORABRE CORCIERRA IDENTIFICADOR IGUAL LLAVEA LISTA_EXPRESIONES LLAVEC PTCOMA                 {$$= new Nodo.default("DECLARACION_VECTOR1","");
+                                                                                                                        $$.agregarHijo(new Nodo.default("int","RINT"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        $$.agregarHijo(new Nodo.default($3,"IDENTIFICADOR"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("=","IGUAL"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("{","LLAVEA"));
+                                                                                                                        $$.agregarHijo($7);
+                                                                                                                        $$.agregarHijo(new Nodo.default("}","LLAVEC"));
+                                                                                                                        $$.agregarHijo(new Nodo.default(";","PTCOMA"));
+                                                                                                                        }
+                    | RDOUBLE CORABRE CORCIERRA IDENTIFICADOR IGUAL RNEW RDOUBLE RCORABRE EXPRESION CORCIERRA PTCOMA    {$$=new Nodo.default("DECLARACION_VECTOR1","");
+                                                                                                                        $$.agregarHijo(new Nodo.default("double","RDOUBLE"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        $$.agregarHijo(new Nodo.default($3,"IDENTIFICADOR"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("=","IGUAL"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("new","RNEW"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("double","RDOUBLE"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        $$.agregarHijo($9);
+                                                                                                                        $$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        $$.agregarHijo(new Nodo.default(";","PTCOMA"));
+                                                                                                                        }
+                    | RDOUBLE CORABRE CORCIERRA IDENTIFICADOR IGUAL LLAVEA LISTA_EXPRESIONES LLAVEC PTCOMA              {$$=new Nodo.default("DECLARACION_VECTOR1","");
+                                                                                                                        $$.agregarHijo(new Nodo.default("double","RDOUBLE"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        $$.agregarHijo(new Nodo.default($3,"IDENTIFICADOR"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("=","IGUAL"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("{","LLAVEA"));
+                                                                                                                        $$.agregarHijo($7);
+                                                                                                                        $$.agregarHijo(new Nodo.default("}","LLAVEC"));
+                                                                                                                        $$.agregarHijo(new Nodo.default(";","PTCOMA"));
+                                                                                                                        }
+                    | RSTRING CORABRE CORCIERRA IDENTIFICADOR IGUAL RNEW RSTRING RCORABRE EXPRESION CORCIERRA PTCOMA    {$$=new Nodo.default("DECLARACION_VECTOR1","");
+                                                                                                                        $$.agregarHijo(new Nodo.default("String","RSTRING"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        $$.agregarHijo(new Nodo.default($3,"IDENTIFICADOR"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("=","IGUAL"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("new","RNEW"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("String","RSTRING"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        $$.agregarHijo($9);
+                                                                                                                        $$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        $$.agregarHijo(new Nodo.default(";","PTCOMA"));
+                                                                                                                        }
+                    | RSTRING CORABRE CORCIERRA IDENTIFICADOR IGUAL LLAVEA LISTA_EXPRESIONES LLAVEC PTCOMA              {$$=new Nodo.default("DECLARACION_VECTOR1","");
+                                                                                                                        $$.agregarHijo(new Nodo.default("String","RSTRING"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        $$.agregarHijo(new Nodo.default($3,"IDENTIFICADOR"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("=","IGUAL"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("{","LLAVEA"));
+                                                                                                                        $$.agregarHijo($7);
+                                                                                                                        $$.agregarHijo(new Nodo.default("}","LLAVEC"));
+                                                                                                                        $$.agregarHijo(new Nodo.default(";","PTCOMA"));
+                                                                                                                        }
+                    | RCHAR CORABRE CORCIERRA IDENTIFICADOR IGUAL RNEW RCHAR RCORABRE EXPRESION CORCIERRA PTCOMA        {$$=new Nodo.default("DECLARACION_VECTOR1","");
+                                                                                                                        $$.agregarHijo(new Nodo.default("char","RCHAR"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        $$.agregarHijo(new Nodo.default($3,"IDENTIFICADOR"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("=","IGUAL"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("new","RNEW"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("char","RCHAR"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        $$.agregarHijo($9);
+                                                                                                                        $$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        $$.agregarHijo(new Nodo.default(";","PTCOMA"));
+                                                                                                                        }
+                    | RCHAR CORABRE CORCIERRA IDENTIFICADOR IGUAL LLAVEA LISTA_EXPRESIONES LLAVEC PTCOMA                {$$=new Nodo.default("DECLARACION_VECTOR1","");
+                                                                                                                        $$.agregarHijo(new Nodo.default("char","RCHAR"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        $$.agregarHijo(new Nodo.default($3,"IDENTIFICADOR"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("=","IGUAL"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("{","LLAVEA"));
+                                                                                                                        $$.agregarHijo($7);
+                                                                                                                        $$.agregarHijo(new Nodo.default("}","LLAVEC"));
+                                                                                                                        $$.agregarHijo(new Nodo.default(";","PTCOMA"));
+                                                                                                                        }
+                    | RCHAR CORABRE CORCIERRA IDENTIFICADOR IGUAL RTOCHARARRAY PARABRE EXPRESION PARCIERRA PTCOMA       {$$=new Nodo.default("DECLARACION_VECTOR1","");
+                                                                                                                        $$.agregarHijo(new Nodo.default("char","RCHAR"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        $$.agregarHijo(new Nodo.default($3,"IDENTIFICADOR"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("=","IGUAL"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("toCharArray","RTOCHARARRAY"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("(","PARABRE"));
+                                                                                                                        $$.agregarHijo($7);
+                                                                                                                        $$.agregarHijo(new Nodo.default(")","PARCIERRA"));
+                                                                                                                        $$.agregarHijo(new Nodo.default(";","PTCOMA"));
+                                                                                                                        }
+                    | RBOOLEAN CORABRE CORCIERRA IDENTIFICADOR IGUAL RNEW RBOOLEAN RCORABRE EXPRESION CORCIERRA PTCOMA  {$$=new Nodo.default("DECLARACION_VECTOR1","");
+                                                                                                                        $$.agregarHijo(new Nodo.default("boolean","RBOOLEAN"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        $$.agregarHijo(new Nodo.default($3,"IDENTIFICADOR"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("=","IGUAL"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("new","RNEW"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("boolean","RBOOLEAN"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        $$.agregarHijo($9);
+                                                                                                                        $$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        $$.agregarHijo(new Nodo.default(";","PTCOMA"));
+                                                                                                                        }
+                    | RBOOLEAN CORABRE CORCIERRA IDENTIFICADOR IGUAL LLAVEA LISTA_EXPRESIONES LLAVEC PTCOMA             {$$=new Nodo.default("DECLARACION_VECTOR1","");
+                                                                                                                        $$.agregarHijo(new Nodo.default("boolean","RBOOLEAN"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        $$.agregarHijo(new Nodo.default($3,"IDENTIFICADOR"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("=","IGUAL"));
+                                                                                                                        $$.agregarHijo(new Nodo.default("{","LLAVEA"));
+                                                                                                                        $$.agregarHijo($7);
+                                                                                                                        $$.agregarHijo(new Nodo.default("}","LLAVEC"));
+                                                                                                                        $$.agregarHijo(new Nodo.default(";","PTCOMA"));
+                                                                                                                        }
 ;
 
 ASIGNACION : LISTA_IDENTIFICADORES IGUAL EXPRESION PTCOMA                                                   {$$=new Nodo.default("ASIGNACION","");

@@ -72,12 +72,12 @@
   }
 */
 var AST = (function(){
-var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,5],$V1=[1,4],$V2=[1,16],$V3=[1,17],$V4=[1,29],$V5=[1,23],$V6=[1,25],$V7=[1,26],$V8=[1,24],$V9=[1,27],$Va=[1,21],$Vb=[1,22],$Vc=[1,30],$Vd=[1,35],$Ve=[1,32],$Vf=[1,31],$Vg=[1,33],$Vh=[1,34],$Vi=[5,19,20,24,35,36,37,38,39,40,41,49,50,54,55,57,58,59,60,63],$Vj=[1,45],$Vk=[1,51],$Vl=[28,43],$Vm=[2,56],$Vn=[1,61],$Vo=[1,68],$Vp=[1,72],$Vq=[1,64],$Vr=[1,65],$Vs=[1,66],$Vt=[1,67],$Vu=[1,69],$Vv=[1,70],$Vw=[1,71],$Vx=[1,73],$Vy=[1,77],$Vz=[1,78],$VA=[8,28,43],$VB=[1,101],$VC=[1,102],$VD=[1,103],$VE=[1,104],$VF=[1,105],$VG=[1,117],$VH=[1,118],$VI=[1,119],$VJ=[1,120],$VK=[1,121],$VL=[1,122],$VM=[1,123],$VN=[1,124],$VO=[1,125],$VP=[1,126],$VQ=[1,127],$VR=[1,128],$VS=[1,129],$VT=[1,130],$VU=[1,131],$VV=[8,26,28,31,45,71,72,73,74,75,76,77,78,80,81,82,83,84,85,90],$VW=[2,21],$VX=[26,28],$VY=[5,19,20,24,35,36,37,38,39,40,41,49,50,51,53,54,55,57,58,59,60,63,64],$VZ=[8,26,28,31,45,77,78,90],$V_=[8,26,28,31,45,71,72,77,78,80,81,82,83,84,85,90],$V$=[8,26,28,31,45,71,72,73,74,75,77,78,80,81,82,83,84,85,90],$V01=[8,26,28,31,45,77,78,80,81,82,83,84,85,90],$V11=[49,57,58],$V21=[5,19,20,24,35,36,37,38,39,40,41,49,50,51,53,54,55,57,58,59,60,63];
+var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,5],$V1=[1,4],$V2=[1,14],$V3=[1,15],$V4=[1,31],$V5=[1,32],$V6=[1,35],$V7=[1,34],$V8=[1,33],$V9=[1,36],$Va=[1,19],$Vb=[1,20],$Vc=[1,25],$Vd=[1,30],$Ve=[1,27],$Vf=[1,26],$Vg=[1,28],$Vh=[1,29],$Vi=[5,17,18,26,37,38,39,40,41,42,43,50,55,59,60,62,63,64,65,68],$Vj=[1,51],$Vk=[1,58],$Vl=[1,62],$Vm=[1,54],$Vn=[1,55],$Vo=[1,56],$Vp=[1,57],$Vq=[1,59],$Vr=[1,60],$Vs=[1,61],$Vt=[1,63],$Vu=[1,67],$Vv=[1,68],$Vw=[30,47],$Vx=[2,69],$Vy=[1,75],$Vz=[1,85],$VA=[1,99],$VB=[1,100],$VC=[1,101],$VD=[1,102],$VE=[1,103],$VF=[1,104],$VG=[1,105],$VH=[1,106],$VI=[1,107],$VJ=[1,108],$VK=[1,109],$VL=[1,110],$VM=[1,111],$VN=[1,112],$VO=[1,113],$VP=[8,28,30,33,46,50,76,77,78,79,80,81,82,83,85,86,87,88,89,90,95],$VQ=[1,130],$VR=[1,131],$VS=[1,132],$VT=[1,133],$VU=[1,134],$VV=[8,30,47],$VW=[5,17,18,26,37,38,39,40,41,42,43,50,55,56,58,59,60,62,63,64,65,68,69],$VX=[8,28,30,33,46,50,82,83,95],$VY=[2,23],$VZ=[1,191],$V_=[28,30,50],$V$=[8,28,30,33,46,50,76,77,82,83,85,86,87,88,89,90,95],$V01=[8,28,30,33,46,50,76,77,78,79,80,82,83,85,86,87,88,89,90,95],$V11=[8,28,30,33,46,50,82,83,85,86,87,88,89,90,95],$V21=[28,30],$V31=[50,62,63],$V41=[5,17,18,26,37,38,39,40,41,42,43,50,55,56,58,59,60,62,63,64,65,68];
 var parser = {trace: function trace () { },
 yy: {},
-symbols_: {"error":2,"INIT":3,"INSTRUCCIONES":4,"EOF":5,"AMBITO_GLOBAL":6,"INVALID":7,"PTCOMA":8,"IMPRIMIR":9,"DECLARACION_ASIGNACION":10,"DECLARACION":11,"ASIGNACION":12,"SENTENCIA_IF":13,"CICLO_WHILE":14,"SENTENCIA_SWITCH":15,"CICLO_FOR":16,"CICLO_DO_WHILE":17,"CICLO_DO_UNTIL":18,"RBREAK":19,"RCONTINUE":20,"INS_RETURN":21,"LLAMADA":22,"METODO":23,"IDENTIFICADOR":24,"PARABRE":25,"PARCIERRA":26,"LISTA_EXPRESIONES":27,"COMA":28,"EXPRESION":29,"LISTA_PARAMETROS":30,"DOSPUNTOS":31,"RVOID":32,"ENCAPSULAMIENTO":33,"TIPO_DATO":34,"RINT":35,"RSTRING":36,"RCHAR":37,"RDOUBLE":38,"RBOOLEAN":39,"RPRINT":40,"RPRINTLN":41,"LISTA_IDENTIFICADORES":42,"IGUAL":43,"CORABRE":44,"CORCIERRA":45,"INCREMENTO":46,"DECREMENTO":47,"LLAVEA":48,"LLAVEC":49,"RIF":50,"RELSE":51,"LISTA_ELIF":52,"RELIF":53,"RRETURN":54,"RSWITCH":55,"LISTA_CASES":56,"RDEFAULT":57,"RCASE":58,"RWHILE":59,"RFOR":60,"DECLARACION_ASIG_FOR":61,"ACTUALIZACION_FOR":62,"RDO":63,"RUNTIL":64,"ENTERO":65,"CADENA":66,"CARACTER":67,"DECIMAL":68,"RTRUE":69,"RFALSE":70,"MAS":71,"MENOS":72,"MULTIPLICACION":73,"DIVISION":74,"MODULO":75,"POTENCIA":76,"OR":77,"AND":78,"NOT":79,"IGUALIGUAL":80,"DIFERENTE":81,"MENOR":82,"MAYOR":83,"MENOROIGUAL":84,"MAYOROIGUAL":85,"OPERADOR_TERNARIO":86,"CASTEOS":87,"ACCESO_VECTORES":88,"FUNCIONES_NATIVAS":89,"INTERROGACION":90,"RFLOAT":91,"RBOOL":92,"$accept":0,"$end":1},
-terminals_: {2:"error",5:"EOF",7:"INVALID",8:"PTCOMA",19:"RBREAK",20:"RCONTINUE",24:"IDENTIFICADOR",25:"PARABRE",26:"PARCIERRA",28:"COMA",31:"DOSPUNTOS",32:"RVOID",35:"RINT",36:"RSTRING",37:"RCHAR",38:"RDOUBLE",39:"RBOOLEAN",40:"RPRINT",41:"RPRINTLN",43:"IGUAL",44:"CORABRE",45:"CORCIERRA",46:"INCREMENTO",47:"DECREMENTO",48:"LLAVEA",49:"LLAVEC",50:"RIF",51:"RELSE",53:"RELIF",54:"RRETURN",55:"RSWITCH",57:"RDEFAULT",58:"RCASE",59:"RWHILE",60:"RFOR",63:"RDO",64:"RUNTIL",65:"ENTERO",66:"CADENA",67:"CARACTER",68:"DECIMAL",69:"RTRUE",70:"RFALSE",71:"MAS",72:"MENOS",73:"MULTIPLICACION",74:"DIVISION",75:"MODULO",76:"POTENCIA",77:"OR",78:"AND",79:"NOT",80:"IGUALIGUAL",81:"DIFERENTE",82:"MENOR",83:"MAYOR",84:"MENOROIGUAL",85:"MAYOROIGUAL",88:"ACCESO_VECTORES",89:"FUNCIONES_NATIVAS",90:"INTERROGACION",91:"RFLOAT",92:"RBOOL"},
-productions_: [0,[3,2],[4,2],[4,1],[4,1],[4,2],[6,1],[6,1],[6,1],[6,1],[6,1],[6,1],[6,1],[6,1],[6,1],[6,1],[6,2],[6,2],[6,1],[6,2],[6,1],[22,3],[22,4],[27,3],[27,1],[23,7],[23,5],[23,6],[23,4],[30,4],[30,2],[34,1],[34,1],[34,1],[34,1],[34,1],[9,5],[9,5],[11,3],[11,3],[11,3],[11,3],[11,3],[12,4],[12,7],[12,10],[12,3],[12,3],[10,5],[10,5],[10,5],[10,5],[10,5],[33,3],[33,2],[42,3],[42,1],[13,5],[13,7],[13,6],[13,8],[52,6],[52,5],[21,2],[21,3],[15,7],[15,10],[15,9],[56,5],[56,4],[14,5],[16,9],[17,7],[18,7],[61,4],[61,3],[62,3],[62,2],[62,2],[29,1],[29,1],[29,1],[29,1],[29,1],[29,1],[29,1],[29,3],[29,3],[29,3],[29,3],[29,3],[29,3],[29,2],[29,3],[29,3],[29,3],[29,2],[29,3],[29,3],[29,3],[29,3],[29,3],[29,3],[29,2],[29,2],[29,1],[29,1],[29,1],[29,1],[29,1],[86,5],[87,4],[87,4],[87,4],[87,4],[87,4]],
+symbols_: {"error":2,"INIT":3,"INSTRUCCIONES":4,"EOF":5,"AMBITO_GLOBAL":6,"INVALID":7,"PTCOMA":8,"IMPRIMIR":9,"DECLARACION_VARIABLES":10,"SENTENCIA_IF":11,"CICLO_WHILE":12,"SENTENCIA_SWITCH":13,"CICLO_FOR":14,"CICLO_DO_WHILE":15,"CICLO_DO_UNTIL":16,"RBREAK":17,"RCONTINUE":18,"INS_RETURN":19,"LLAMADA":20,"METODO":21,"DECLARACION":22,"ASIGNACION":23,"DECLARACION_ASIGNACION":24,"DECLARACION_VECTOR1":25,"IDENTIFICADOR":26,"PARABRE":27,"PARCIERRA":28,"LISTA_EXPRESIONES":29,"COMA":30,"EXPRESION":31,"LISTA_PARAMETROS":32,"DOSPUNTOS":33,"RVOID":34,"ENCAPSULAMIENTO":35,"TIPO_DATO":36,"RINT":37,"RSTRING":38,"RCHAR":39,"RDOUBLE":40,"RBOOLEAN":41,"RPRINT":42,"RPRINTLN":43,"LISTA_IDENTIFICADORES":44,"CORABRE":45,"CORCIERRA":46,"IGUAL":47,"RNEW":48,"LLAVEA":49,"LLAVEC":50,"RCORABRE":51,"RTOCHARARRAY":52,"INCREMENTO":53,"DECREMENTO":54,"RIF":55,"RELSE":56,"LISTA_ELIF":57,"RELIF":58,"RRETURN":59,"RSWITCH":60,"LISTA_CASES":61,"RDEFAULT":62,"RCASE":63,"RWHILE":64,"RFOR":65,"DECLARACION_ASIG_FOR":66,"ACTUALIZACION_FOR":67,"RDO":68,"RUNTIL":69,"ENTERO":70,"CADENA":71,"CARACTER":72,"DECIMAL":73,"RTRUE":74,"RFALSE":75,"MAS":76,"MENOS":77,"MULTIPLICACION":78,"DIVISION":79,"MODULO":80,"POTENCIA":81,"OR":82,"AND":83,"NOT":84,"IGUALIGUAL":85,"DIFERENTE":86,"MENOR":87,"MAYOR":88,"MENOROIGUAL":89,"MAYOROIGUAL":90,"OPERADOR_TERNARIO":91,"CASTEOS":92,"ACCESO_VECTORES":93,"FUNCIONES_NATIVAS":94,"INTERROGACION":95,"RFLOAT":96,"RBOOL":97,"$accept":0,"$end":1},
+terminals_: {2:"error",5:"EOF",7:"INVALID",8:"PTCOMA",17:"RBREAK",18:"RCONTINUE",26:"IDENTIFICADOR",27:"PARABRE",28:"PARCIERRA",30:"COMA",33:"DOSPUNTOS",34:"RVOID",37:"RINT",38:"RSTRING",39:"RCHAR",40:"RDOUBLE",41:"RBOOLEAN",42:"RPRINT",43:"RPRINTLN",45:"CORABRE",46:"CORCIERRA",47:"IGUAL",48:"RNEW",49:"LLAVEA",50:"LLAVEC",51:"RCORABRE",52:"RTOCHARARRAY",53:"INCREMENTO",54:"DECREMENTO",55:"RIF",56:"RELSE",58:"RELIF",59:"RRETURN",60:"RSWITCH",62:"RDEFAULT",63:"RCASE",64:"RWHILE",65:"RFOR",68:"RDO",69:"RUNTIL",70:"ENTERO",71:"CADENA",72:"CARACTER",73:"DECIMAL",74:"RTRUE",75:"RFALSE",76:"MAS",77:"MENOS",78:"MULTIPLICACION",79:"DIVISION",80:"MODULO",81:"POTENCIA",82:"OR",83:"AND",84:"NOT",85:"IGUALIGUAL",86:"DIFERENTE",87:"MENOR",88:"MAYOR",89:"MENOROIGUAL",90:"MAYOROIGUAL",93:"ACCESO_VECTORES",94:"FUNCIONES_NATIVAS",95:"INTERROGACION",96:"RFLOAT",97:"RBOOL"},
+productions_: [0,[3,2],[4,2],[4,1],[4,1],[4,2],[6,1],[6,1],[6,1],[6,1],[6,1],[6,1],[6,1],[6,1],[6,2],[6,2],[6,1],[6,2],[6,1],[10,1],[10,1],[10,1],[10,1],[20,3],[20,4],[29,3],[29,1],[21,7],[21,5],[21,6],[21,4],[32,4],[32,2],[36,1],[36,1],[36,1],[36,1],[36,1],[9,5],[9,5],[22,3],[22,3],[22,3],[22,3],[22,3],[25,11],[25,9],[25,11],[25,9],[25,11],[25,9],[25,11],[25,9],[25,10],[25,11],[25,9],[23,4],[23,7],[23,10],[23,3],[23,3],[24,5],[24,5],[24,5],[24,5],[24,5],[35,3],[35,2],[44,3],[44,1],[11,5],[11,7],[11,6],[11,8],[57,6],[57,5],[19,2],[19,3],[13,7],[13,10],[13,9],[61,5],[61,4],[12,5],[14,9],[15,7],[16,7],[66,4],[66,3],[67,3],[67,2],[67,2],[31,1],[31,1],[31,1],[31,1],[31,1],[31,1],[31,1],[31,3],[31,3],[31,3],[31,3],[31,3],[31,3],[31,2],[31,3],[31,3],[31,3],[31,2],[31,3],[31,3],[31,3],[31,3],[31,3],[31,3],[31,2],[31,2],[31,1],[31,1],[31,1],[31,1],[31,1],[91,5],[92,4],[92,4],[92,4],[92,4],[92,4]],
 performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
 /* this == yyval */
 
@@ -111,37 +111,42 @@ this.$=new Nodo.default("INSTRUCCIONES","");
                                                                             this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
                                                                             
 break;
-case 6: case 7: case 8: case 9: case 10: case 11: case 12: case 13: case 14: case 15: case 18: case 20:
+case 6: case 7: case 8: case 9: case 10: case 11: case 12: case 13: case 16: case 18:
 this.$=new Nodo.default("AMBITO LOCAL","");
                                                                             this.$.agregarHijo($$[$0]);
                                                                             
 break;
-case 16:
+case 14:
 this.$=new Nodo.default("AMBITO LOCAL","");
                                                                             this.$.agregarHijo(new Nodo.default("break","BREAK"));
                                                                             this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
                                                                             
 break;
-case 17:
+case 15:
 this.$=new Nodo.default("AMBITO LOCAL","");
                                                                             this.$.agregarHijo(new Nodo.default("continue","CONTINUE"));
                                                                             this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
                                                                             
 break;
-case 19:
+case 17:
 this.$=new Nodo.default("AMBITO LOCAL","");
                                                                             this.$.agregarHijo($$[$0-1]);
                                                                             this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
                                                                             
 break;
-case 21:
+case 19: case 20: case 21: case 22:
+this.$=new Nodo.default("DECLARACION VARIABLES","");
+                                                                            this.$.agregarHijo($$[$0]);
+                                                                            
+break;
+case 23:
 this.$= new Nodo.default("LLAMADA","");
                                                                         this.$.agregarHijo(new Nodo.default("IDENTIFICADOR", $$[$0-2]));
                                                                         this.$.agregarHijo(new Nodo.default("(","PARABRE"));
                                                                         this.$.agregarHijo(new Nodo.default(")","PARCIERRA"));
                                                                         
 break;
-case 22:
+case 24:
 this.$= new Nodo.default("LLAMADA","");
                                                                         this.$.agregarHijo(new Nodo.default("IDENTIFICADOR", $$[$0-3]));
                                                                         this.$.agregarHijo(new Nodo.default("(","PARABRE"));
@@ -149,19 +154,19 @@ this.$= new Nodo.default("LLAMADA","");
                                                                         this.$.agregarHijo(new Nodo.default(")","PARCIERRA"));
                                                                         
 break;
-case 23:
+case 25:
 this.$ = new Nodo.default("LISTA_EXPRESIONES", "");
                                                                             this.$.agregarHijo($$[$0-2]);
                                                                             this.$.agregarHijo(new Nodo.default(",","COMA"));
                                                                             this.$.agregarHijo($$[$0]);
                                                                             
 break;
-case 24:
+case 26:
 this.$ = new Nodo.default("LISTA_EXPRESIONES", "");
                                                                             this.$.agregarHijo($$[$0]);
                                                                             
 break;
-case 25:
+case 27:
 this.$ = new Nodo.default("METODO","");
                                                                                             this.$.agregarHijo(new Nodo.default($$[$0-6],"IDENTIFICADOR"));
                                                                                             this.$.agregarHijo(new Nodo.default("(","PARABRE"));
@@ -172,7 +177,7 @@ this.$ = new Nodo.default("METODO","");
                                                                                             this.$.agregarHijo($$[$0-1]);
                                                                                             
 break;
-case 26:
+case 28:
 this.$ = new Nodo.default("METODO","");
                                                                                             this.$.agregarHijo(new Nodo.default($$[$0-4],"IDENTIFICADOR"));
                                                                                             this.$.agregarHijo(new Nodo.default("(","PARABRE"));
@@ -181,7 +186,7 @@ this.$ = new Nodo.default("METODO","");
                                                                                             this.$.agregarHijo($$[$0]);
                                                                                             
 break;
-case 27:
+case 29:
 this.$ = new Nodo.default("METODO","");
                                                                                             this.$.agregarHijo(new Nodo.default($$[$0-5],"IDENTIFICADOR"));
                                                                                             this.$.agregarHijo(new Nodo.default("(","PARABRE"));
@@ -191,7 +196,7 @@ this.$ = new Nodo.default("METODO","");
                                                                                             this.$.agregarHijo($$[$0]);
                                                                                             
 break;
-case 28:
+case 30:
 this.$ = new Nodo.default("METODO","");
                                                                                             this.$.agregarHijo(new Nodo.default($$[$0-3],"IDENTIFICADOR"));
                                                                                             this.$.agregarHijo(new Nodo.default("(","PARABRE"));
@@ -199,7 +204,7 @@ this.$ = new Nodo.default("METODO","");
                                                                                             this.$.agregarHijo($$[$0]);
                                                                                             
 break;
-case 29:
+case 31:
 this.$=new Nodo.default("LISTA_PARAMETROS","");
                                                                             this.$.agregarHijo($$[$0-3]);
                                                                             this.$.agregarHijo(new Nodo.default(",","COMA"));
@@ -207,38 +212,38 @@ this.$=new Nodo.default("LISTA_PARAMETROS","");
                                                                             this.$.agregarHijo(new Nodo.default($$[$0],"IDENTIFICADOR"));
                                                                             
 break;
-case 30:
+case 32:
 this.$=new Nodo.default("LISTA_PARAMETROS","");
                                                                             this.$.agregarHijo($$[$0-1]);
                                                                             this.$.agregarHijo(new Nodo.default($$[$0],"IDENTIFICADOR"));
                                                                             
 break;
-case 31:
+case 33:
 this.$=new Nodo.default("TIPO_DATO","");
                                                                             this.$.agregarHijo(new Nodo.default("int","RINT"));
                                                                             
 break;
-case 32:
+case 34:
 this.$=new Nodo.default("TIPO_DATO","");
                                                                             this.$.agregarHijo(new Nodo.default("string","RSTRING"));
                                                                             
 break;
-case 33:
+case 35:
 this.$=new Nodo.default("TIPO_DATO","");
                                                                             this.$.agregarHijo(new Nodo.default("char","RCHAR"));
                                                                             
 break;
-case 34:
+case 36:
 this.$=new Nodo.default("TIPO_DATO","");
                                                                             this.$.agregarHijo(new Nodo.default("double","RDOUBLE"));
                                                                             
 break;
-case 35:
+case 37:
 this.$=new Nodo.default("TIPO_DATO","");
                                                                             this.$.agregarHijo(new Nodo.default("boolean","RBOOLEAN"));
                                                                             
 break;
-case 36:
+case 38:
 this.$=new Nodo.default("IMPRIMIR","");
                                                                             this.$.agregarHijo(new Nodo.default("print","RPRINT"));
                                                                             this.$.agregarHijo(new Nodo.default("(","PARABRE"));
@@ -247,7 +252,7 @@ this.$=new Nodo.default("IMPRIMIR","");
                                                                             this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
                                                                             
 break;
-case 37:
+case 39:
 this.$=new Nodo.default("IMPRIMIR","");
                                                                             this.$.agregarHijo(new Nodo.default("println","RPRINT"));
                                                                             this.$.agregarHijo(new Nodo.default("(","PARABRE"));
@@ -256,42 +261,196 @@ this.$=new Nodo.default("IMPRIMIR","");
                                                                             this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
                                                                             
 break;
-case 38:
+case 40:
 this.$=new Nodo.default("DECLARACION","");
                                                                             this.$.agregarHijo(new Nodo.default("int",""));
                                                                             this.$.agregarHijo($$[$0-1]);
                                                                             this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
                                                                             
 break;
-case 39:
+case 41:
 this.$=new Nodo.default("DECLARACION","");
                                                                             this.$.agregarHijo(new Nodo.default("double",""));
                                                                             this.$.agregarHijo($$[$0-1]);
                                                                             this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
                                                                             
 break;
-case 40:
+case 42:
 this.$=new Nodo.default("DECLARACION","");
                                                                             this.$.agregarHijo(new Nodo.default("char",""));
                                                                             this.$.agregarHijo($$[$0-1]);
                                                                             this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
                                                                             
 break;
-case 41:
+case 43:
 this.$=new Nodo.default("DECLARACION","");
                                                                             this.$.agregarHijo(new Nodo.default("string",""));
                                                                             this.$.agregarHijo($$[$0-1]);
                                                                             this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
                                                                             
 break;
-case 42:
+case 44:
 this.$=new Nodo.default("DECLARACION","");
                                                                             this.$.agregarHijo(new Nodo.default("boolean",""));
                                                                             this.$.agregarHijo($$[$0-1]);
                                                                             this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
                                                                             
 break;
-case 43:
+case 45:
+this.$=new Nodo.default("DECLARACION_VECTOR1","");
+                                                                                                                        this.$.agregarHijo(new Nodo.default("int","RINT"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default($$[$0-7],"IDENTIFICADOR"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("=","IGUAL"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("new","RNEW"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("int","RINT"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        this.$.agregarHijo($$[$0-2]);
+                                                                                                                        this.$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
+                                                                                                                        
+break;
+case 46:
+this.$= new Nodo.default("DECLARACION_VECTOR1","");
+                                                                                                                        this.$.agregarHijo(new Nodo.default("int","RINT"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default($$[$0-6],"IDENTIFICADOR"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("=","IGUAL"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("{","LLAVEA"));
+                                                                                                                        this.$.agregarHijo($$[$0-2]);
+                                                                                                                        this.$.agregarHijo(new Nodo.default("}","LLAVEC"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
+                                                                                                                        
+break;
+case 47:
+this.$=new Nodo.default("DECLARACION_VECTOR1","");
+                                                                                                                        this.$.agregarHijo(new Nodo.default("double","RDOUBLE"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default($$[$0-8],"IDENTIFICADOR"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("=","IGUAL"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("new","RNEW"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("double","RDOUBLE"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        this.$.agregarHijo($$[$0-2]);
+                                                                                                                        this.$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
+                                                                                                                        
+break;
+case 48:
+this.$=new Nodo.default("DECLARACION_VECTOR1","");
+                                                                                                                        this.$.agregarHijo(new Nodo.default("double","RDOUBLE"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default($$[$0-6],"IDENTIFICADOR"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("=","IGUAL"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("{","LLAVEA"));
+                                                                                                                        this.$.agregarHijo($$[$0-2]);
+                                                                                                                        this.$.agregarHijo(new Nodo.default("}","LLAVEC"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
+                                                                                                                        
+break;
+case 49:
+this.$=new Nodo.default("DECLARACION_VECTOR1","");
+                                                                                                                        this.$.agregarHijo(new Nodo.default("String","RSTRING"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default($$[$0-8],"IDENTIFICADOR"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("=","IGUAL"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("new","RNEW"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("String","RSTRING"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        this.$.agregarHijo($$[$0-2]);
+                                                                                                                        this.$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
+                                                                                                                        
+break;
+case 50:
+this.$=new Nodo.default("DECLARACION_VECTOR1","");
+                                                                                                                        this.$.agregarHijo(new Nodo.default("String","RSTRING"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default($$[$0-6],"IDENTIFICADOR"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("=","IGUAL"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("{","LLAVEA"));
+                                                                                                                        this.$.agregarHijo($$[$0-2]);
+                                                                                                                        this.$.agregarHijo(new Nodo.default("}","LLAVEC"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
+                                                                                                                        
+break;
+case 51:
+this.$=new Nodo.default("DECLARACION_VECTOR1","");
+                                                                                                                        this.$.agregarHijo(new Nodo.default("char","RCHAR"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default($$[$0-8],"IDENTIFICADOR"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("=","IGUAL"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("new","RNEW"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("char","RCHAR"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        this.$.agregarHijo($$[$0-2]);
+                                                                                                                        this.$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
+                                                                                                                        
+break;
+case 52:
+this.$=new Nodo.default("DECLARACION_VECTOR1","");
+                                                                                                                        this.$.agregarHijo(new Nodo.default("char","RCHAR"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default($$[$0-6],"IDENTIFICADOR"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("=","IGUAL"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("{","LLAVEA"));
+                                                                                                                        this.$.agregarHijo($$[$0-2]);
+                                                                                                                        this.$.agregarHijo(new Nodo.default("}","LLAVEC"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
+                                                                                                                        
+break;
+case 53:
+this.$=new Nodo.default("DECLARACION_VECTOR1","");
+                                                                                                                        this.$.agregarHijo(new Nodo.default("char","RCHAR"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default($$[$0-7],"IDENTIFICADOR"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("=","IGUAL"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("toCharArray","RTOCHARARRAY"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("(","PARABRE"));
+                                                                                                                        this.$.agregarHijo($$[$0-3]);
+                                                                                                                        this.$.agregarHijo(new Nodo.default(")","PARCIERRA"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
+                                                                                                                        
+break;
+case 54:
+this.$=new Nodo.default("DECLARACION_VECTOR1","");
+                                                                                                                        this.$.agregarHijo(new Nodo.default("boolean","RBOOLEAN"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default($$[$0-8],"IDENTIFICADOR"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("=","IGUAL"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("new","RNEW"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("boolean","RBOOLEAN"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        this.$.agregarHijo($$[$0-2]);
+                                                                                                                        this.$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
+                                                                                                                        
+break;
+case 55:
+this.$=new Nodo.default("DECLARACION_VECTOR1","");
+                                                                                                                        this.$.agregarHijo(new Nodo.default("boolean","RBOOLEAN"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("[","CORABRE"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("]","CORCIERRA"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default($$[$0-6],"IDENTIFICADOR"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("=","IGUAL"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default("{","LLAVEA"));
+                                                                                                                        this.$.agregarHijo($$[$0-2]);
+                                                                                                                        this.$.agregarHijo(new Nodo.default("}","LLAVEC"));
+                                                                                                                        this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
+                                                                                                                        
+break;
+case 56:
 this.$=new Nodo.default("ASIGNACION","");
                                                                                                             this.$.agregarHijo($$[$0-3]);
                                                                                                             this.$.agregarHijo(new Nodo.default("IGUAL","="));
@@ -299,7 +458,7 @@ this.$=new Nodo.default("ASIGNACION","");
                                                                                                             this.$.agregarHijo(new Nodo.default("PTCOMA",";"));
                                                                                                             
 break;
-case 44:
+case 57:
 this.$=new Nodo.default("ASIGNACION","");
                                                                                                             this.$.agregarHijo(new Nodo.default($$[$0-6],"IDENTIFICADOR"));
                                                                                                             this.$.agregarHijo(new Nodo.default("[","CORABRE"));
@@ -310,7 +469,7 @@ this.$=new Nodo.default("ASIGNACION","");
                                                                                                             this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
                                                                                                             
 break;
-case 45:
+case 58:
 this.$=new Nodo.default("ASIGNACION","");
                                                                                                             this.$.agregarHijo(new Nodo.default($$[$0-9],"IDENTIFICADOR"));
                                                                                                             this.$.agregarHijo(new Nodo.default("[","CORABRE"));
@@ -324,21 +483,21 @@ this.$=new Nodo.default("ASIGNACION","");
                                                                                                             this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
                                                                                                             
 break;
-case 46:
+case 59:
 this.$=new Nodo.default("ASIGNACION","");
                                                                                                             this.$.agregarHijo(new Nodo.default($$[$0-2],"IDENTIFICADOR"));
                                                                                                             this.$.agregarHijo(new Nodo.default("++","INCREMENTO"));
                                                                                                             this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
                                                                                                             
 break;
-case 47:
+case 60:
 this.$=new Nodo.default("ASIGNACION","");
                                                                                                             this.$.agregarHijo(new Nodo.default($$[$0-2],"IDENTIFICADOR"));
                                                                                                             this.$.agregarHijo(new Nodo.default("--","DECREMENTO"));
                                                                                                             this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
                                                                                                             
 break;
-case 48:
+case 61:
 this.$=new Nodo.default("DECLARACION_ASIGNACION","");
                                                                                 this.$.agregarHijo(new Nodo.default("int","RINT"));
                                                                                 this.$.agregarHijo($$[$0-3]);
@@ -347,7 +506,7 @@ this.$=new Nodo.default("DECLARACION_ASIGNACION","");
                                                                                 this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
                                                                                 
 break;
-case 49:
+case 62:
 this.$=new Nodo.default("DECLARACION_ASIGNACION","");
                                                                                 this.$.agregarHijo(new Nodo.default("double","RDOUBLE"));
                                                                                 this.$.agregarHijo($$[$0-3]);
@@ -356,7 +515,7 @@ this.$=new Nodo.default("DECLARACION_ASIGNACION","");
                                                                                 this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
                                                                                 
 break;
-case 50:
+case 63:
 this.$=new Nodo.default("DECLARACION_ASIGNACION","");
                                                                                 this.$.agregarHijo(new Nodo.default("string","RSTRING"));
                                                                                 this.$.agregarHijo($$[$0-3]);
@@ -365,7 +524,7 @@ this.$=new Nodo.default("DECLARACION_ASIGNACION","");
                                                                                 this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
                                                                                 
 break;
-case 51:
+case 64:
 this.$=new Nodo.default("DECLARACION_ASIGNACION","");
                                                                                 this.$.agregarHijo(new Nodo.default("char","RCHAR"));
                                                                                 this.$.agregarHijo($$[$0-3]);
@@ -374,7 +533,7 @@ this.$=new Nodo.default("DECLARACION_ASIGNACION","");
                                                                                 this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
                                                                                 
 break;
-case 52:
+case 65:
 this.$=new Nodo.default("DECLARACION_ASIGNACION","");
                                                                                 this.$.agregarHijo(new Nodo.default("int","RBOOLEAN"));
                                                                                 this.$.agregarHijo($$[$0-3]);
@@ -383,32 +542,32 @@ this.$=new Nodo.default("DECLARACION_ASIGNACION","");
                                                                                 this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
                                                                                 
 break;
-case 53:
+case 66:
 this.$=new Nodo.default("ENCAPSULAMIENTO", "");
                                                                             this.$.agregarHijo(new Nodo.default("{", "LLAVEA"));
                                                                             this.$.agregarHijo($$[$0-1]);
                                                                             this.$.agregarHijo(new Nodo.default("}", "LLAVEC"));
                                                                             
 break;
-case 54:
+case 67:
 this.$=new Nodo.default("ENCAPSULAMIENTO", "");
                                                                             this.$.agregarHijo(new Nodo.default("{", "LLAVEA"));
                                                                             this.$.agregarHijo(new Nodo.default("}", "LLAVEC"));
                                                                             
 break;
-case 55:
+case 68:
 this.$=new Nodo.default("LISTA_IDENTIFICADORES", "");
                                                                             this.$.agregarHijo($$[$0-2]);
                                                                             this.$.agregarHijo(new Nodo.default(",", "COMA"));
                                                                             this.$.agregarHijo(new Nodo.default($$[$0], "IDENTIFICADOR"));
                                                                             
 break;
-case 56:
+case 69:
 this.$=new Nodo.default("LISTA_IDENTIFICADORES", "");
                                                                             this.$.agregarHijo(new Nodo.default($$[$0], "IDENTIFICADOR"));
                                                                             
 break;
-case 57:
+case 70:
 this.$ = new Nodo.default("SENTENCIA IF","");
                                                                                                 this.$.agregarHijo(new Nodo.default("if","IF"));
                                                                                                 this.$.agregarHijo(new Nodo.default("(","PARABRE"));
@@ -417,7 +576,7 @@ this.$ = new Nodo.default("SENTENCIA IF","");
                                                                                                 this.$.agregarHijo($$[$0]);
                                                                                                 
 break;
-case 58:
+case 71:
 this.$ = new Nodo.default("SENTENCIA IF","");
                                                                                                 this.$.agregarHijo(new Nodo.default("if","IF"));
                                                                                                 this.$.agregarHijo(new Nodo.default("(","PARABRE"));
@@ -428,7 +587,7 @@ this.$ = new Nodo.default("SENTENCIA IF","");
                                                                                                 this.$.agregarHijo($$[$0]);
                                                                                                 
 break;
-case 59:
+case 72:
 this.$ = new Nodo.default("SENTENCIA IF","");
                                                                                                 this.$.agregarHijo(new Nodo.default("if","IF"));
                                                                                                 this.$.agregarHijo(new Nodo.default("(","PARABRE"));
@@ -438,7 +597,7 @@ this.$ = new Nodo.default("SENTENCIA IF","");
                                                                                                 this.$.agregarHijo($$[$0]);
                                                                                                 
 break;
-case 60:
+case 73:
 this.$ = new Nodo.default("SENTENCIA IF","");
                                                                                                 this.$.agregarHijo(new Nodo.default("if","IF"));
                                                                                                 this.$.agregarHijo(new Nodo.default("(","PARABRE"));
@@ -450,7 +609,7 @@ this.$ = new Nodo.default("SENTENCIA IF","");
                                                                                                 this.$.agregarHijo($$[$0]);
                                                                                                 
 break;
-case 61:
+case 74:
 this.$ = new Nodo.default("LISTA ELIF","");
                                                                             this.$.agregarHijo($$[$0-5]);
                                                                             this.$.agregarHijo(new Nodo.default("elif","ELIF"));
@@ -460,7 +619,7 @@ this.$ = new Nodo.default("LISTA ELIF","");
                                                                             this.$.agregarHijo($$[$0]);
                                                                             
 break;
-case 62:
+case 75:
 this.$ = new Nodo.default("LISTA ELIF","");
                                                                             this.$.agregarHijo(new Nodo.default("elif","ELIF"));
                                                                             this.$.agregarHijo(new Nodo.default("(","PARABRE"));
@@ -469,20 +628,20 @@ this.$ = new Nodo.default("LISTA ELIF","");
                                                                             this.$.agregarHijo($$[$0]);
                                                                             
 break;
-case 63:
+case 76:
 this.$=new Nodo.default("INS RETURN","");
                                                                             this.$.agregarHijo(new Nodo.default("return","RETURN"));
                                                                             this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
                                                                             
 break;
-case 64:
+case 77:
 this.$=new Nodo.default("INS RETURN","");
                                                                             this.$.agregarHijo(new Nodo.default("return","RETURN"));
                                                                             this.$.agregarHijo($$[$0-1]);
                                                                             this.$.agregarHijo(new Nodo.default(";","PTCOMA"));
                                                                             
 break;
-case 65:
+case 78:
 this.$=new Nodo.default("SENTENCIA SWITCH","");
                                                                                                                     this.$.agregarHijo(new Nodo.default("switch","SWITCH"));
                                                                                                                     this.$.agregarHijo(new Nodo.default("(","PARABRE"));
@@ -493,7 +652,7 @@ this.$=new Nodo.default("SENTENCIA SWITCH","");
                                                                                                                     this.$.agregarHijo(new Nodo.default("}","LLAVEC"));
                                                                                                                     
 break;
-case 66:
+case 79:
 this.$=new Nodo.default("SENTENCIA SWITCH","");
                                                                                                                     this.$.agregarHijo(new Nodo.default("switch","SWITCH"));
                                                                                                                     this.$.agregarHijo(new Nodo.default("(","PARABRE"));
@@ -507,7 +666,7 @@ this.$=new Nodo.default("SENTENCIA SWITCH","");
                                                                                                                     this.$.agregarHijo(new Nodo.default("}","LLAVEC"));
                                                                                                                     
 break;
-case 67:
+case 80:
 this.$=new Nodo.default("SENTENCIA SWITCH","");
                                                                                                                     this.$.agregarHijo(new Nodo.default("switch","SWITCH"));
                                                                                                                     this.$.agregarHijo(new Nodo.default("(","PARABRE"));
@@ -520,7 +679,7 @@ this.$=new Nodo.default("SENTENCIA SWITCH","");
                                                                                                                     this.$.agregarHijo(new Nodo.default("}","LLAVEC"));
                                                                                                                     
 break;
-case 68:
+case 81:
 this.$= new Nodo.default("LISTA_CASES","");
                                                                             this.$.agregarHijo($$[$0-4]);
                                                                             this.$.agregarHijo(new Nodo.default("case","RCASE"));
@@ -529,7 +688,7 @@ this.$= new Nodo.default("LISTA_CASES","");
                                                                             this.$.agregarHijo($$[$0]);
                                                                             
 break;
-case 69:
+case 82:
 this.$= new Nodo.default("LISTA_CASES","");
                                                                             this.$.agregarHijo(new Nodo.default("case","RCASE"));
                                                                             this.$.agregarHijo($$[$0-2]);
@@ -537,7 +696,7 @@ this.$= new Nodo.default("LISTA_CASES","");
                                                                             this.$.agregarHijo($$[$0]);
                                                                             
 break;
-case 70:
+case 83:
 this.$ = new Nodo.default("CICLO WHILE","");
                                                                             this.$.agregarHijo(new Nodo.default("while","WHILE"));
                                                                             this.$.agregarHijo(new Nodo.default("(","PARABRE"));
@@ -546,7 +705,7 @@ this.$ = new Nodo.default("CICLO WHILE","");
                                                                             this.$.agregarHijo($$[$0]);
                                                                             
 break;
-case 71:
+case 84:
 this.$= new Nodo.default("CICLO FOR","");
                                                                                                                     this.$.agregarHijo(new Nodo.default("for","FOR"));
                                                                                                                     this.$.agregarHijo(new Nodo.default("(","("));
@@ -559,7 +718,7 @@ this.$= new Nodo.default("CICLO FOR","");
                                                                                                                     this.$.agregarHijo($$[$0]);
                                                                                                                     
 break;
-case 72:
+case 85:
 this.$= new Nodo.default("CICLO DO_WHILE", "");
                                                                                 this.$.agregarHijo(new Nodo.default("do", "DO"));
                                                                                 this.$.agregarHijo($$[$0-5]);
@@ -570,7 +729,7 @@ this.$= new Nodo.default("CICLO DO_WHILE", "");
                                                                                 this.$.agregarHijo(new Nodo.default(";", ";"));
                                                                                 
 break;
-case 73:
+case 86:
 this.$= new Nodo.default("CICLO DO_UNTIL","");
                                                                                 this.$.agregarHijo(new Nodo.default("do","DO"));
                                                                                 this.$.agregarHijo($$[$0-5]);
@@ -581,7 +740,7 @@ this.$= new Nodo.default("CICLO DO_UNTIL","");
                                                                                 this.$.agregarHijo(new Nodo.default(";",";"));
                                                                                 
 break;
-case 74:
+case 87:
 this.$=new Nodo.default("DECLARACION_ASIG_FOR","");
                                                                             this.$.agregarHijo(new Nodo.default("int","RINT"));
                                                                             this.$.agregarHijo($$[$0-2]);
@@ -589,192 +748,192 @@ this.$=new Nodo.default("DECLARACION_ASIG_FOR","");
                                                                             this.$.agregarHijo($$[$0]);
                                                                             
 break;
-case 75:
+case 88:
 this.$= new Nodo.default("DECLARACION_ASIG_FOR","");
                                                                             this.$.agregarHijo(new Nodo.default($$[$0-2],"IDENTIFICADOR"));
                                                                             this.$.agregarHijo(new Nodo.default("=","IGUAL"));
                                                                             this.$.agregarHijo(new Nodo.default($$[$0],"EXPRESION"));
                                                                             
 break;
-case 76:
+case 89:
 this.$= new Nodo.default("ACTUALIZACION_FOR","");
                                                                             this.$.agregarHijo($$[$0-2]);
                                                                             this.$.agregarHijo(new Nodo.default("=","IGUAL"));
                                                                             this.$.agregarHijo($$[$0]);
                                                                             
 break;
-case 77:
+case 90:
 this.$= new Nodo.default("ACTUALIZACION_FOR","");
                                                                             this.$.agregarHijo(new Nodo.default($$[$0-1],"IDENTIFICADOR"));
                                                                             this.$.agregarHijo(new Nodo.default("++","INCREMENTO"));
                                                                             
 break;
-case 78:
+case 91:
 this.$ = new Nodo.default("ACTUALIZACION_FOR","");
                                                                             this.$.agregarHijo(new Nodo.default($$[$0-1],"IDENTIFICADOR"));
                                                                             this.$.agregarHijo(new Nodo.default("--","DECREMENTO"));
                                                                             
 break;
-case 79:
+case 92:
 this.$ = new Nodo.default("EXPRESION","");
                                                                             this.$.agregarHijo(new Nodo.default($$[$0],"ENTERO"));
 break;
-case 80:
+case 93:
 this.$ = new Nodo.default("EXPRESION","");
                                                                             this.$.agregarHijo(new Nodo.default($$[$0],"CADENA"));
 break;
-case 81:
+case 94:
 this.$ = new Nodo.default("EXPRESION","");
                                                                             this.$.agregarHijo(new Nodo.default($$[$0],"CARACTER"));
 break;
-case 82:
+case 95:
 this.$ = new Nodo.default("EXPRESION","");
                                                                             this.$.agregarHijo(new Nodo.default($$[$0],"DECIMAL"));
 break;
-case 83:
+case 96:
 this.$ = new Nodo.default("EXPRESION","");
                                                                             this.$.agregarHijo(new Nodo.default($$[$0],"IDENTIFICADOR"));
 break;
-case 84: case 85:
+case 97: case 98:
 this.$ = new Nodo.default("EXPRESION","");
                                                                             this.$.agregarHijo(new Nodo.default($$[$0],""));
-break;
-case 86:
-this.$ = new Nodo.default("EXPRESION","");
-                                                                            this.$.agregarHijo($$[$0-2]);
-                                                                            this.$.agregarHijo(new Nodo.default("+","MAS"));
-                                                                            this.$.agregarHijo($$[$0]);
-                                                                            
-break;
-case 87:
-this.$ = new Nodo.default("EXPRESION","");
-                                                                            this.$.agregarHijo($$[$0-2]);
-                                                                            this.$.agregarHijo(new Nodo.default("-","MENOS"));
-                                                                            this.$.agregarHijo($$[$0]);
-                                                                            
-break;
-case 88:
-this.$ = new Nodo.default("EXPRESION","");
-                                                                            this.$.agregarHijo($$[$0-2]);
-                                                                            this.$.agregarHijo(new Nodo.default("*","MULTIPLICACION"));
-                                                                            this.$.agregarHijo($$[$0]);
-                                                                            
-break;
-case 89:
-this.$ = new Nodo.default("/","DIVISION");
-                                                                            this.$.agregarHijo($$[$0-2]);
-                                                                            this.$.agregarHijo(new Nodo.default("+","MAS"));
-                                                                            this.$.agregarHijo($$[$0]);
-                                                                            
-break;
-case 90:
-this.$ = new Nodo.default("EXPRESION","");
-                                                                            this.$.agregarHijo($$[$0-2]);
-                                                                            this.$.agregarHijo(new Nodo.default("%","MODULO"));
-                                                                            this.$.agregarHijo($$[$0]);
-                                                                            
-break;
-case 91:
-this.$ = new Nodo.default("EXPRESION","");
-                                                                            this.$.agregarHijo($$[$0-2]);
-                                                                            this.$.agregarHijo(new Nodo.default("^","POTENCIA"));
-                                                                            this.$.agregarHijo($$[$0]);
-                                                                            
-break;
-case 92:
-this.$ = new Nodo.default("EXPRESION","");
-                                                                            this.$.agregarHijo(new Nodo.default("-","NEGATIVO"));
-                                                                            this.$.agregarHijo($$[$0]);
-                                                                            
-break;
-case 93:
-this.$ = new Nodo.default("EXPRESION","");
-                                                                            this.$.agregarHijo(new Nodo.default("(",""));
-                                                                            this.$.agregarHijo($$[$0-1]);
-                                                                            this.$.agregarHijo(new Nodo.default(")",""));
-                                                                            
-break;
-case 94:
-this.$ = new Nodo.default("EXPRESION","");
-                                                                            this.$.agregarHijo($$[$0-2]);
-                                                                            this.$.agregarHijo(new Nodo.default("||","OR"));
-                                                                            this.$.agregarHijo($$[$0]);
-                                                                            
-break;
-case 95:
-this.$ = new Nodo.default("EXPRESION","");
-                                                                            this.$.agregarHijo($$[$0-2]);
-                                                                            this.$.agregarHijo(new Nodo.default("&&","AND"));
-                                                                            this.$.agregarHijo($$[$0]);
-                                                                            
-break;
-case 96:
-this.$ = new Nodo.default("EXPRESION","");
-                                                                            this.$.agregarHijo(new Nodo.default("!","NOT"));
-                                                                            this.$.agregarHijo($$[$01]);
-                                                                            
-break;
-case 97:
-this.$ = new Nodo.default("EXPRESION","");
-                                                                            this.$.agregarHijo($$[$0-2]);
-                                                                            this.$.agregarHijo(new Nodo.default("==","IGUALIGUAL"));
-                                                                            this.$.agregarHijo($$[$0]);
-                                                                            
-break;
-case 98:
-this.$ = new Nodo.default("EXPRESION","");
-                                                                            this.$.agregarHijo($$[$0-2]);
-                                                                            this.$.agregarHijo(new Nodo.default("!=","DIFERENTE"));
-                                                                            this.$.agregarHijo($$[$0]);
-                                                                            
 break;
 case 99:
 this.$ = new Nodo.default("EXPRESION","");
                                                                             this.$.agregarHijo($$[$0-2]);
-                                                                            this.$.agregarHijo(new Nodo.default("<","MENOR"));
+                                                                            this.$.agregarHijo(new Nodo.default("+","MAS"));
                                                                             this.$.agregarHijo($$[$0]);
                                                                             
 break;
 case 100:
 this.$ = new Nodo.default("EXPRESION","");
                                                                             this.$.agregarHijo($$[$0-2]);
-                                                                            this.$.agregarHijo(new Nodo.default(">","MAYOR"));
+                                                                            this.$.agregarHijo(new Nodo.default("-","MENOS"));
                                                                             this.$.agregarHijo($$[$0]);
                                                                             
 break;
 case 101:
 this.$ = new Nodo.default("EXPRESION","");
                                                                             this.$.agregarHijo($$[$0-2]);
-                                                                            this.$.agregarHijo(new Nodo.default("<=","MENOR O IGUAL"));
+                                                                            this.$.agregarHijo(new Nodo.default("*","MULTIPLICACION"));
                                                                             this.$.agregarHijo($$[$0]);
                                                                             
 break;
 case 102:
+this.$ = new Nodo.default("/","DIVISION");
+                                                                            this.$.agregarHijo($$[$0-2]);
+                                                                            this.$.agregarHijo(new Nodo.default("+","MAS"));
+                                                                            this.$.agregarHijo($$[$0]);
+                                                                            
+break;
+case 103:
+this.$ = new Nodo.default("EXPRESION","");
+                                                                            this.$.agregarHijo($$[$0-2]);
+                                                                            this.$.agregarHijo(new Nodo.default("%","MODULO"));
+                                                                            this.$.agregarHijo($$[$0]);
+                                                                            
+break;
+case 104:
+this.$ = new Nodo.default("EXPRESION","");
+                                                                            this.$.agregarHijo($$[$0-2]);
+                                                                            this.$.agregarHijo(new Nodo.default("^","POTENCIA"));
+                                                                            this.$.agregarHijo($$[$0]);
+                                                                            
+break;
+case 105:
+this.$ = new Nodo.default("EXPRESION","");
+                                                                            this.$.agregarHijo(new Nodo.default("-","NEGATIVO"));
+                                                                            this.$.agregarHijo($$[$0]);
+                                                                            
+break;
+case 106:
+this.$ = new Nodo.default("EXPRESION","");
+                                                                            this.$.agregarHijo(new Nodo.default("(",""));
+                                                                            this.$.agregarHijo($$[$0-1]);
+                                                                            this.$.agregarHijo(new Nodo.default(")",""));
+                                                                            
+break;
+case 107:
+this.$ = new Nodo.default("EXPRESION","");
+                                                                            this.$.agregarHijo($$[$0-2]);
+                                                                            this.$.agregarHijo(new Nodo.default("||","OR"));
+                                                                            this.$.agregarHijo($$[$0]);
+                                                                            
+break;
+case 108:
+this.$ = new Nodo.default("EXPRESION","");
+                                                                            this.$.agregarHijo($$[$0-2]);
+                                                                            this.$.agregarHijo(new Nodo.default("&&","AND"));
+                                                                            this.$.agregarHijo($$[$0]);
+                                                                            
+break;
+case 109:
+this.$ = new Nodo.default("EXPRESION","");
+                                                                            this.$.agregarHijo(new Nodo.default("!","NOT"));
+                                                                            this.$.agregarHijo($$[$01]);
+                                                                            
+break;
+case 110:
+this.$ = new Nodo.default("EXPRESION","");
+                                                                            this.$.agregarHijo($$[$0-2]);
+                                                                            this.$.agregarHijo(new Nodo.default("==","IGUALIGUAL"));
+                                                                            this.$.agregarHijo($$[$0]);
+                                                                            
+break;
+case 111:
+this.$ = new Nodo.default("EXPRESION","");
+                                                                            this.$.agregarHijo($$[$0-2]);
+                                                                            this.$.agregarHijo(new Nodo.default("!=","DIFERENTE"));
+                                                                            this.$.agregarHijo($$[$0]);
+                                                                            
+break;
+case 112:
+this.$ = new Nodo.default("EXPRESION","");
+                                                                            this.$.agregarHijo($$[$0-2]);
+                                                                            this.$.agregarHijo(new Nodo.default("<","MENOR"));
+                                                                            this.$.agregarHijo($$[$0]);
+                                                                            
+break;
+case 113:
+this.$ = new Nodo.default("EXPRESION","");
+                                                                            this.$.agregarHijo($$[$0-2]);
+                                                                            this.$.agregarHijo(new Nodo.default(">","MAYOR"));
+                                                                            this.$.agregarHijo($$[$0]);
+                                                                            
+break;
+case 114:
+this.$ = new Nodo.default("EXPRESION","");
+                                                                            this.$.agregarHijo($$[$0-2]);
+                                                                            this.$.agregarHijo(new Nodo.default("<=","MENOR O IGUAL"));
+                                                                            this.$.agregarHijo($$[$0]);
+                                                                            
+break;
+case 115:
 this.$ = new Nodo.default("EXPRESION","");
                                                                             this.$.agregarHijo($$[$0-2]);
                                                                             this.$.agregarHijo(new Nodo.default(">=","MAYOR O IGUAL"));
                                                                             this.$.agregarHijo($$[$0]);
                                                                             
 break;
-case 103:
+case 116:
 this.$ = new Nodo.default("EXPRESION","");
                                                                             this.$.agregarHijo($$[$0-1]);
                                                                             this.$.agregarHijo(new Nodo.default("++","INCREMENTO"));
                                                                             
 break;
-case 104:
+case 117:
 this.$ = new Nodo.default("EXPRESION","");
                                                                             this.$.agregarHijo($$[$0-1]);
                                                                             this.$.agregarHijo(new Nodo.default("--","DECREMENTO"));
                                                                             
 break;
-case 105: case 108: case 109:
+case 118: case 121: case 122:
 ;
 break;
-case 106: case 107:
+case 119: case 120:
 this.$=$$[$0];
 break;
-case 110:
+case 123:
 this.$ = new Nodo.default("OPERADOR_TERNARIO","");
                                                                             this.$.agregarHijo($$[$0-4]);
                                                                             this.$.agregarHijo(new Nodo.default("?","INTERROGACION"));
@@ -783,7 +942,7 @@ this.$ = new Nodo.default("OPERADOR_TERNARIO","");
                                                                             this.$.agregarHijo($$[$0]);
                                                                             
 break;
-case 111:
+case 124:
 this.$= new Nodo.default("CASTEOS","");
                                                                             this.$.agregarHijo(new Nodo.default("(",""));
                                                                             this.$.agregarHijo(new Nodo.default("int","RINT"));
@@ -791,7 +950,7 @@ this.$= new Nodo.default("CASTEOS","");
                                                                             this.$.agregarHijo($$[$0]);
                                                                             
 break;
-case 112:
+case 125:
 this.$= new Nodo.default("CASTEOS","");
                                                                             this.$.agregarHijo(new Nodo.default("(",""));
                                                                             this.$.agregarHijo(new Nodo.default("float","RFLOAT"));
@@ -799,7 +958,7 @@ this.$= new Nodo.default("CASTEOS","");
                                                                             this.$.agregarHijo($$[$0]);
                                                                             
 break;
-case 113:
+case 126:
 this.$= new Nodo.default("CASTEOS","");
                                                                             this.$.agregarHijo(new Nodo.default("(",""));
                                                                             this.$.agregarHijo(new Nodo.default("string","RSTRING"));
@@ -807,7 +966,7 @@ this.$= new Nodo.default("CASTEOS","");
                                                                             this.$.agregarHijo($$[$0]);
                                                                             
 break;
-case 114:
+case 127:
 this.$= new Nodo.default("CASTEOS","");
                                                                             this.$.agregarHijo(new Nodo.default("(",""));
                                                                             this.$.agregarHijo(new Nodo.default("bool","RBOOL"));
@@ -815,7 +974,7 @@ this.$= new Nodo.default("CASTEOS","");
                                                                             this.$.agregarHijo($$[$0]);
                                                                             
 break;
-case 115:
+case 128:
 this.$= new Nodo.default("CASTEOS","");
                                                                             this.$.agregarHijo(new Nodo.default("(",""));
                                                                             this.$.agregarHijo(new Nodo.default("char","RCHAR"));
@@ -825,8 +984,8 @@ this.$= new Nodo.default("CASTEOS","");
 break;
 }
 },
-table: [{2:$V0,3:1,4:2,6:3,7:$V1,9:6,10:7,11:8,12:9,13:10,14:11,15:12,16:13,17:14,18:15,19:$V2,20:$V3,21:18,22:19,23:20,24:$V4,35:$V5,36:$V6,37:$V7,38:$V8,39:$V9,40:$Va,41:$Vb,42:28,50:$Vc,54:$Vd,55:$Ve,59:$Vf,60:$Vg,63:$Vh},{1:[3]},{5:[1,36],6:37,9:6,10:7,11:8,12:9,13:10,14:11,15:12,16:13,17:14,18:15,19:$V2,20:$V3,21:18,22:19,23:20,24:$V4,35:$V5,36:$V6,37:$V7,38:$V8,39:$V9,40:$Va,41:$Vb,42:28,50:$Vc,54:$Vd,55:$Ve,59:$Vf,60:$Vg,63:$Vh},o($Vi,[2,3]),o($Vi,[2,4]),{8:[1,38]},o($Vi,[2,6]),o($Vi,[2,7]),o($Vi,[2,8]),o($Vi,[2,9]),o($Vi,[2,10]),o($Vi,[2,11]),o($Vi,[2,12]),o($Vi,[2,13]),o($Vi,[2,14]),o($Vi,[2,15]),{8:[1,39]},{8:[1,40]},o($Vi,[2,18]),{8:[1,41]},o($Vi,[2,20]),{25:[1,42]},{25:[1,43]},{24:$Vj,42:44},{24:$Vj,42:46},{24:$Vj,42:47},{24:$Vj,42:48},{24:$Vj,42:49},{28:$Vk,43:[1,50]},o($Vl,$Vm,{25:[1,55],44:[1,52],46:[1,53],47:[1,54]}),{25:[1,56]},{25:[1,57]},{25:[1,58]},{25:[1,59]},{33:60,48:$Vn},{8:[1,62],22:74,24:$Vo,25:$Vp,29:63,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{1:[2,1]},o($Vi,[2,2]),o($Vi,[2,5]),o($Vi,[2,16]),o($Vi,[2,17]),o($Vi,[2,19]),{22:74,24:$Vo,25:$Vp,29:79,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{22:74,24:$Vo,25:$Vp,29:80,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{8:[1,82],28:$Vk,43:[1,81]},o($VA,$Vm),{8:[1,84],28:$Vk,43:[1,83]},{8:[1,86],28:$Vk,43:[1,85]},{8:[1,88],28:$Vk,43:[1,87]},{8:[1,90],28:$Vk,43:[1,89]},{22:74,24:$Vo,25:$Vp,29:91,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{24:[1,92]},{22:74,24:$Vo,25:$Vp,29:93,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{8:[1,94]},{8:[1,95]},{22:74,24:$Vo,25:$Vp,26:[1,96],27:97,29:99,30:98,34:100,35:$VB,36:$VC,37:$VD,38:$VE,39:$VF,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{22:74,24:$Vo,25:$Vp,29:106,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{22:74,24:$Vo,25:$Vp,29:107,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{22:74,24:$Vo,25:$Vp,29:108,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{24:[1,111],35:[1,110],61:109},{59:[1,112],64:[1,113]},{2:$V0,4:114,6:3,7:$V1,9:6,10:7,11:8,12:9,13:10,14:11,15:12,16:13,17:14,18:15,19:$V2,20:$V3,21:18,22:19,23:20,24:$V4,35:$V5,36:$V6,37:$V7,38:$V8,39:$V9,40:$Va,41:$Vb,42:28,49:[1,115],50:$Vc,54:$Vd,55:$Ve,59:$Vf,60:$Vg,63:$Vh},o($Vi,[2,63]),{8:[1,116],71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,77:$VM,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT,90:$VU},o($VV,[2,79]),o($VV,[2,80]),o($VV,[2,81]),o($VV,[2,82]),o($VV,[2,83],{25:[1,134],46:[1,132],47:[1,133]}),o($VV,[2,84]),o($VV,[2,85]),{22:74,24:$Vo,25:$Vp,29:135,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{22:74,24:$Vo,25:$Vp,29:136,35:[1,137],36:[1,139],37:[1,141],65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz,91:[1,138],92:[1,140]},{22:74,24:$Vo,25:$Vp,29:142,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},o($VV,[2,105]),o($VV,[2,106]),o($VV,[2,107]),o($VV,[2,108]),o($VV,[2,109]),{26:[1,143],71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,77:$VM,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT,90:$VU},{26:[1,144],71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,77:$VM,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT,90:$VU},{22:74,24:$Vo,25:$Vp,29:145,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},o($Vi,[2,38]),{22:74,24:$Vo,25:$Vp,29:146,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},o($Vi,[2,39]),{22:74,24:$Vo,25:$Vp,29:147,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},o($Vi,[2,41]),{22:74,24:$Vo,25:$Vp,29:148,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},o($Vi,[2,40]),{22:74,24:$Vo,25:$Vp,29:149,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},o($Vi,[2,42]),{8:[1,150],71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,77:$VM,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT,90:$VU},o($VA,[2,55]),{45:[1,151],71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,77:$VM,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT,90:$VU},o($Vi,[2,46]),o($Vi,[2,47]),{8:$VW,31:[1,152],33:153,48:$Vn},{26:[1,154],28:[1,155]},{26:[1,156],28:[1,157]},o($VX,[2,24],{71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,77:$VM,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT,90:$VU}),{24:[1,158]},{24:[2,31]},{24:[2,32]},{24:[2,33]},{24:[2,34]},{24:[2,35]},{26:[1,159],71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,77:$VM,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT,90:$VU},{26:[1,160],71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,77:$VM,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT,90:$VU},{26:[1,161],71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,77:$VM,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT,90:$VU},{8:[1,162]},{24:$Vj,42:163},{43:[1,164]},{25:[1,165]},{25:[1,166]},{6:37,9:6,10:7,11:8,12:9,13:10,14:11,15:12,16:13,17:14,18:15,19:$V2,20:$V3,21:18,22:19,23:20,24:$V4,35:$V5,36:$V6,37:$V7,38:$V8,39:$V9,40:$Va,41:$Vb,42:28,49:[1,167],50:$Vc,54:$Vd,55:$Ve,59:$Vf,60:$Vg,63:$Vh},o($VY,[2,54]),o($Vi,[2,64]),{22:74,24:$Vo,25:$Vp,29:168,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{22:74,24:$Vo,25:$Vp,29:169,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{22:74,24:$Vo,25:$Vp,29:170,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{22:74,24:$Vo,25:$Vp,29:171,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{22:74,24:$Vo,25:$Vp,29:172,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{22:74,24:$Vo,25:$Vp,29:173,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{22:74,24:$Vo,25:$Vp,29:174,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{22:74,24:$Vo,25:$Vp,29:175,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{22:74,24:$Vo,25:$Vp,29:176,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{22:74,24:$Vo,25:$Vp,29:177,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{22:74,24:$Vo,25:$Vp,29:178,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{22:74,24:$Vo,25:$Vp,29:179,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{22:74,24:$Vo,25:$Vp,29:180,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{22:74,24:$Vo,25:$Vp,29:181,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{22:74,24:$Vo,25:$Vp,29:182,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},o($VV,[2,103]),o($VV,[2,104]),{22:74,24:$Vo,25:$Vp,26:[1,183],27:97,29:99,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},o($VV,[2,92]),{26:[1,184],71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,77:$VM,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT,90:$VU},{26:[1,185]},{26:[1,186]},{26:[1,187]},{26:[1,188]},{26:[1,189]},o($VZ,[2,96],{71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT}),{8:[1,190]},{8:[1,191]},{8:[1,192],71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,77:$VM,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT,90:$VU},{8:[1,193],71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,77:$VM,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT,90:$VU},{8:[1,194],71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,77:$VM,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT,90:$VU},{8:[1,195],71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,77:$VM,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT,90:$VU},{8:[1,196],71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,77:$VM,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT,90:$VU},o($Vi,[2,43]),{43:[1,197],44:[1,198]},{32:[1,199]},o($Vi,[2,28]),o($VV,[2,22]),{22:74,24:$Vo,25:$Vp,29:200,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{31:[1,201],33:202,48:$Vn},{34:203,35:$VB,36:$VC,37:$VD,38:$VE,39:$VF},o($VX,[2,30]),{33:204,48:$Vn},{33:205,48:$Vn},{48:[1,206]},{22:74,24:$Vo,25:$Vp,29:207,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{28:$Vk,43:[1,208]},{22:74,24:$Vo,25:$Vp,29:209,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{22:74,24:$Vo,25:$Vp,29:210,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{22:74,24:$Vo,25:$Vp,29:211,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},o($VY,[2,53]),o($V_,[2,86],{73:$VI,74:$VJ,75:$VK,76:$VL}),o($V_,[2,87],{73:$VI,74:$VJ,75:$VK,76:$VL}),o($V$,[2,88],{76:$VL}),o($V$,[2,89],{76:$VL}),o($V$,[2,90],{76:$VL}),o($VV,[2,91]),o([8,26,28,31,45,77,90],[2,94],{71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT}),o($VZ,[2,95],{71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT}),o($V01,[2,97],{71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL}),o($V01,[2,98],{71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL}),o($V01,[2,99],{71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL}),o($V01,[2,100],{71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL}),o($V01,[2,101],{71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL}),o($V01,[2,102],{71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL}),{31:[1,212],71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,77:$VM,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT,90:$VU},o($VV,$VW),o($VV,[2,93]),{22:74,24:$Vo,25:$Vp,29:213,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{22:74,24:$Vo,25:$Vp,29:214,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{22:74,24:$Vo,25:$Vp,29:215,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{22:74,24:$Vo,25:$Vp,29:216,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{22:74,24:$Vo,25:$Vp,29:217,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},o($Vi,[2,36]),o($Vi,[2,37]),o($Vi,[2,48]),o($Vi,[2,49]),o($Vi,[2,50]),o($Vi,[2,51]),o($Vi,[2,52]),{22:74,24:$Vo,25:$Vp,29:218,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{22:74,24:$Vo,25:$Vp,29:219,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{33:220,48:$Vn},o($VX,[2,23],{71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,77:$VM,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT,90:$VU}),{32:[1,221]},o($Vi,[2,26]),{24:[1,222]},o($Vi,[2,57],{52:224,51:[1,223],53:[1,225]}),o($Vi,[2,70]),{56:226,57:[1,227],58:[1,228]},{8:[1,229],71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,77:$VM,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT,90:$VU},{22:74,24:$Vo,25:$Vp,29:230,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{8:[2,75],71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,77:$VM,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT,90:$VU},{26:[1,231],71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,77:$VM,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT,90:$VU},{26:[1,232],71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,77:$VM,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT,90:$VU},{22:74,24:$Vo,25:$Vp,29:233,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},o($VV,[2,111]),o($VV,[2,112]),o($VV,[2,113]),o($VV,[2,114]),o($VV,[2,115]),{8:[1,234],71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,77:$VM,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT,90:$VU},{45:[1,235],71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,77:$VM,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT,90:$VU},o($Vi,[2,27]),{33:236,48:$Vn},o($VX,[2,29]),{33:237,48:$Vn},o($Vi,[2,59],{51:[1,238],53:[1,239]}),{25:[1,240]},{49:[1,241],57:[1,242],58:[1,243]},{31:[1,244]},{22:74,24:$Vo,25:$Vp,29:245,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{24:[1,248],42:247,62:246},{8:[2,74],71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,77:$VM,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT,90:$VU},{8:[1,249]},{8:[1,250]},o([8,26,28,31,45,90],[2,110],{71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,77:$VM,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT}),o($Vi,[2,44]),{43:[1,251]},o($Vi,[2,25]),o($Vi,[2,58]),{33:252,48:$Vn},{25:[1,253]},{22:74,24:$Vo,25:$Vp,29:254,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},o($Vi,[2,65]),{31:[1,255]},{22:74,24:$Vo,25:$Vp,29:256,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{2:$V0,4:257,6:3,7:$V1,9:6,10:7,11:8,12:9,13:10,14:11,15:12,16:13,17:14,18:15,19:$V2,20:$V3,21:18,22:19,23:20,24:$V4,35:$V5,36:$V6,37:$V7,38:$V8,39:$V9,40:$Va,41:$Vb,42:28,50:$Vc,54:$Vd,55:$Ve,59:$Vf,60:$Vg,63:$Vh},{31:[1,258],71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,77:$VM,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT,90:$VU},{26:[1,259]},{28:$Vk,43:[1,260]},o($Vl,$Vm,{46:[1,261],47:[1,262]}),o($Vi,[2,72]),o($Vi,[2,73]),{22:74,24:$Vo,25:$Vp,29:263,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},o($Vi,[2,60]),{22:74,24:$Vo,25:$Vp,29:264,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{26:[1,265],71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,77:$VM,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT,90:$VU},{2:$V0,4:266,6:3,7:$V1,9:6,10:7,11:8,12:9,13:10,14:11,15:12,16:13,17:14,18:15,19:$V2,20:$V3,21:18,22:19,23:20,24:$V4,35:$V5,36:$V6,37:$V7,38:$V8,39:$V9,40:$Va,41:$Vb,42:28,50:$Vc,54:$Vd,55:$Ve,59:$Vf,60:$Vg,63:$Vh},{31:[1,267],71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,77:$VM,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT,90:$VU},{6:37,9:6,10:7,11:8,12:9,13:10,14:11,15:12,16:13,17:14,18:15,19:$V2,20:$V3,21:18,22:19,23:20,24:$V4,35:$V5,36:$V6,37:$V7,38:$V8,39:$V9,40:$Va,41:$Vb,42:28,49:[1,268],50:$Vc,54:$Vd,55:$Ve,59:$Vf,60:$Vg,63:$Vh},{2:$V0,4:269,6:3,7:$V1,9:6,10:7,11:8,12:9,13:10,14:11,15:12,16:13,17:14,18:15,19:$V2,20:$V3,21:18,22:19,23:20,24:$V4,35:$V5,36:$V6,37:$V7,38:$V8,39:$V9,40:$Va,41:$Vb,42:28,50:$Vc,54:$Vd,55:$Ve,59:$Vf,60:$Vg,63:$Vh},{33:270,48:$Vn},{22:74,24:$Vo,25:$Vp,29:271,65:$Vq,66:$Vr,67:$Vs,68:$Vt,69:$Vu,70:$Vv,72:$Vw,79:$Vx,86:75,87:76,88:$Vy,89:$Vz},{26:[2,77]},{26:[2,78]},{8:[1,272],71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,77:$VM,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT,90:$VU},{26:[1,273],71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,77:$VM,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT,90:$VU},{33:274,48:$Vn},{6:37,9:6,10:7,11:8,12:9,13:10,14:11,15:12,16:13,17:14,18:15,19:$V2,20:$V3,21:18,22:19,23:20,24:$V4,35:$V5,36:$V6,37:$V7,38:$V8,39:$V9,40:$Va,41:$Vb,42:28,49:[1,275],50:$Vc,54:$Vd,55:$Ve,59:$Vf,60:$Vg,63:$Vh},{2:$V0,4:276,6:3,7:$V1,9:6,10:7,11:8,12:9,13:10,14:11,15:12,16:13,17:14,18:15,19:$V2,20:$V3,21:18,22:19,23:20,24:$V4,35:$V5,36:$V6,37:$V7,38:$V8,39:$V9,40:$Va,41:$Vb,42:28,50:$Vc,54:$Vd,55:$Ve,59:$Vf,60:$Vg,63:$Vh},o($Vi,[2,67]),o($V11,[2,69],{9:6,10:7,11:8,12:9,13:10,14:11,15:12,16:13,17:14,18:15,21:18,22:19,23:20,42:28,6:37,19:$V2,20:$V3,24:$V4,35:$V5,36:$V6,37:$V7,38:$V8,39:$V9,40:$Va,41:$Vb,50:$Vc,54:$Vd,55:$Ve,59:$Vf,60:$Vg,63:$Vh}),o($Vi,[2,71]),{26:[2,76],71:$VG,72:$VH,73:$VI,74:$VJ,75:$VK,76:$VL,77:$VM,78:$VN,80:$VO,81:$VP,82:$VQ,83:$VR,84:$VS,85:$VT,90:$VU},o($Vi,[2,45]),{33:277,48:$Vn},o($V21,[2,62]),o($Vi,[2,66]),o($V11,[2,68],{9:6,10:7,11:8,12:9,13:10,14:11,15:12,16:13,17:14,18:15,21:18,22:19,23:20,42:28,6:37,19:$V2,20:$V3,24:$V4,35:$V5,36:$V6,37:$V7,38:$V8,39:$V9,40:$Va,41:$Vb,50:$Vc,54:$Vd,55:$Ve,59:$Vf,60:$Vg,63:$Vh}),o($V21,[2,61])],
-defaultActions: {36:[2,1],101:[2,31],102:[2,32],103:[2,33],104:[2,34],105:[2,35],261:[2,77],262:[2,78]},
+table: [{2:$V0,3:1,4:2,6:3,7:$V1,9:6,10:7,11:8,12:9,13:10,14:11,15:12,16:13,17:$V2,18:$V3,19:16,20:17,21:18,22:21,23:22,24:23,25:24,26:$V4,37:$V5,38:$V6,39:$V7,40:$V8,41:$V9,42:$Va,43:$Vb,44:37,55:$Vc,59:$Vd,60:$Ve,64:$Vf,65:$Vg,68:$Vh},{1:[3]},{5:[1,38],6:39,9:6,10:7,11:8,12:9,13:10,14:11,15:12,16:13,17:$V2,18:$V3,19:16,20:17,21:18,22:21,23:22,24:23,25:24,26:$V4,37:$V5,38:$V6,39:$V7,40:$V8,41:$V9,42:$Va,43:$Vb,44:37,55:$Vc,59:$Vd,60:$Ve,64:$Vf,65:$Vg,68:$Vh},o($Vi,[2,3]),o($Vi,[2,4]),{8:[1,40]},o($Vi,[2,6]),o($Vi,[2,7]),o($Vi,[2,8]),o($Vi,[2,9]),o($Vi,[2,10]),o($Vi,[2,11]),o($Vi,[2,12]),o($Vi,[2,13]),{8:[1,41]},{8:[1,42]},o($Vi,[2,16]),{8:[1,43]},o($Vi,[2,18]),{27:[1,44]},{27:[1,45]},o($Vi,[2,19]),o($Vi,[2,20]),o($Vi,[2,21]),o($Vi,[2,22]),{27:[1,46]},{27:[1,47]},{27:[1,48]},{27:[1,49]},{35:50,49:$Vj},{8:[1,52],20:64,26:$Vk,27:$Vl,31:53,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},o($Vw,$Vx,{27:[1,69],45:[1,70],53:[1,71],54:[1,72]}),{26:$Vy,44:73,45:[1,74]},{26:$Vy,44:76,45:[1,77]},{26:$Vy,44:78,45:[1,79]},{26:$Vy,44:80,45:[1,81]},{26:$Vy,44:82,45:[1,83]},{30:$Vz,47:[1,84]},{1:[2,1]},o($Vi,[2,2]),o($Vi,[2,5]),o($Vi,[2,14]),o($Vi,[2,15]),o($Vi,[2,17]),{20:64,26:$Vk,27:$Vl,31:86,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{20:64,26:$Vk,27:$Vl,31:87,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{20:64,26:$Vk,27:$Vl,31:88,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{20:64,26:$Vk,27:$Vl,31:89,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{20:64,26:$Vk,27:$Vl,31:90,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{26:[1,93],37:[1,92],66:91},{64:[1,94],69:[1,95]},{2:$V0,4:96,6:3,7:$V1,9:6,10:7,11:8,12:9,13:10,14:11,15:12,16:13,17:$V2,18:$V3,19:16,20:17,21:18,22:21,23:22,24:23,25:24,26:$V4,37:$V5,38:$V6,39:$V7,40:$V8,41:$V9,42:$Va,43:$Vb,44:37,50:[1,97],55:$Vc,59:$Vd,60:$Ve,64:$Vf,65:$Vg,68:$Vh},o($Vi,[2,76]),{8:[1,98],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},o($VP,[2,92]),o($VP,[2,93]),o($VP,[2,94]),o($VP,[2,95]),o($VP,[2,96],{27:[1,116],53:[1,114],54:[1,115]}),o($VP,[2,97]),o($VP,[2,98]),{20:64,26:$Vk,27:$Vl,31:117,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{20:64,26:$Vk,27:$Vl,31:118,37:[1,119],38:[1,121],39:[1,123],70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv,96:[1,120],97:[1,122]},{20:64,26:$Vk,27:$Vl,31:124,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},o($VP,[2,118]),o($VP,[2,119]),o($VP,[2,120]),o($VP,[2,121]),o($VP,[2,122]),{20:64,26:$Vk,27:$Vl,28:[1,125],29:126,31:128,32:127,36:129,37:$VQ,38:$VR,39:$VS,40:$VT,41:$VU,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{20:64,26:$Vk,27:$Vl,31:135,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{8:[1,136]},{8:[1,137]},{8:[1,138],30:$Vz,47:[1,139]},{46:[1,140]},o($VV,$Vx),{8:[1,141],30:$Vz,47:[1,142]},{46:[1,143]},{8:[1,144],30:$Vz,47:[1,145]},{46:[1,146]},{8:[1,147],30:$Vz,47:[1,148]},{46:[1,149]},{8:[1,150],30:$Vz,47:[1,151]},{46:[1,152]},{20:64,26:$Vk,27:$Vl,31:153,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{26:[1,154]},{28:[1,155],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},{28:[1,156],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},{28:[1,157],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},{28:[1,158],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},{28:[1,159],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},{8:[1,160]},{26:$Vy,44:161},{47:[1,162]},{27:[1,163]},{27:[1,164]},{6:39,9:6,10:7,11:8,12:9,13:10,14:11,15:12,16:13,17:$V2,18:$V3,19:16,20:17,21:18,22:21,23:22,24:23,25:24,26:$V4,37:$V5,38:$V6,39:$V7,40:$V8,41:$V9,42:$Va,43:$Vb,44:37,50:[1,165],55:$Vc,59:$Vd,60:$Ve,64:$Vf,65:$Vg,68:$Vh},o($VW,[2,67]),o($Vi,[2,77]),{20:64,26:$Vk,27:$Vl,31:166,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{20:64,26:$Vk,27:$Vl,31:167,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{20:64,26:$Vk,27:$Vl,31:168,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{20:64,26:$Vk,27:$Vl,31:169,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{20:64,26:$Vk,27:$Vl,31:170,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{20:64,26:$Vk,27:$Vl,31:171,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{20:64,26:$Vk,27:$Vl,31:172,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{20:64,26:$Vk,27:$Vl,31:173,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{20:64,26:$Vk,27:$Vl,31:174,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{20:64,26:$Vk,27:$Vl,31:175,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{20:64,26:$Vk,27:$Vl,31:176,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{20:64,26:$Vk,27:$Vl,31:177,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{20:64,26:$Vk,27:$Vl,31:178,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{20:64,26:$Vk,27:$Vl,31:179,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{20:64,26:$Vk,27:$Vl,31:180,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},o($VP,[2,116]),o($VP,[2,117]),{20:64,26:$Vk,27:$Vl,28:[1,181],29:126,31:128,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},o($VP,[2,105]),{28:[1,182],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},{28:[1,183]},{28:[1,184]},{28:[1,185]},{28:[1,186]},{28:[1,187]},o($VX,[2,109],{76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN}),{8:$VY,33:[1,188],35:189,49:$Vj},{28:[1,190],30:$VZ},{28:[1,192],30:[1,193]},o($V_,[2,26],{76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO}),{26:[1,194]},{26:[2,33]},{26:[2,34]},{26:[2,35]},{26:[2,36]},{26:[2,37]},{46:[1,195],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},o($Vi,[2,59]),o($Vi,[2,60]),o($Vi,[2,40]),{20:64,26:$Vk,27:$Vl,31:196,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{26:[1,197]},o($Vi,[2,41]),{20:64,26:$Vk,27:$Vl,31:198,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{26:[1,199]},o($Vi,[2,42]),{20:64,26:$Vk,27:$Vl,31:200,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{26:[1,201]},o($Vi,[2,43]),{20:64,26:$Vk,27:$Vl,31:202,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{26:[1,203]},o($Vi,[2,44]),{20:64,26:$Vk,27:$Vl,31:204,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{26:[1,205]},{8:[1,206],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},o($VV,[2,68]),{8:[1,207]},{8:[1,208]},{35:209,49:$Vj},{35:210,49:$Vj},{49:[1,211]},{20:64,26:$Vk,27:$Vl,31:212,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{30:$Vz,47:[1,213]},{20:64,26:$Vk,27:$Vl,31:214,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{20:64,26:$Vk,27:$Vl,31:215,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{20:64,26:$Vk,27:$Vl,31:216,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},o($VW,[2,66]),o($V$,[2,99],{78:$VC,79:$VD,80:$VE,81:$VF}),o($V$,[2,100],{78:$VC,79:$VD,80:$VE,81:$VF}),o($V01,[2,101],{81:$VF}),o($V01,[2,102],{81:$VF}),o($V01,[2,103],{81:$VF}),o($VP,[2,104]),o([8,28,30,33,46,50,82,95],[2,107],{76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN}),o($VX,[2,108],{76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN}),o($V11,[2,110],{76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF}),o($V11,[2,111],{76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF}),o($V11,[2,112],{76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF}),o($V11,[2,113],{76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF}),o($V11,[2,114],{76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF}),o($V11,[2,115],{76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF}),{33:[1,217],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},o($VP,$VY),o($VP,[2,106]),{20:64,26:$Vk,27:$Vl,31:218,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{20:64,26:$Vk,27:$Vl,31:219,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{20:64,26:$Vk,27:$Vl,31:220,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{20:64,26:$Vk,27:$Vl,31:221,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{20:64,26:$Vk,27:$Vl,31:222,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{34:[1,223]},o($Vi,[2,30]),o($VP,[2,24]),{20:64,26:$Vk,27:$Vl,31:224,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{33:[1,225],35:226,49:$Vj},{36:227,37:$VQ,38:$VR,39:$VS,40:$VT,41:$VU},o($V21,[2,32]),{45:[1,229],47:[1,228]},{8:[1,230],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},{47:[1,231]},{8:[1,232],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},{47:[1,233]},{8:[1,234],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},{47:[1,235]},{8:[1,236],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},{47:[1,237]},{8:[1,238],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},{47:[1,239]},o($Vi,[2,56]),o($Vi,[2,38]),o($Vi,[2,39]),o($Vi,[2,70],{57:241,56:[1,240],58:[1,242]}),o($Vi,[2,83]),{61:243,62:[1,244],63:[1,245]},{8:[1,246],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},{20:64,26:$Vk,27:$Vl,31:247,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{8:[2,88],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},{28:[1,248],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},{28:[1,249],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},{20:64,26:$Vk,27:$Vl,31:250,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},o($VP,[2,124]),o($VP,[2,125]),o($VP,[2,126]),o($VP,[2,127]),o($VP,[2,128]),{35:251,49:$Vj},o($V_,[2,25],{76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO}),{34:[1,252]},o($Vi,[2,28]),{26:[1,253]},{20:64,26:$Vk,27:$Vl,31:254,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{20:64,26:$Vk,27:$Vl,31:255,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},o($Vi,[2,61]),{48:[1,256],49:[1,257]},o($Vi,[2,62]),{48:[1,258],49:[1,259]},o($Vi,[2,64]),{48:[1,260],49:[1,261],52:[1,262]},o($Vi,[2,63]),{48:[1,263],49:[1,264]},o($Vi,[2,65]),{48:[1,265],49:[1,266]},{35:267,49:$Vj},o($Vi,[2,72],{56:[1,268],58:[1,269]}),{27:[1,270]},{50:[1,271],62:[1,272],63:[1,273]},{33:[1,274]},{20:64,26:$Vk,27:$Vl,31:275,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{26:[1,278],44:277,67:276},{8:[2,87],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},{8:[1,279]},{8:[1,280]},o([8,28,30,33,46,50,95],[2,123],{76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN}),o($Vi,[2,29]),{35:281,49:$Vj},o($V21,[2,31]),{8:[1,282],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},{46:[1,283],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},{37:[1,284]},{20:64,26:$Vk,27:$Vl,29:285,31:128,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{40:[1,286]},{20:64,26:$Vk,27:$Vl,29:287,31:128,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{39:[1,288]},{20:64,26:$Vk,27:$Vl,29:289,31:128,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{27:[1,290]},{38:[1,291]},{20:64,26:$Vk,27:$Vl,29:292,31:128,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{41:[1,293]},{20:64,26:$Vk,27:$Vl,29:294,31:128,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},o($Vi,[2,71]),{35:295,49:$Vj},{27:[1,296]},{20:64,26:$Vk,27:$Vl,31:297,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},o($Vi,[2,78]),{33:[1,298]},{20:64,26:$Vk,27:$Vl,31:299,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{2:$V0,4:300,6:3,7:$V1,9:6,10:7,11:8,12:9,13:10,14:11,15:12,16:13,17:$V2,18:$V3,19:16,20:17,21:18,22:21,23:22,24:23,25:24,26:$V4,37:$V5,38:$V6,39:$V7,40:$V8,41:$V9,42:$Va,43:$Vb,44:37,55:$Vc,59:$Vd,60:$Ve,64:$Vf,65:$Vg,68:$Vh},{33:[1,301],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},{28:[1,302]},{30:$Vz,47:[1,303]},o($Vw,$Vx,{53:[1,304],54:[1,305]}),o($Vi,[2,85]),o($Vi,[2,86]),o($Vi,[2,27]),o($Vi,[2,57]),{47:[1,306]},{45:[1,307]},{30:$VZ,50:[1,308]},{51:[1,309]},{30:$VZ,50:[1,310]},{51:[1,311]},{30:$VZ,50:[1,312]},{20:64,26:$Vk,27:$Vl,31:313,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{51:[1,314]},{30:$VZ,50:[1,315]},{51:[1,316]},{30:$VZ,50:[1,317]},o($Vi,[2,73]),{20:64,26:$Vk,27:$Vl,31:318,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{28:[1,319],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},{2:$V0,4:320,6:3,7:$V1,9:6,10:7,11:8,12:9,13:10,14:11,15:12,16:13,17:$V2,18:$V3,19:16,20:17,21:18,22:21,23:22,24:23,25:24,26:$V4,37:$V5,38:$V6,39:$V7,40:$V8,41:$V9,42:$Va,43:$Vb,44:37,55:$Vc,59:$Vd,60:$Ve,64:$Vf,65:$Vg,68:$Vh},{33:[1,321],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},{6:39,9:6,10:7,11:8,12:9,13:10,14:11,15:12,16:13,17:$V2,18:$V3,19:16,20:17,21:18,22:21,23:22,24:23,25:24,26:$V4,37:$V5,38:$V6,39:$V7,40:$V8,41:$V9,42:$Va,43:$Vb,44:37,50:[1,322],55:$Vc,59:$Vd,60:$Ve,64:$Vf,65:$Vg,68:$Vh},{2:$V0,4:323,6:3,7:$V1,9:6,10:7,11:8,12:9,13:10,14:11,15:12,16:13,17:$V2,18:$V3,19:16,20:17,21:18,22:21,23:22,24:23,25:24,26:$V4,37:$V5,38:$V6,39:$V7,40:$V8,41:$V9,42:$Va,43:$Vb,44:37,55:$Vc,59:$Vd,60:$Ve,64:$Vf,65:$Vg,68:$Vh},{35:324,49:$Vj},{20:64,26:$Vk,27:$Vl,31:325,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{28:[2,90]},{28:[2,91]},{20:64,26:$Vk,27:$Vl,31:326,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{20:64,26:$Vk,27:$Vl,31:327,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{8:[1,328]},{20:64,26:$Vk,27:$Vl,31:329,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{8:[1,330]},{20:64,26:$Vk,27:$Vl,31:331,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{8:[1,332]},{28:[1,333],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},{20:64,26:$Vk,27:$Vl,31:334,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{8:[1,335]},{20:64,26:$Vk,27:$Vl,31:336,70:$Vm,71:$Vn,72:$Vo,73:$Vp,74:$Vq,75:$Vr,77:$Vs,84:$Vt,91:65,92:66,93:$Vu,94:$Vv},{8:[1,337]},{28:[1,338],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},{35:339,49:$Vj},{6:39,9:6,10:7,11:8,12:9,13:10,14:11,15:12,16:13,17:$V2,18:$V3,19:16,20:17,21:18,22:21,23:22,24:23,25:24,26:$V4,37:$V5,38:$V6,39:$V7,40:$V8,41:$V9,42:$Va,43:$Vb,44:37,50:[1,340],55:$Vc,59:$Vd,60:$Ve,64:$Vf,65:$Vg,68:$Vh},{2:$V0,4:341,6:3,7:$V1,9:6,10:7,11:8,12:9,13:10,14:11,15:12,16:13,17:$V2,18:$V3,19:16,20:17,21:18,22:21,23:22,24:23,25:24,26:$V4,37:$V5,38:$V6,39:$V7,40:$V8,41:$V9,42:$Va,43:$Vb,44:37,55:$Vc,59:$Vd,60:$Ve,64:$Vf,65:$Vg,68:$Vh},o($Vi,[2,80]),o($V31,[2,82],{9:6,10:7,11:8,12:9,13:10,14:11,15:12,16:13,19:16,20:17,21:18,22:21,23:22,24:23,25:24,44:37,6:39,17:$V2,18:$V3,26:$V4,37:$V5,38:$V6,39:$V7,40:$V8,41:$V9,42:$Va,43:$Vb,55:$Vc,59:$Vd,60:$Ve,64:$Vf,65:$Vg,68:$Vh}),o($Vi,[2,84]),{28:[2,89],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},{8:[1,342],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},{46:[1,343],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},o($Vi,[2,46]),{46:[1,344],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},o($Vi,[2,48]),{46:[1,345],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},o($Vi,[2,52]),{8:[1,346]},{46:[1,347],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},o($Vi,[2,50]),{46:[1,348],76:$VA,77:$VB,78:$VC,79:$VD,80:$VE,81:$VF,82:$VG,83:$VH,85:$VI,86:$VJ,87:$VK,88:$VL,89:$VM,90:$VN,95:$VO},o($Vi,[2,55]),{35:349,49:$Vj},o($V41,[2,75]),o($Vi,[2,79]),o($V31,[2,81],{9:6,10:7,11:8,12:9,13:10,14:11,15:12,16:13,19:16,20:17,21:18,22:21,23:22,24:23,25:24,44:37,6:39,17:$V2,18:$V3,26:$V4,37:$V5,38:$V6,39:$V7,40:$V8,41:$V9,42:$Va,43:$Vb,55:$Vc,59:$Vd,60:$Ve,64:$Vf,65:$Vg,68:$Vh}),o($Vi,[2,58]),{8:[1,350]},{8:[1,351]},{8:[1,352]},o($Vi,[2,53]),{8:[1,353]},{8:[1,354]},o($V41,[2,74]),o($Vi,[2,45]),o($Vi,[2,47]),o($Vi,[2,51]),o($Vi,[2,49]),o($Vi,[2,54])],
+defaultActions: {38:[2,1],130:[2,33],131:[2,34],132:[2,35],133:[2,36],134:[2,37],304:[2,90],305:[2,91]},
 parseError: function parseError (str, hash) {
     if (hash.recoverable) {
         this.trace(str);
@@ -1411,51 +1570,51 @@ case 1://comentario multilinea
 break;
 case 2://EXPACIOS EN BLANCO
 break;
-case 3:console.log(yy_.yytext);return 35
+case 3:console.log(yy_.yytext);return 37
 break;
-case 4:return 38;
+case 4:return 40;
 break;
-case 5:return 39;
+case 5:return 41;
 break;
-case 6:return 37;
+case 6:return 39;
 break;
-case 7:return 36;
+case 7:return 38;
 break;
-case 8:return 69;
+case 8:return 74;
 break;
-case 9:return 70;
+case 9:return 75;
 break;
-case 10:return 50;
+case 10:return 55;
 break;
-case 11:return 51;
+case 11:return 56;
 break;
-case 12:return 53;
+case 12:return 58;
 break;
-case 13:return 55;
+case 13:return 60;
 break;
-case 14:return 58;
+case 14:return 63;
 break;
-case 15:return 57;
+case 15:return 62;
 break;
-case 16:return 19;
+case 16:return 17;
 break;
-case 17:return 59;
+case 17:return 64;
 break;
-case 18:return 60;
+case 18:return 65;
 break;
-case 19:return 63;
+case 19:return 68;
 break;
-case 20:return 64;
+case 20:return 69;
 break;
-case 21:return 20;
+case 21:return 18;
 break;
-case 22:return 54;
+case 22:return 59;
 break;
-case 23:return 32;
+case 23:return 34;
 break;
-case 24:return 40;
+case 24:return 42;
 break;
-case 25:return 41;
+case 25:return 43;
 break;
 case 26:return 'RTOLOWER';
 break;
@@ -1469,7 +1628,7 @@ case 30:return 'RTYPEOF';
 break;
 case 31:return 'RTOSTRING';
 break;
-case 32:return 'RTOCHARARRAY';
+case 32:return 52;
 break;
 case 33:return 'RPUSH';
 break;
@@ -1477,75 +1636,75 @@ case 34:return 'RPOP';
 break;
 case 35:return 'RRUN';
 break;
-case 36:return 'RNEW';
+case 36:return 48;
 break;
-case 37:return 46;
+case 37:return 53;
 break;
-case 38:return 47;
+case 38:return 54;
 break;
-case 39:return 75;
+case 39:return 80;
 break;
-case 40:return 85;
+case 40:return 90;
 break;
-case 41:return 84;
+case 41:return 89;
 break;
-case 42:return 80;
+case 42:return 85;
 break;
-case 43:return 81;
+case 43:return 86;
 break;
-case 44:return 83;
+case 44:return 88;
 break;
-case 45:return 82;
+case 45:return 87;
 break;
-case 46:return 71;
+case 46:return 76;
 break;
-case 47:return 72;
+case 47:return 77;
 break;
-case 48:return 73;
+case 48:return 78;
 break;
-case 49:return 74;
+case 49:return 79;
 break;
-case 50:return 76;
+case 50:return 81;
 break;
-case 51:console.log(yy_.yytext);return 43;
+case 51:console.log(yy_.yytext);return 47;
 break;
-case 52:return 77;
+case 52:return 82;
 break;
-case 53:return 78;
+case 53:return 83;
 break;
-case 54:return 79;
+case 54:return 84;
 break;
-case 55:return 90;
+case 55:return 95;
 break;
-case 56:return 31;
+case 56:return 33;
 break;
-case 57:return 25;
+case 57:return 27;
 break;
-case 58:return 26;
+case 58:return 28;
 break;
 case 59:console.log(yy_.yytext);return 8;
 break;
-case 60:return 48;
+case 60:return 49;
 break;
-case 61:return 49;
+case 61:return 50;
 break;
-case 62:return 28;
+case 62:return 30;
 break;
 case 63:return 'PUNTO';
 break;
-case 64:return 44;
+case 64:return 45;
 break;
-case 65:return 45;
+case 65:return 46;
 break;
-case 66: yy_.yytext=yy_.yytext.substr(1,yy_.yyleng-2); return 66; 
+case 66: yy_.yytext=yy_.yytext.substr(1,yy_.yyleng-2); return 71; 
 break;
-case 67:console.log(yy_.yytext);return 68;
+case 67:console.log(yy_.yytext);return 73;
 break;
-case 68:console.log(yy_.yytext);return 65;
+case 68:console.log(yy_.yytext);return 70;
 break;
-case 69: yy_.yytext=yy_.yytext.substr(1,yy_.yyleng-2); return 67; 
+case 69: yy_.yytext=yy_.yytext.substr(1,yy_.yyleng-2); return 72; 
 break;
-case 70:console.log(yy_.yytext);return 24;
+case 70:console.log(yy_.yytext);return 26;
 break;
 case 71:return 5;
 break;

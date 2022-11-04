@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const Symbol_1 = __importDefault(require("./Symbol"));
 const Data_1 = require("../Data/Data");
+const Error_1 = __importDefault(require("../Exceptions/Error"));
 class SymbolTable {
     constructor(anterior) {
         this.tablaAnterior = anterior;
@@ -142,6 +143,19 @@ class SymbolTable {
             temp = temp.getAnterior();
         }
         return true;
+    }
+    saveVector(nombreid, value, tipo, linea, columna) {
+        console.log(".,v");
+        nombreid = nombreid.toLowerCase();
+        let tablaLocal = this;
+        while (tablaLocal != null) {
+            if (tablaLocal.tablaActual.has(nombreid)) {
+                throw new Error_1.default(Data_1.tipoErr.SEMANTICO, "El vector ya existe", linea, columna);
+            }
+            tablaLocal = tablaLocal.getAnterior();
+        }
+        this.tablaActual.set(nombreid, new Symbol_1.default(tipo, nombreid, "Vector", value));
+        console.log("Vector guardado");
     }
 }
 exports.default = SymbolTable;

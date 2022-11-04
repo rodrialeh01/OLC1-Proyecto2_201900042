@@ -1,6 +1,6 @@
 %{
     //codigo js
-    const listaErrores = require('../../../controller/parser/parser')
+    const controller = require('../../../controller/parser/parser')
     const errores = require('./Exceptions/Error')
     const nativo = require('./Expresions/Native');
     const Tipo = require('./Data/Data');
@@ -33,6 +33,7 @@
     const inscontinue = require('./Instructions/Continue');
     const funcion = require('./Instructions/Funcion');
     const llamada = require('./Instructions/LlamadaFuncion');
+    const decv1f1 = require('./Instructions/DeclaracionVector1D1');
 %}
 %lex 
 
@@ -40,6 +41,7 @@
 %options case-insensitive 
 //---------------------------------------------ANALIZADOR LEXICO--------------------------------------------------
 %%
+
 //COMENTARIOS
 [/][/].*                                                                  //comentario unilinea
 [/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]                                       //comentario multilinea
@@ -156,14 +158,12 @@ INIT: INSTRUCCIONES EOF                                                     {ret
 
 INSTRUCCIONES : INSTRUCCIONES AMBITO_GLOBAL                                 {$1.push($2); $$=$1;}
               | AMBITO_GLOBAL                                               {$$=[$1];}
-              | INVALID                                                     {listaErrores.push(new errores.default('ERROR LEXICO', "No se esperaba el caracter " + $1, @1.first_line, @1.first_column));}
-              | error PTCOMA                                                {listaErrores.push(new errores.default('ERROR SINTACTICO', "Se esperaba token", @1.first_line, @1.first_column));}
+              | INVALID                                                     {controller.listaErrores.push(new errores.default('ERROR LEXICO', "No se esperaba el caracter " , @1.first_line, @1.first_column));}
+              | error PTCOMA                                                {controller.listaErrores.push(new errores.default('ERROR SINTACTICO', "Se esperaba token " + $1, @1.first_line, @1.first_column));}
 ;
 
 AMBITO_GLOBAL : IMPRIMIR                                                    {$$=$1;}
-              | DECLARACION_ASIGNACION                                      {$$=$1;}
-              | DECLARACION                                                 {$$=$1;}
-              | ASIGNACION                                                  {$$=$1;} 
+              | DECLARACION_VARIABLES                                       {$$=$1;}
               | SENTENCIA_IF                                                {$$=$1;}
               | CICLO_WHILE                                                 {$$=$1;}
               | SENTENCIA_SWITCH                                            {$$=$1;}
@@ -175,7 +175,7 @@ AMBITO_GLOBAL : IMPRIMIR                                                    {$$=
               | INS_RETURN                                                  {$$=$1;}
               | LLAMADA PTCOMA                                              {$$=$1;}
               | METODO                                                      {$$=$1;}
-              | FUNCION                                                     {$$=$1;}                                                       
+              | FUNCION                                                     {$$=$1;}                                                      
 ;
 
 LLAMADA : IDENTIFICADOR PARABRE PARCIERRA                             {$$= new llamada.default($1,null,@1.first_line,@1.first_column);}
@@ -219,11 +219,18 @@ IMPRIMIR : RPRINT PARABRE EXPRESION PARCIERRA PTCOMA                        {$$=
          | RPRINTLN PARABRE EXPRESION PARCIERRA PTCOMA                      {$$=new impresionconsalto.default($3,@1.first_line,@1.first_column);}
 ;
 
+DECLARACION_VARIABLES: DECLARACION                                           {$$=$1;}
+                     | ASIGNACION                                            {$$=$1;}
+                     | DECLARACION_ASIGNACION                                {$$=$1;}
+                     | DECLARACION_VECTOR1                                   {$$=$1;}
+;
+
+
 DECLARACION : RINT LISTA_IDENTIFICADORES PTCOMA                             {$$= new Declaracion.default($2,Tipo.DataType.ENTERO, @1.first_line,@1.first_column);}
             | RDOUBLE LISTA_IDENTIFICADORES PTCOMA                          {$$= new Declaracion.default($2,Tipo.DataType.DECIMAL, @1.first_line,@1.first_column);}
             | RCHAR LISTA_IDENTIFICADORES PTCOMA                            {$$= new Declaracion.default($2,Tipo.DataType.CARACTER, @1.first_line,@1.first_column);}
             | RSTRING LISTA_IDENTIFICADORES PTCOMA                          {$$= new Declaracion.default($2,Tipo.DataType.CARACTER, @1.first_line,@1.first_column);}
-            | RBOOLEAN LISTA_IDENTIFICADORES PTCOMA                         {$$= new Declaracion.default($2,Tipo.DataType.BOOLEANO, @1.first_line,@1.first_column);}
+            | RBOOLEAN LISTA_IDENTIFICADORES PTCOMA                         {$$= new Declaracion.default($2,Tipo.DataType.BOOLEANO, @1.first_line,@1.first_column);}                          
 ;
 
 ASIGNACION : LISTA_IDENTIFICADORES IGUAL EXPRESION PTCOMA                                                   {$$= new Asignacion.default($1, $3, @1.first_line, @1.first_column);}
@@ -239,6 +246,14 @@ DECLARACION_ASIGNACION : RINT LISTA_IDENTIFICADORES IGUAL EXPRESION PTCOMA      
                        | RCHAR LISTA_IDENTIFICADORES IGUAL EXPRESION PTCOMA     {$$=new DeclaracionAsignacion.default($2,Tipo.DataType.CARACTER, $4, @1.first_line, @1.first_column);}
                        | RBOOLEAN LISTA_IDENTIFICADORES IGUAL EXPRESION PTCOMA  {$$=new DeclaracionAsignacion.default($2,Tipo.DataType.BOOLEANO, $4, @1.first_line, @1.first_column);}
 ;
+
+DECLARACION_VECTOR1 : RINT CORABRE CORCIERRA IDENTIFICADOR IGUAL RNEW RINT CORABRE EXPRESION CORCIERRA PTCOMA           {$$=new decv1f1.default($4,Tipo.DataType.ENTERO,$9,@1.first_line,@1.first_column);}
+                    | RDOUBLE CORABRE CORCIERRA IDENTIFICADOR IGUAL RNEW RDOUBLE RCORABRE EXPRESION CORCIERRA PTCOMA    {$$=new decv1f1.default($4,Tipo.DataType.DECIMAL,$9,@1.first_line,@1.first_column);}
+                    | RSTRING CORABRE CORCIERRA IDENTIFICADOR IGUAL RNEW RSTRING RCORABRE EXPRESION CORCIERRA PTCOMA    {$$=new decv1f1.default($4,Tipo.DataType.CADENA,$9,@1.first_line,@1.first_column);}
+                    | RCHAR CORABRE CORCIERRA IDENTIFICADOR IGUAL RNEW RCHAR RCORABRE EXPRESION CORCIERRA PTCOMA        {$$=new decv1f1.default($4,Tipo.DataType.CARACTER,$9,@1.first_line,@1.first_column);}
+                    | RBOOLEAN CORABRE CORCIERRA IDENTIFICADOR IGUAL RNEW RBOOLEAN RCORABRE EXPRESION CORCIERRA PTCOMA  {$$=new decv1f1.default($4,Tipo.DataType.BOOLEANO,$9,@1.first_line,@1.first_column);}
+;
+
 ENCAPSULAMIENTO : LLAVEA INSTRUCCIONES LLAVEC                               {$$=$2;}
                 | LLAVEA LLAVEC                                             {$$=[];}
 ;
